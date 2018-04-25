@@ -20,22 +20,22 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String userDNI = "admin";
-	private final String password = "password";
+	//private final String userDNI = "admin";
+	//private final String password = "password";
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		// get request parameters userID contraseña
-		String user = request.getParameter("user");
-		String pwd = request.getParameter("pwd");
+		String user = request.getParameter("dni");
+		String pwd = request.getParameter("password");
 		
-		if(Validate.checkUser(Integer.parseInt(userDNI.trim()), password)){ //trim?
+		if(Validate.checkUser(Integer.parseInt(user), pwd)){ 
 			HttpSession session = request.getSession();
-			session.setAttribute("user", Validate.getUser(Integer.parseInt(userDNI.trim())).getDniUsuarios());
+			session.setAttribute("user", Validate.getUser(Integer.parseInt(user)).getDniUsuarios());
 			//La sesion expira en 30 min
 			session.setMaxInactiveInterval(30*60);
-			String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
+			String encodedURL = response.encodeRedirectURL("Zona_usuarios.jsp");
 			response.sendRedirect(encodedURL);
 		}else{
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");

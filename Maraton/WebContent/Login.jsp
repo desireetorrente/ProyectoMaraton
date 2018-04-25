@@ -22,12 +22,12 @@
       <h1 class="h3 mb-3 font-weight-normal">Por favor, inicie sesión</h1>
 
      <label for="text" class="sr-only">D.N.I.</label>
-     <input type="text" id="dni" class="form-control" placeholder="D.N.I. sin letra" required autofocus>
+     <input type="text" name="dni" class="form-control" placeholder="D.N.I. sin letra" required autofocus>
      
      <label for="inputPassword" class="sr-only">Contraseña</label>
-      <input type="password" id="password" class="form-control" placeholder="Contraseña" required autofocus>
+      <input type="password" name="password" class="form-control" placeholder="Contraseña" required autofocus>
 <br></br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" id="button" value="Enviar">Registrarse</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" id="button" value="Enviar">Acceder</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
       
 </form>

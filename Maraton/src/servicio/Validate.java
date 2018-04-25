@@ -13,7 +13,7 @@ public class Validate {
 		
 		try {
 			Usuarios usuario2Check = usuario.search(dni);
-			if(usuario2Check.getPasswordUsuarios().equals(pass) && usuario2Check != null) {
+			if(usuario2Check.getPasswordUsuarios().equals(pass)) {
 				correcto = true;
 			}else {
 				correcto = false;
