@@ -86,13 +86,13 @@ public class CarrerasHelper {
 		
 	}
 		
-	public List listarCarrera() {
+	public List<Carrera> listarCarrera() {
 		
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
         session.beginTransaction();
-        List result = session.createQuery("from carrera").list();
+        List <Carrera> result = session.createQuery("from carrera").list();
         session.getTransaction().commit();
         return result;
     }
