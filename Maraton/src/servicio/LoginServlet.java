@@ -6,13 +6,11 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controlador.ControladorUsuario;
 
 /**
  * 
@@ -24,7 +22,6 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String userDNI = "admin";
 	private final String password = "password";
-	private ControladorUsuario userControl = new ControladorUsuario();
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -33,13 +30,11 @@ public class LoginServlet extends HttpServlet {
 		String user = request.getParameter("user");
 		String pwd = request.getParameter("pwd");
 		
-		if(Validate.checkUser(Integer.parseInt(userDNI), password)){
+		if(Validate.checkUser(Integer.parseInt(userDNI.trim()), password)){ //trim?
 			HttpSession session = request.getSession();
-			session.setAttribute("user", "David");
+			session.setAttribute("user", Validate.getUser(Integer.parseInt(userDNI.trim())).getDniUsuarios());
 			//La sesion expira en 30 min
 			session.setMaxInactiveInterval(30*60);
-			Cookie userName = new Cookie("user", user);
-			response.addCookie(userName);
 			String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
 			response.sendRedirect(encodedURL);
 		}else{

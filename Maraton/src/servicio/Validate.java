@@ -24,4 +24,8 @@ public class Validate {
 		
 		return correcto;
 	}
+	
+	public static Usuarios getUser(int dni) {
+		return usuario.search(dni);
+	}
 }
