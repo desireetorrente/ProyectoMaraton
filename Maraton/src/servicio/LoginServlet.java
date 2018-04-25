@@ -22,7 +22,7 @@ import controlador.ControladorUsuario;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String userID = "admin";
+	private final String userDNI = "admin";
 	private final String password = "password";
 	private ControladorUsuario userControl = new ControladorUsuario();
 
@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 		String user = request.getParameter("user");
 		String pwd = request.getParameter("pwd");
 		
-		if(userID.equals(user) && password.equals(pwd)){
+		if(Validate.checkUser(Integer.parseInt(userDNI), password)){
 			HttpSession session = request.getSession();
 			session.setAttribute("user", "David");
 			//La sesion expira en 30 min
