@@ -12,6 +12,10 @@ import persistencia.CarrerasHelper;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.GroupLayout;
 
 /**
@@ -3444,7 +3448,7 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
-        modificar_carr_comb_buscar_nombre_carrera.
+               
         
     }                                                   
 
@@ -3893,7 +3897,29 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
-    }                                                      
+        
+        
+        System.out.println("LALALLAA");
+        List <Carrera>nombres= carrerasHelper.listarCarrera();
+        List <Carrera>nombres2= carrerasHelper.listarCarrera();
+        /*
+        for (int i = 0; i < nombres.size(); i++)
+        {
+        	System.out.println(i);
+        	modificar_carr_comb_buscar_nombre_carrera.addItem(nombres.get(i).getNombreCarrera());
+        }*/
+        
+        /*for (int i = 0; i<nombres.size(); i++) {
+        	System.out.println(nombres2.get(i));
+        }*/
+        
+        modificar_carr_comb_buscar_nombre_carrera.removeAllItems();
+        for (Carrera car: nombres) {
+        	
+        	modificar_carr_comb_buscar_nombre_carrera.addItem("" + car.getNombreCarrera());
+        }
+        
+    }   
 
     private void menu_eliminar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         // TODO add your handling code here:

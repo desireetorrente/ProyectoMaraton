@@ -1,6 +1,7 @@
 package persistencia;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -13,6 +14,7 @@ import org.hibernate.cfg.Configuration;
 import Modelo.Administradores;
 import Modelo.Carrera;
 import Modelo.Jueces;
+import Modelo.Participantes;
 
 public class CarrerasHelper {
 
@@ -92,9 +94,27 @@ public class CarrerasHelper {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
         session.beginTransaction();
-        List <Carrera> result = session.createQuery("from carrera").list();
+        List <Carrera> result = session.createQuery("SELECT c FROM carrera c").list();
         session.getTransaction().commit();
         return result;
+		/*cfg.configure("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+
+		List<Carrera> carreras = new ArrayList<Carrera>();
+		Query query = session.createQuery("SELECT c FROM carrera c");
+		List<Carrera> carr = query.list();
+		
+		for(int i = 0; i < carr.size(); i++) {
+			if(carr.get(i).getIdcarreraCarrera() == dni) {
+				carreras.add(carr.get(i));
+			}	
+		}
+		return participante;
+        */
+        
+        
     }
 	
 	public void insertar_juez(Jueces juez, int idCarrera) {
@@ -169,6 +189,22 @@ public class CarrerasHelper {
 			System.out.println("La carrera no existe no existe");
 		}
 		return car;
+	}
+	
+	public static void main(String[] args) {
+		CarrerasHelper prueba = new CarrerasHelper();
+		//prueba.insertar(555, 1);
+		//prueba.insertar(555, 11);
+		//prueba.delete(555, 11);
+		//prueba.delete(555, 1);
+		//prueba.insertarTiempo(555, 1, 1234);
+		//prueba.insertarTiempov2(555, 1, 0);
+		
+		System.out.println("Usuario 555 inscrito en: ");
+		
+			System.out.println(prueba.listarCarrera().get(0).getNombreCarrera());
+			
+		
 	}
 	
 }
