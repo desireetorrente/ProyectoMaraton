@@ -1,20 +1,16 @@
 package persistencia;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
-import Modelo.Administradores;
 import Modelo.Carrera;
 import Modelo.Jueces;
-import Modelo.Participantes;
 
 public class CarrerasHelper {
 
@@ -90,30 +86,17 @@ public class CarrerasHelper {
 		
 	public List<Carrera> listarCarrera() {
 		
+		List <Carrera>carreras = null;
+		
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
-        session.beginTransaction();
-        List <Carrera> result = session.createQuery("SELECT c FROM carrera c").list();
-        session.getTransaction().commit();
-        return result;
-		/*cfg.configure("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
-
-		List<Carrera> carreras = new ArrayList<Carrera>();
-		Query query = session.createQuery("SELECT c FROM carrera c");
-		List<Carrera> carr = query.list();
+		Query query = session.createQuery("FROM Carrera");
 		
-		for(int i = 0; i < carr.size(); i++) {
-			if(carr.get(i).getIdcarreraCarrera() == dni) {
-				carreras.add(carr.get(i));
-			}	
-		}
-		return participante;
-        */
-        
+		carreras = (List<Carrera>) query.list();
+		
+        return carreras;
         
     }
 	
