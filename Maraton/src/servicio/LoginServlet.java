@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 			String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
 			response.sendRedirect(encodedURL);
 		}else{
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
 			PrintWriter out= response.getWriter();
 			out.println("<font color=red>La contraseña o el usuario es incorrecto</font>");
 			rd.include(request, response);
