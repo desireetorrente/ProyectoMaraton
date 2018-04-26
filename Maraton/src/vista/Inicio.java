@@ -8,9 +8,11 @@ package vista;
 import javax.swing.JFrame;
 import Modelo.Carrera;
 import Modelo.Jueces;
+import Modelo.Usuarios;
 import persistencia.CarrerasHelper;
 import persistencia.JuecesHelper;
 import persistencia.ParticipantesHelper;
+import persistencia.UsuariosHelper;
 
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
@@ -35,7 +37,9 @@ public class Inicio extends javax.swing.JFrame {
 	ParticipantesHelper participantesHelper = new ParticipantesHelper();
 	Jueces jueces = new Jueces();
 	JuecesHelper juecesHelper = new JuecesHelper();
+	UsuariosHelper usuarioHelper = new UsuariosHelper();
 	
+	List<Usuarios>nombresUsuarios;
 	List <Carrera> nombres;
 	List<Carrera>nombresListar = new LinkedList<Carrera>();
 	List <Jueces> nombres_jueces;
@@ -454,10 +458,7 @@ public class Inicio extends javax.swing.JFrame {
         car_insertar_juez_but_anadir = new javax.swing.JButton();
         car_insertar_juez_but_anadir.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
-        		//elim_carr_textf_introducir_id_eliminar.setText(Integer.toString(nombres.get(elim_carr_comb_eliminar_carrera.getSelectedIndex()).getIdcarreraCarrera()));
-                //carrera = carrerasHelper.Buscar(Integer.parseInt(elim_carr_textf_introducir_id_eliminar.getText()));
-                
+        		               
                 car_insertar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(car_insertar_juez_comb_buscar_nombre_juez.getSelectedIndex()).getDniJueces()));
         		car_insertar_juez_textf_id_carrera.setText(Integer.toString(nombres.get(car_insertar_juez_combo_carrera.getSelectedIndex()).getIdcarreraCarrera()));
                 carrerasHelper.insertar_juez(juecesHelper.Buscar(Integer.parseInt(car_insertar_juez_textf_dni_juez.getText())), Integer.parseInt(car_insertar_juez_textf_id_carrera.getText()));
@@ -3884,7 +3885,7 @@ public class Inicio extends javax.swing.JFrame {
     
     
     private void menu_crear_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(true);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4024,7 +4025,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                   
 
     private void menu_modificar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4044,6 +4045,14 @@ public class Inicio extends javax.swing.JFrame {
         administrador_modificar_administrador.setVisible(false);
         inicio.setVisible(false);
         panel_modificar_usuario.setVisible(false);
+        
+        nombresUsuarios = 
+        
+        modificar_carr_comb_buscar_nombre_carrera.removeAllItems();
+        for (Carrera car: nombres) {
+        	
+        	modificar_carr_comb_buscar_nombre_carrera.addItem("" + car.getNombreCarrera());
+        } 
     }                                                      
 
     private void menu_eliminar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
