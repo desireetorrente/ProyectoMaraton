@@ -34,15 +34,19 @@ public class SVWeb extends HttpServlet {
 	 * Por el doget entrarán las peticiones de:
 	 * Mostrar el formulario de inscripción vacio (Nuevo) para nuevos usuarios
 	 * Mostrar el listador de usuarios (verListadoCorredores)
-	 * Se añade el parámetro acción para diferenciar las diferentes tareas que entran por el doGEt
+	 * Se añade el parámet ro acción para diferenciar las diferentes tareas que entran por el doGEt
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO : comprobar el campo acción de las vistas que se llama igual.
 		//TODO: comprobar el nombre del servlet en los JSP.
-		String accion = request.getParameter("accion");
+		String idcarrera = request.getParameter("idcarrera");
+		String nombreCarrera =request.getParameter("nombreCarrera");
+		String distanciaCarrera = request.getParameter("distanciaCarrera");
+		String altitudCarrera = request.getParameter("altitudCarrera");
+	
 		//condicional que según lo que hemos recogido en acción hace una cosa u otra.
-		String siguientevista = "formularioUsuario.jsp";
+		String siguientevista = "Zona_usuarios.jsp";
 		//TODO: sustituir el nombre de siguietne vista por el nombre del JSP del formulario de David.
 		if (accion != null) {
 			switch (accion) {

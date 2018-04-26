@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="persistencia.CarrerasHelper" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="Modelo.Carrera" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,21 +32,72 @@
 	</form>
 </div>
 
+
 <div id="listaCarrera">
-	
-	<form action="" method="post">
-		<p>ID Carrera: </p>
+
+
+
+
+<%
+Carrera carrera = new Carrera();
+CarrerasHelper listarcarrera = new CarrerasHelper();
+
+
+
+%>
+
+
+
+
+
+
+<%--   Intento con JDBC
+
+		CarrerasHelper listaA=new CarrerasHelper();
+
+     String idcarrera = request.getParameter("idcarrera");
+		String nombreCarrera =request.getParameter("nombreCarrera");
+		String distanciaCarrera = request.getParameter("distanciaCarrera");
+		String altitudCarrera = request.getParameter("altitudCarrera");
+		
+		Class.forName("com.mysql.jdbc.Driver");
+			
+
+		try{
+		Connection miConexion=java.sql.DriverManager.getConnection("jdbc:mysql://192.168.203.4:3306/bbdd_g2","admin_g2","a4384"); 
+		
+		Statement miStatement=miConexion.createStatement();
+		
+	    String Sql="SELECT ALL FROM CARRERA";
+				
+		miStatement.executeUpdate(Sql);
+		
+		out.println("idcarrera");
+				
+		 }catch(Exception e){
+			
+			out.println("Ha habido un error");
+			
+		}
+		
+			//(idcarrera_carrera, nombre_carrera, distancia_carrera, altitud-carrera";
+
+		--%>
+
+	<form action="SVWeb.java" method="get">
+		<p>ID Carrera:</p>
 		<input type="text" name="idcarrera"></input>
 		<p>Nombre de la Carrera:</p>
 		<input type="text" name="nombreCarrera"></input>
 		<p>Distancia:</p>
 		<input type="text" name="distancia"></input>
 		<p>Altitud:</p>
-		<input type="text" name="juez"></input>
-		<p>Participantes:</p>
-		<input type="text" name="juez"></input>
-		<p>Juez:</p>
-		<input type="text" name="juez"></input>
+		
+		
+		
+		
+		
+		<input type="text" name="altitud"></input>
 	</form>
 
 </div>
