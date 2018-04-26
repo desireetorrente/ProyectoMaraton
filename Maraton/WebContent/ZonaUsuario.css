@@ -1,0 +1,81 @@
+@charset "ISO-8859-1";
+
+body{
+	background-color: #A9F5F2;
+}
+
+button{
+	margin-left: 0.5em;
+	padding: 1% 2%;
+}
+
+form{
+	text-align: center;	
+	display: block;
+}
+
+
+#contenedor{
+	font: verdana;
+	font-size: 12pt;
+}
+
+.boton{
+	display:inline-block;
+	width:10em;
+	height:45px;
+	border-radius:6px;
+	background:blue;
+	color:white;
+	font-size: 15px;
+}
+
+#botones{
+	width:60em;
+	display:inline-block;
+	margin-left: 15em;
+	position: fixed;
+	z-index:1;
+}
+
+#formularios{
+	width:30em;
+	margin-left: 25em;
+	position: relative;
+	top:2em;
+	left:10em;
+}
+
+#insert{
+	visibility:hidden;
+	position: absolute;
+	top:1em;
+}
+
+#listaCarrera{
+	visibility:hidden;
+	position: absolute;
+	top:1em;
+}
+
+#listaCorredor{
+	visibility:hidden;
+	position: absolute;
+	top:1em;
+}
+
+#editar{
+	visibility:hidden;
+	position: absolute;
+	top:1em;
+}
+
+#eliminar{
+	visibility:hidden;
+	position: absolute;
+	top:1em;
+}
+
+#peliminar{
+	text-align: center;
+}
