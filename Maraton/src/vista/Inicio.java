@@ -6,16 +6,13 @@
 package vista;
 
 import javax.swing.JFrame;
-
 import Modelo.Carrera;
 import persistencia.CarrerasHelper;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.GroupLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,6 +30,9 @@ public class Inicio extends javax.swing.JFrame {
 	CarrerasHelper carrerasHelper = new CarrerasHelper();
 	
 	List <Carrera> nombres;
+	List<Carrera>nombresListar = new LinkedList<Carrera>();
+	
+	int posicion_listar;
 	
     /**
      * Creates new form Inicio
@@ -151,9 +151,51 @@ public class Inicio extends javax.swing.JFrame {
         listar_carr_textf_altura_carrera = new javax.swing.JTextField();
         listar_carr_but_salir = new javax.swing.JButton();
         listar_carr_but_primera = new javax.swing.JButton();
+        listar_carr_but_primera.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		listar_carr_textf_listar_carrera.setText(nombresListar.get(0).getNombreCarrera());
+                listar_carr_textf_distancia_carrera.setText(nombresListar.get(0).getDistanciaCarrera());
+                listar_carr_textf_altura_carrera.setText(nombresListar.get(0).getAltitudCarrera());
+                posicion_listar = 1;
+        	}
+        });
         listar_carr_but_anterior = new javax.swing.JButton();
+        listar_carr_but_anterior.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar!=0) {
+        		listar_carr_textf_listar_carrera.setText(nombresListar.get(posicion_listar).getNombreCarrera());
+                listar_carr_textf_distancia_carrera.setText(nombresListar.get(posicion_listar).getDistanciaCarrera());
+                listar_carr_textf_altura_carrera.setText(nombresListar.get(posicion_listar).getAltitudCarrera());
+                posicion_listar--;
+        		}else {
+        			posicion_listar=0;
+        		}
+        	}
+        });
         listar_carr_but_siguiente = new javax.swing.JButton();
+        listar_carr_but_siguiente.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar< nombresListar.size()) {
+        		listar_carr_textf_listar_carrera.setText(nombresListar.get(posicion_listar).getNombreCarrera());
+                listar_carr_textf_distancia_carrera.setText(nombresListar.get(posicion_listar).getDistanciaCarrera());
+                listar_carr_textf_altura_carrera.setText(nombresListar.get(posicion_listar).getAltitudCarrera());
+                posicion_listar++;
+        		}else {
+        			posicion_listar=nombresListar.size();
+        		}
+        	}
+        });
         listar_carr_but_ultima = new javax.swing.JButton();
+        listar_carr_but_ultima.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		listar_carr_textf_listar_carrera.setText(nombresListar.get(nombresListar.size() -1 ).getNombreCarrera());
+                listar_carr_textf_distancia_carrera.setText(nombresListar.get(nombresListar.size()-1).getDistanciaCarrera());
+                listar_carr_textf_altura_carrera.setText(nombresListar.get(nombresListar.size()-1).getAltitudCarrera());
+                posicion_listar = nombresListar.size()-1;
+ 
+        	}
+        });
         listar_carr_lab_titulo = new javax.swing.JLabel();
         usuario_modificar_usuario = new javax.swing.JPanel();
         panel_modificar_usuario = new javax.swing.JPanel();
@@ -3936,7 +3978,7 @@ public class Inicio extends javax.swing.JFrame {
     }   
 
     private void menu_eliminar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
+       
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(true);
         carrera_listar_carrera.setVisible(false);
@@ -3960,6 +4002,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        modificar_admin_textf_dni_buscar.setVisible(false);
+        eliminar_admin_textf_buscar_dni_eliminar.setVisible(false);
+        modificar_carr_textf_buscar_id.setVisible(false);
+        elim_carr_textf_introducir_id_eliminar.setVisible(false);
+        modificar_juez_textf_dni_para_modificar.setVisible(false);
+        eliminar_juez_textf_dni_juez_eliminar.setVisible(false);
+        modificar_usu_textf_buscar_usuario_id.setVisible(false);
+        eliminar_usu_textf_buscar_usuario_id.setVisible(false);
         
         nombres = carrerasHelper.listarCarrera();
         
@@ -3972,7 +4022,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                     
 
     private void menu_listar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+    
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(true);
@@ -3995,6 +4045,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombresListar= carrerasHelper.listarCarrera();
+        listar_carr_textf_listar_carrera.setText(nombresListar.get(0).getNombreCarrera());
+        listar_carr_textf_distancia_carrera.setText(nombresListar.get(0).getDistanciaCarrera());
+        listar_carr_textf_altura_carrera.setText(nombresListar.get(0).getAltitudCarrera());
+        posicion_listar = 0;
+        
     }                                                   
 
     private void menu_modificar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                       
