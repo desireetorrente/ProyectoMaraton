@@ -12,7 +12,7 @@
 <body>
 	<div id="cuadro">
 		<form action="LoginServlet" method="post">
-			<p id="titulo">Registro de usuario</p>
+			<p id="titulo">Iniciar sesion</p>
 			<hr>
 			<br />
 			<br /> <label id="subtitulo">DNI de usuario</label> <br />
@@ -20,7 +20,9 @@
 			<br /> <label id="subtitulo2">Contraseña</label> <br />
 			<br /> <input type="password" name="password" class="entrada" /> <br />
 			<br /> <input type="submit" value="Iniciar sesion" id="boton" />
+			<a id="volver" href="index.jsp">Volver</a>
 		</form>
+	
 	</div>
 </body>
 </html>

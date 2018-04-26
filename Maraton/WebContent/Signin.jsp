@@ -11,8 +11,8 @@
 
 <body>
 	<div id="cuadro">
-		<form action="LoginServlet" method="post">
-			<p id="titulo">INICIAR SESION</p>
+		<form action="SigninServlet" method="post">
+			<p id="titulo">Registro de usuario</p>
 			<hr>
 			<br />
 			<br /> <label id="subtitulo">DNI de usuario</label> <br />
@@ -31,8 +31,8 @@
 			<br /> <input type="text" name="telefono" class="entrada" /> <br />
 			<br /> <label id="subtitulo3">Codigo postal</label> <br />
 			<br /> <input type="text" name="cp" class="entrada" /> <br />
-			
 			<br /> <input type="submit" value="Registrarse" id="boton" />
+			<a id="volver" href="index.jsp">Volver</a>
 		</form>
 	</div>
 </body>

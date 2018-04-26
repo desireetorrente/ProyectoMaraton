@@ -35,22 +35,15 @@ public class UsuariosHelper {
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 
-		Query q = session.createQuery("select count(*)from Usuarios as user where user.dniUsuarios = " + user.getDniUsuarios());
-
-		long count = (long) q.uniqueResult();
 
 		try {
-			if (count == 0) {
-				session.save(user);
-				tx.commit();
-				session.close();
-				return 0;
-			}else {
-				return -1;
-
-			}
+			session.save(user);
+			tx.commit();
+			session.close();
+			return 0;
 		}catch(Exception e) {
 			e.printStackTrace();
+			session.close();
 			return 1;
 		}
 

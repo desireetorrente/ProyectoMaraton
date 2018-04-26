@@ -11,13 +11,13 @@ body{
 	background: #090909;
 	color: #ffffff;
 	margin: auto;
-	margin-top: 20px;
-	padding: 5px 5px 30px 5px;
-	border-top: 35px solid #090909;
-	border-bot: 35px solid #090909;
+	padding: 5px 5px 10px 5px;
+	border-top: 15px solid #090909;
+	border-bot: 15px solid #090909;
 	border-right: 35px solid #090909;
 	border-left: 35px solid #090909;
 	border-radius: 6px;
+	font-size: 15px;
 }
 .entrada{
 	width:320px;
