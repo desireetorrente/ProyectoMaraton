@@ -167,13 +167,16 @@ public class ParticipantesHelper {
 		List<Participantes> participante = new ArrayList<Participantes>();
 		Query query = session.createQuery("SELECT p FROM Participantes p");
 		List<Participantes> partis = query.list();
-		
 		for(int i = 0; i < partis.size(); i++) {
 			if(partis.get(i).getId().getIdcarreraCarrera() == idcarrera) {
 				participante.add(partis.get(i));
 			}	
 		}
-		return participante.get(participante.size()-1).getId().getDorsalParticipantes();
+		if(participante.isEmpty()) {
+			return 1;
+		}else {
+			return participante.get(participante.size()-1).getId().getDorsalParticipantes()+1;
+		}
 		
 	}
 	
@@ -181,18 +184,21 @@ public class ParticipantesHelper {
 	
 	public static void main(String[] args) {
 		ParticipantesHelper prueba = new ParticipantesHelper();
-		//prueba.insertar(555, 1);
-		//prueba.insertar(555, 11);
-		//prueba.delete(555, 11);
-		//prueba.delete(555, 1);
-		//prueba.insertarTiempo(555, 1, 1234);
-		//prueba.insertarTiempov2(555, 1, 0);
+		///prueba.insertar(555, 1);
+		//prueba.insertar(777, 11);
+		//prueba.insertar(1234, 1);
+		///prueba.insertar(1234, 11);
+		//prueba.insertar(54034125, 1);
+		//prueba.insertar(54034125, 11);
+		//prueba.insertar(54034125, 11);
+		//prueba.insertar(54034125, 11);
+		//prueba.insertar(54034125, 11);
+		//prueba.insertar(54034125, 11);
+		prueba.insertarTiempo(777, 11, 200);
 		
-		System.out.println("Usuario 555 inscrito en: ");
-		for(int i = 0; i < prueba.buscar(555).size(); i++) {
-			System.out.println(prueba.buscar(555).get(i).getCarrera().getNombreCarrera());
-			
-		}
+
+
+		
 	}
 	
 }
