@@ -25,14 +25,17 @@ public class ControladorUsuario {
 	 * @param cp Codigo postal usuario
 	 * @return Booleeano que indica si la operacion se realiza bien 
 	 */
-	public boolean crearUsuario(int dni, String nombre, String apellidos, String mail, String password, int edad, String telefono, String cp) {
+	public int crearUsuario(int dni, String nombre, String apellidos, String mail, String password, int edad, String telefono, String cp) {
 		try {
 			Usuarios nuevoUsuario = new Usuarios(dni, nombre, apellidos, mail, password, edad, telefono, cp);
-			helper.insertar(nuevoUsuario);
-			return true;
+			if(helper.insertar(nuevoUsuario) == 0) {
+				return 0;
+			}else {
+				return 1;
+			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return false;
+			return -1;
 		}
 	}
 	

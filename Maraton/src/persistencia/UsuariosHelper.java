@@ -35,18 +35,19 @@ public class UsuariosHelper {
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 
-
-		try {
-			session.save(user);
-			tx.commit();
-			session.close();
+		if(search(user.getDniUsuarios()) == null) {
+			try {
+				session.save(user);
+				tx.commit();
+				session.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+				session.close();	
+			}
 			return 0;
-		}catch(Exception e) {
-			e.printStackTrace();
-			session.close();
+		}else {
 			return 1;
 		}
-
 
 	}
 
@@ -133,14 +134,13 @@ public class UsuariosHelper {
 			user = (Usuarios) q.uniqueResult();
 			tx.commit();
 			session.close();
-			return user;
 		} catch (HibernateException e) {
 			System.err.println("No se pudo encontrar al usuario");
 			e.printStackTrace();
 			tx.rollback();
 			session.close();
-			return user;
 		}
+		return user;
 
 	}
 

@@ -50,14 +50,18 @@ public class SigninServlet extends HttpServlet {
 		String telefono = request.getParameter("telefono");
 		String cp = request.getParameter("cp");
 		
-		if(user.crearUsuario(Integer.parseInt(dni), nombre, apellidos, mail, pwd, Integer.parseInt(edad), telefono, cp)) {
+		short comprobarUser = (short) user.crearUsuario(Integer.parseInt(dni), nombre, apellidos, mail, pwd, Integer.parseInt(edad), telefono, cp);
+		if( comprobarUser == 0) {
 			PrintWriter out= response.getWriter();
 			out.println("<font color=blue>Se ha registrado correctamenteo</font>");
-		}else{
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+		}
+		if (comprobarUser == 1){
 			PrintWriter out= response.getWriter();
-			out.println("<font color=red>La contraseña o el usuario es incorrecto</font>");
-			rd.include(request, response);
+			out.println("<font color=red>Usuario ya registrado</font>");
+		}
+		if(comprobarUser == -1) {
+			PrintWriter out= response.getWriter();
+			out.println("<font color=red>Error al registrar usuario</font>");
 		}
 		
 	}
