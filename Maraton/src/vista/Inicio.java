@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.GroupLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import javax.swing.JPanel;
 
 /**
  *
@@ -26,6 +31,8 @@ public class Inicio extends javax.swing.JFrame {
 
 	Carrera carrera = new Carrera();
 	CarrerasHelper carrerasHelper = new CarrerasHelper();
+	
+	List <Carrera> nombres;
 	
     /**
      * Creates new form Inicio
@@ -88,16 +95,32 @@ public class Inicio extends javax.swing.JFrame {
         panel_modificar_carrera = new javax.swing.JPanel();
         modificar_carr_textf_nuevo_nombre_carrera = new javax.swing.JTextField();
         modificar_carr_lab_nueva_distancia_carrera = new javax.swing.JLabel();
-        modificar_carr_combo_nueva_distancia_carrera = new javax.swing.JComboBox<>();
+        modificar_carr_textf_nueva_distancia_carrera = new JTextField();
         modificar_carr_lab_nueva_altura_carrera = new javax.swing.JLabel();
         modificar_carr_textf_nueva_altura_carrera = new javax.swing.JTextField();
         modificar_carr_lab_nuevo_nombre_carrera = new javax.swing.JLabel();
         modificar_carr_but_guardar_cambios = new javax.swing.JButton();
+        modificar_carr_but_guardar_cambios.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		carrerasHelper.cambiar(Integer.parseInt(modificar_carr_textf_buscar_id.getText()), modificar_carr_textf_nuevo_nombre_carrera.getText(), modificar_carr_textf_nueva_distancia_carrera.getText(), modificar_carr_textf_nueva_altura_carrera.getText());
+        		
+        	}
+        });
         modificar_carr_textf_buscar_id = new javax.swing.JTextField();
         modificar_carr_but_buscar = new javax.swing.JButton();
         modificar_carr_but_salir = new javax.swing.JButton();
         modificar_carr_lab_buscar_nombre_carrera = new javax.swing.JLabel();
         modificar_carr_comb_buscar_nombre_carrera = new javax.swing.JComboBox<>();
+        modificar_carr_comb_buscar_nombre_carrera.addItemListener(new ItemListener() {
+        	public void itemStateChanged(ItemEvent arg0) {
+        		
+        	}
+        });
+        modificar_carr_comb_buscar_nombre_carrera.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         modificar_carr_lab_titulo = new javax.swing.JLabel();
         carrera_eliminar_carrera = new javax.swing.JPanel();
         elim_carr_textf_introducir_id_eliminar = new javax.swing.JTextField();
@@ -507,12 +530,13 @@ public class Inicio extends javax.swing.JFrame {
         					.addGroup(carrera_crear_carreraLayout.createParallelGroup(Alignment.TRAILING)
         						.addComponent(crear_carr_lab_distancia_carrera)
         						.addComponent(crear_carr_lab_altura_carrera))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(carrera_crear_carreraLayout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(crear_carr_textf_altura_carrera, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
+        					.addGroup(carrera_crear_carreraLayout.createParallelGroup(Alignment.TRAILING)
         						.addGroup(carrera_crear_carreraLayout.createSequentialGroup()
-        							.addGap(131)
-        							.addComponent(carr_crear_carrera_textf_distancia_carrera, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(crear_carr_textf_altura_carrera, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(Alignment.LEADING, carrera_crear_carreraLayout.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(carr_crear_carrera_textf_distancia_carrera, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE))))
         				.addGroup(carrera_crear_carreraLayout.createSequentialGroup()
         					.addGap(64)
         					.addComponent(crear_carr_but_guardar, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
@@ -555,8 +579,6 @@ public class Inicio extends javax.swing.JFrame {
         modificar_carr_lab_nueva_distancia_carrera.setText("Nueva distancia");
         modificar_carr_lab_nueva_distancia_carrera.setFocusable(false);
 
-        modificar_carr_combo_nueva_distancia_carrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         modificar_carr_lab_nueva_altura_carrera.setText("Nueva altura");
         modificar_carr_lab_nueva_altura_carrera.setFocusable(false);
 
@@ -566,50 +588,50 @@ public class Inicio extends javax.swing.JFrame {
         modificar_carr_but_guardar_cambios.setText("Guardar cambios");
 
         javax.swing.GroupLayout panel_modificar_carreraLayout = new javax.swing.GroupLayout(panel_modificar_carrera);
-        panel_modificar_carrera.setLayout(panel_modificar_carreraLayout);
         panel_modificar_carreraLayout.setHorizontalGroup(
-            panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_modificar_carreraLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel_modificar_carreraLayout.createSequentialGroup()
-                            .addGap(121, 121, 121)
-                            .addComponent(modificar_carr_but_guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel_modificar_carreraLayout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(modificar_carr_lab_nueva_altura_carrera)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(modificar_carr_textf_nueva_altura_carrera)))
-                    .addGroup(panel_modificar_carreraLayout.createSequentialGroup()
-                        .addGroup(panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(modificar_carr_lab_nuevo_nombre_carrera)
-                            .addComponent(modificar_carr_lab_nueva_distancia_carrera))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificar_carr_combo_nueva_distancia_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modificar_carr_textf_nuevo_nombre_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(32, Short.MAX_VALUE))
+        	panel_modificar_carreraLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panel_modificar_carreraLayout.createSequentialGroup()
+        			.addGap(27)
+        			.addGroup(panel_modificar_carreraLayout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(panel_modificar_carreraLayout.createParallelGroup(Alignment.LEADING)
+        					.addGroup(panel_modificar_carreraLayout.createSequentialGroup()
+        						.addGap(121)
+        						.addComponent(modificar_carr_but_guardar_cambios, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(panel_modificar_carreraLayout.createSequentialGroup()
+        						.addGap(14)
+        						.addComponent(modificar_carr_lab_nueva_altura_carrera)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(modificar_carr_textf_nueva_altura_carrera)))
+        				.addGroup(panel_modificar_carreraLayout.createSequentialGroup()
+        					.addGroup(panel_modificar_carreraLayout.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(modificar_carr_lab_nuevo_nombre_carrera)
+        						.addComponent(modificar_carr_lab_nueva_distancia_carrera))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(panel_modificar_carreraLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(modificar_carr_textf_nueva_distancia_carrera, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(modificar_carr_textf_nuevo_nombre_carrera, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE))))
+        			.addContainerGap(209, Short.MAX_VALUE))
         );
         panel_modificar_carreraLayout.setVerticalGroup(
-            panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_modificar_carreraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modificar_carr_textf_nuevo_nombre_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modificar_carr_lab_nuevo_nombre_carrera))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modificar_carr_lab_nueva_distancia_carrera)
-                    .addComponent(modificar_carr_combo_nueva_distancia_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_modificar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modificar_carr_lab_nueva_altura_carrera)
-                    .addComponent(modificar_carr_textf_nueva_altura_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(modificar_carr_but_guardar_cambios)
-                .addContainerGap(38, Short.MAX_VALUE))
+        	panel_modificar_carreraLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panel_modificar_carreraLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(panel_modificar_carreraLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(modificar_carr_textf_nuevo_nombre_carrera, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(modificar_carr_lab_nuevo_nombre_carrera))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(panel_modificar_carreraLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(modificar_carr_lab_nueva_distancia_carrera)
+        				.addComponent(modificar_carr_textf_nueva_distancia_carrera, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(panel_modificar_carreraLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(modificar_carr_lab_nueva_altura_carrera)
+        				.addComponent(modificar_carr_textf_nueva_altura_carrera, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addComponent(modificar_carr_but_guardar_cambios)
+        			.addContainerGap(38, Short.MAX_VALUE))
         );
+        panel_modificar_carrera.setLayout(panel_modificar_carreraLayout);
 
         modificar_carr_but_buscar.setText("Buscar");
         modificar_carr_but_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -3874,6 +3896,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void menu_modificar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         // TODO add your handling code here:
+    	
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3899,25 +3922,18 @@ public class Inicio extends javax.swing.JFrame {
         usuario_insertar_usuario.setVisible(false);
         
         
-        System.out.println("LALALLAA");
-        List <Carrera>nombres= carrerasHelper.listarCarrera();
-        List <Carrera>nombres2= carrerasHelper.listarCarrera();
-        /*
-        for (int i = 0; i < nombres.size(); i++)
-        {
-        	System.out.println(i);
-        	modificar_carr_comb_buscar_nombre_carrera.addItem(nombres.get(i).getNombreCarrera());
-        }*/
+       
+        /*List <Carrera>nombres= carrerasHelper.listarCarrera();*/
         
-        /*for (int i = 0; i<nombres.size(); i++) {
-        	System.out.println(nombres2.get(i));
-        }*/
-        
+        nombres = carrerasHelper.listarCarrera();
+               
         modificar_carr_comb_buscar_nombre_carrera.removeAllItems();
         for (Carrera car: nombres) {
         	
         	modificar_carr_comb_buscar_nombre_carrera.addItem("" + car.getNombreCarrera());
         }
+        
+        
         
     }   
 
@@ -4344,7 +4360,15 @@ public class Inicio extends javax.swing.JFrame {
     
     private void modificar_carr_but_buscarActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         // TODO add your handling code here:
-        panel_modificar_carrera.setVisible(true);
+        //System.out.println(nombres.get(1).getNombreCarrera());
+    	
+    	panel_modificar_carrera.setVisible(true);
+        
+        modificar_carr_textf_buscar_id.setText(Integer.toString(nombres.get(modificar_carr_comb_buscar_nombre_carrera.getSelectedIndex()).getIdcarreraCarrera()));
+        carrera = carrerasHelper.Buscar(Integer.parseInt(modificar_carr_textf_buscar_id.getText()));
+        modificar_carr_textf_nuevo_nombre_carrera.setText(carrera.getNombreCarrera());
+        modificar_carr_textf_nueva_altura_carrera.setText(carrera.getAltitudCarrera());
+        modificar_carr_textf_nueva_distancia_carrera.setText(carrera.getDistanciaCarrera());
         
     }                                                         
 
@@ -4947,7 +4971,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton modificar_carr_but_guardar_cambios;
     private javax.swing.JButton modificar_carr_but_salir;
     private javax.swing.JComboBox<String> modificar_carr_comb_buscar_nombre_carrera;
-    private javax.swing.JComboBox<String> modificar_carr_combo_nueva_distancia_carrera;
+    private JTextField modificar_carr_textf_nueva_distancia_carrera;
     private javax.swing.JLabel modificar_carr_lab_buscar_nombre_carrera;
     private javax.swing.JLabel modificar_carr_lab_nueva_altura_carrera;
     private javax.swing.JLabel modificar_carr_lab_nueva_distancia_carrera;
@@ -5035,4 +5059,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel usuario_listar_usuario;
     private javax.swing.JPanel usuario_modificar_usuario;
     private JTextField carr_crear_carrera_textf_distancia_carrera;
+	public JPanel getPanel_modificar_carrera() {
+		return panel_modificar_carrera;
+	}
 }
