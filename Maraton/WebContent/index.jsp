@@ -20,7 +20,7 @@
     <br></br>
 	
 	 <br></br>
-	  <form action="Signin.jsp">
+	  <form action="Signin.jsp" method="post">
       <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" id="button" value="Enviar">Registrate en la web</button>
       </form>
 
