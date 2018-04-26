@@ -158,6 +158,25 @@ public class ParticipantesHelper {
 		return participante;
 	}
 	
+	public List<Participantes> corredoresEnCarrera(int idcarrera){
+		cfg.configure("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+
+		List<Participantes> participante = new ArrayList<Participantes>();
+		Query query = session.createQuery("SELECT p FROM Participantes p");
+		List<Participantes> partis = query.list();
+		
+		for(int i = 0; i < partis.size(); i++) {
+			if(partis.get(i).getId().getIdcarreraCarrera() == idcarrera) {
+				participante.add(partis.get(i));
+			}	
+		}
+		return participante;
+	}
+	
+	
 	public int nextDorsal(int idcarrera) {
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
