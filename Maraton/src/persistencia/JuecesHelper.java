@@ -4,6 +4,10 @@ import org.hibernate.query.Query;
 
 import Modelo.Administradores;
 import Modelo.Jueces;
+import Modelo.Participantes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -127,6 +131,26 @@ public class JuecesHelper {
 			System.out.println("El juez no existe");
 		}
 		return juez;
+	}
+	
+	public List<Jueces> imprimirJueces(){
+		cfg.configure("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		List<Jueces> jueces = new ArrayList<>();
+		
+		try {
+			Query query = session.createQuery("SELECT p FROM Participantes p");
+			jueces = query.list();
+			tx.commit();
+			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			tx.rollback();
+			session.close();
+		}
+		return jueces;
 	}
 
 }

@@ -36,7 +36,7 @@ public class ParticipantesHelper {
 		participanteid.setDniUsuarios(dni);
 		participanteid.setIdcarreraCarrera(idcarrera);
 		participanteid.setTiempoParticipantes(0);
-		participanteid.setDorsalParticipantes((int) Math.random()*10);
+		participanteid.setDorsalParticipantes(nextDorsal(idcarrera));
 		
 		Usuarios usuario = session.get(Usuarios.class, dni);
 		Carrera carrera = session.get(Carrera.class, idcarrera);
@@ -158,6 +158,25 @@ public class ParticipantesHelper {
 		return participante;
 	}
 	
+	public int nextDorsal(int idcarrera) {
+		cfg.configure("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+
+		List<Participantes> participante = new ArrayList<Participantes>();
+		Query query = session.createQuery("SELECT p FROM Participantes p");
+		List<Participantes> partis = query.list();
+		
+		for(int i = 0; i < partis.size(); i++) {
+			if(partis.get(i).getId().getIdcarreraCarrera() == idcarrera) {
+				participante.add(partis.get(i));
+			}	
+		}
+		return participante.get(participante.size()-1).getId().getDorsalParticipantes();
+		
+	}
+	
 	
 	
 	public static void main(String[] args) {
@@ -177,3 +196,4 @@ public class ParticipantesHelper {
 	}
 	
 }
+
