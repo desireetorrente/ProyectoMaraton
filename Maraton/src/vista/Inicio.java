@@ -8,6 +8,8 @@ package vista;
 import javax.swing.JFrame;
 import Modelo.Carrera;
 import persistencia.CarrerasHelper;
+import persistencia.ParticipantesHelper;
+
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -28,6 +30,7 @@ public class Inicio extends javax.swing.JFrame {
 
 	Carrera carrera = new Carrera();
 	CarrerasHelper carrerasHelper = new CarrerasHelper();
+	ParticipantesHelper participantesHelper = new ParticipantesHelper();
 	
 	List <Carrera> nombres;
 	List<Carrera>nombresListar = new LinkedList<Carrera>();
@@ -154,19 +157,19 @@ public class Inicio extends javax.swing.JFrame {
         listar_carr_but_primera.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		listar_carr_textf_listar_carrera.setText(nombresListar.get(0).getNombreCarrera());
-                listar_carr_textf_distancia_carrera.setText(nombresListar.get(0).getDistanciaCarrera());
+        		listar_carr_textf_distancia_carrera.setText(nombresListar.get(0).getDistanciaCarrera());
                 listar_carr_textf_altura_carrera.setText(nombresListar.get(0).getAltitudCarrera());
-                posicion_listar = 1;
+                posicion_listar = 0;
         	}
         });
         listar_carr_but_anterior = new javax.swing.JButton();
         listar_carr_but_anterior.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		if(posicion_listar!=0) {
+        		if(posicion_listar>0) {
+        		posicion_listar--;
         		listar_carr_textf_listar_carrera.setText(nombresListar.get(posicion_listar).getNombreCarrera());
                 listar_carr_textf_distancia_carrera.setText(nombresListar.get(posicion_listar).getDistanciaCarrera());
                 listar_carr_textf_altura_carrera.setText(nombresListar.get(posicion_listar).getAltitudCarrera());
-                posicion_listar--;
         		}else {
         			posicion_listar=0;
         		}
@@ -175,13 +178,14 @@ public class Inicio extends javax.swing.JFrame {
         listar_carr_but_siguiente = new javax.swing.JButton();
         listar_carr_but_siguiente.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		if(posicion_listar< nombresListar.size()) {
+        		if(posicion_listar< nombresListar.size()-1) {
+        		posicion_listar++;
         		listar_carr_textf_listar_carrera.setText(nombresListar.get(posicion_listar).getNombreCarrera());
                 listar_carr_textf_distancia_carrera.setText(nombresListar.get(posicion_listar).getDistanciaCarrera());
                 listar_carr_textf_altura_carrera.setText(nombresListar.get(posicion_listar).getAltitudCarrera());
-                posicion_listar++;
+                
         		}else {
-        			posicion_listar=nombresListar.size();
+        			posicion_listar=nombresListar.size()-1;
         		}
         	}
         });
@@ -420,14 +424,24 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_tiempo = new javax.swing.JPanel();
         carrera_insertar_tiempo_lab_carrera = new javax.swing.JLabel();
         carrera_insertar_tiempo_comb_carrera_nombre = new javax.swing.JComboBox<>();
+        carrera_insertar_tiempo_comb_carrera_nombre.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
         carrera_insertar_tiempo_lab_dni_corredor = new javax.swing.JLabel();
         carrera_insertar_tiempo_textf_dni_corredor = new javax.swing.JTextField();
         carrera_insertar_tiempo_lab_tiempo = new javax.swing.JLabel();
         carrera_insertar_tiempo_textf_tiempo = new javax.swing.JTextField();
-        carrera_insertar_tiempo_but_buscar = new javax.swing.JButton();
         carrera_insertar_tiempo_but_insertar_tiempo = new javax.swing.JButton();
+        carrera_insertar_tiempo_but_insertar_tiempo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		carrera_insertar_tiempo_textf_id_carrera.setText(Integer.toString(nombres.get(carrera_insertar_tiempo_comb_carrera_nombre.getSelectedIndex()).getIdcarreraCarrera()));
+        		participantesHelper.insertarTiempo(Integer.parseInt(carrera_insertar_tiempo_textf_dni_corredor.getText()), Integer.parseInt(carrera_insertar_tiempo_textf_id_carrera.getText()), Integer.parseInt(carrera_insertar_tiempo_textf_tiempo.getText()));
+        	}
+        });
         carrera_insertar_tiempo_but_salir = new javax.swing.JButton();
-        carrera_insertar_tiempo_lab_titulo = new javax.swing.JLabel();
+        carrera_insertar_tiempo_textf_id_carrera = new JTextField();
         carrera_insertar_juez = new javax.swing.JPanel();
         car_insertar_juez_textf_dni_juez = new javax.swing.JTextField();
         car_insertar_juez_combo_carrera = new javax.swing.JComboBox<>();
@@ -499,34 +513,7 @@ public class Inicio extends javax.swing.JFrame {
         menu_eliminar_administrador = new javax.swing.JMenuItem();
         menu_listar_administradores = new javax.swing.JMenuItem();
 
-        menu_blacklist_usuario.setText("Blacklist");
-
-        menu_blacklist_submenu_meter_usuario.setText("Meter usuario en Blacklist");
-        menu_blacklist_submenu_meter_usuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu_blacklist_submenu_meter_usuarioMouseClicked(evt);
-            }
-        });
-        menu_blacklist_submenu_meter_usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_blacklist_submenu_meter_usuarioActionPerformed(evt);
-            }
-        });
-        menu_blacklist_usuario.add(menu_blacklist_submenu_meter_usuario);
-
-        menu_blacklist_submenu_listar_blacklist.setText("Listar Blacklist");
-        menu_blacklist_submenu_listar_blacklist.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu_blacklist_submenu_listar_blacklistMouseClicked(evt);
-            }
-        });
-        menu_blacklist_submenu_listar_blacklist.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_blacklist_submenu_listar_blacklistActionPerformed(evt);
-            }
-        });
-        menu_blacklist_usuario.add(menu_blacklist_submenu_listar_blacklist);
-
+    
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PROYECTO MARATON G2");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -2651,8 +2638,6 @@ public class Inicio extends javax.swing.JFrame {
 
         carrera_insertar_tiempo_lab_tiempo.setText("Tiempo");
 
-        carrera_insertar_tiempo_but_buscar.setText("BUSCAR");
-
         carrera_insertar_tiempo_but_insertar_tiempo.setText("INSERTAR TIEMPO");
 
         carrera_insertar_tiempo_but_salir.setText("SALIR");
@@ -2662,66 +2647,59 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        carrera_insertar_tiempo_lab_titulo.setText("INSERTAR TIEMPOS");
-
         javax.swing.GroupLayout carrera_insertar_tiempoLayout = new javax.swing.GroupLayout(carrera_insertar_tiempo);
-        carrera_insertar_tiempo.setLayout(carrera_insertar_tiempoLayout);
         carrera_insertar_tiempoLayout.setHorizontalGroup(
-            carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
-                .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
-                                .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(carrera_insertar_tiempo_lab_dni_corredor)
-                                    .addComponent(carrera_insertar_tiempo_lab_carrera, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(carrera_insertar_tiempo_comb_carrera_nombre, 0, 265, Short.MAX_VALUE)
-                                    .addComponent(carrera_insertar_tiempo_textf_dni_corredor)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carrera_insertar_tiempoLayout.createSequentialGroup()
-                                .addComponent(carrera_insertar_tiempo_lab_tiempo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(carrera_insertar_tiempo_textf_tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(carrera_insertar_tiempo_but_buscar))
-                    .addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(carrera_insertar_tiempo_but_insertar_tiempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(carrera_insertar_tiempo_but_salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(carrera_insertar_tiempo_lab_titulo)))
-                .addContainerGap(123, Short.MAX_VALUE))
+        	carrera_insertar_tiempoLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
+        			.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.TRAILING, false)
+        						.addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
+        							.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.LEADING)
+        								.addComponent(carrera_insertar_tiempo_lab_dni_corredor)
+        								.addComponent(carrera_insertar_tiempo_lab_carrera, Alignment.TRAILING))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.LEADING, false)
+        								.addComponent(carrera_insertar_tiempo_comb_carrera_nombre, 0, 265, Short.MAX_VALUE)
+        								.addComponent(carrera_insertar_tiempo_textf_dni_corredor)))
+        						.addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
+        							.addComponent(carrera_insertar_tiempo_lab_tiempo)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(carrera_insertar_tiempo_textf_tiempo, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE))))
+        				.addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
+        					.addGap(156)
+        					.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(carrera_insertar_tiempo_but_insertar_tiempo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(carrera_insertar_tiempo_but_salir, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        				.addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
+        					.addGap(132)
+        					.addComponent(carrera_insertar_tiempo_textf_id_carrera)))
+        			.addContainerGap(300, Short.MAX_VALUE))
         );
         carrera_insertar_tiempoLayout.setVerticalGroup(
-            carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
-                .addComponent(carrera_insertar_tiempo_lab_titulo)
-                .addGap(29, 29, 29)
-                .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carrera_insertar_tiempo_lab_carrera)
-                    .addComponent(carrera_insertar_tiempo_comb_carrera_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carrera_insertar_tiempo_lab_dni_corredor)
-                    .addComponent(carrera_insertar_tiempo_textf_dni_corredor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(carrera_insertar_tiempo_but_buscar)
-                .addGap(21, 21, 21)
-                .addGroup(carrera_insertar_tiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carrera_insertar_tiempo_lab_tiempo)
-                    .addComponent(carrera_insertar_tiempo_textf_tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(carrera_insertar_tiempo_but_insertar_tiempo)
-                .addGap(52, 52, 52)
-                .addComponent(carrera_insertar_tiempo_but_salir)
-                .addContainerGap(69, Short.MAX_VALUE))
+        	carrera_insertar_tiempoLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(carrera_insertar_tiempoLayout.createSequentialGroup()
+        			.addComponent(carrera_insertar_tiempo_textf_id_carrera)
+        			.addGap(29)
+        			.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(carrera_insertar_tiempo_lab_carrera)
+        				.addComponent(carrera_insertar_tiempo_comb_carrera_nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(carrera_insertar_tiempo_lab_dni_corredor)
+        				.addComponent(carrera_insertar_tiempo_textf_dni_corredor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(62)
+        			.addGroup(carrera_insertar_tiempoLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(carrera_insertar_tiempo_lab_tiempo)
+        				.addComponent(carrera_insertar_tiempo_textf_tiempo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addComponent(carrera_insertar_tiempo_but_insertar_tiempo)
+        			.addGap(52)
+        			.addComponent(carrera_insertar_tiempo_but_salir)
+        			.addContainerGap(146, Short.MAX_VALUE))
         );
+        carrera_insertar_tiempo.setLayout(carrera_insertar_tiempoLayout);
 
         car_insertar_juez_combo_carrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -3675,33 +3653,7 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
-    }                                                                 
-
-    private void menu_blacklist_submenu_listar_blacklistMouseClicked(java.awt.event.MouseEvent evt) {                                                                     
-        // TODO add your handling code here:
-        carrera_crear_carrera.setVisible(false);
-        carrera_eliminar_carrera.setVisible(false);
-        carrera_listar_carrera.setVisible(false);
-        carrera_modificar_carrera.setVisible(false);
-        usuario_blacklist_anadir_blacklist.setVisible(false);
-        usuario_blacklistt_listar_blacklist.setVisible(true);
-        usuario_eliminar_usuario.setVisible(false);
-        usuario_listar_usuario.setVisible(false);
-        usuario_modificar_usuario.setVisible(false);
-        jueces_crear_juez.setVisible(false);
-        jueces_eliminar_juez.setVisible(false);
-        jueces_listar_juez.setVisible(false);
-        jueces_modificar_juez.setVisible(false);
-        administrador_crear_administrador.setVisible(false);
-        administrador_eliminar_administrador.setVisible(false);
-        administrador_listar_administrador.setVisible(false);
-        administrador_modificar_administrador.setVisible(false);
-        inicio.setVisible(false);
-        carrera_insertar_tiempo.setVisible(false);
-        carrera_insertar_juez.setVisible(false);
-        carrera_desasignar_juez.setVisible(false);
-        usuario_insertar_usuario.setVisible(false);
-    }                                                                    
+    }                                                                                                                               
 
     private void menu_anadir_juezMouseClicked(java.awt.event.MouseEvent evt) {                                              
         // TODO add your handling code here:
@@ -4129,59 +4081,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
     }                                                   
-
-    private void menu_blacklist_submenu_meter_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                                     
-        // TODO add your handling code here:
-        carrera_crear_carrera.setVisible(false);
-        carrera_eliminar_carrera.setVisible(false);
-        carrera_listar_carrera.setVisible(false);
-        carrera_modificar_carrera.setVisible(false);
-        usuario_blacklist_anadir_blacklist.setVisible(true);
-        usuario_blacklistt_listar_blacklist.setVisible(false);
-        usuario_eliminar_usuario.setVisible(false);
-        usuario_listar_usuario.setVisible(false);
-        usuario_modificar_usuario.setVisible(false);
-        jueces_crear_juez.setVisible(false);
-        jueces_eliminar_juez.setVisible(false);
-        jueces_listar_juez.setVisible(false);
-        jueces_modificar_juez.setVisible(false);
-        administrador_crear_administrador.setVisible(false);
-        administrador_eliminar_administrador.setVisible(false);
-        administrador_listar_administrador.setVisible(false);
-        administrador_modificar_administrador.setVisible(false);
-        inicio.setVisible(false);
-        carrera_insertar_tiempo.setVisible(false);
-        carrera_insertar_juez.setVisible(false);
-        carrera_desasignar_juez.setVisible(false);
-        usuario_insertar_usuario.setVisible(false);
-    }                                                                    
-
-    private void menu_blacklist_submenu_listar_blacklistActionPerformed(java.awt.event.ActionEvent evt) {                                                                        
-        // TODO add your handling code here:
-        carrera_crear_carrera.setVisible(false);
-        carrera_eliminar_carrera.setVisible(false);
-        carrera_listar_carrera.setVisible(false);
-        carrera_modificar_carrera.setVisible(false);
-        usuario_blacklist_anadir_blacklist.setVisible(false);
-        usuario_blacklistt_listar_blacklist.setVisible(true);
-        usuario_eliminar_usuario.setVisible(false);
-        usuario_listar_usuario.setVisible(false);
-        usuario_modificar_usuario.setVisible(false);
-        jueces_crear_juez.setVisible(false);
-        jueces_eliminar_juez.setVisible(false);
-        jueces_listar_juez.setVisible(false);
-        jueces_modificar_juez.setVisible(false);
-        administrador_crear_administrador.setVisible(false);
-        administrador_eliminar_administrador.setVisible(false);
-        administrador_listar_administrador.setVisible(false);
-        administrador_modificar_administrador.setVisible(false);
-        inicio.setVisible(false);
-        carrera_insertar_tiempo.setVisible(false);
-        carrera_insertar_juez.setVisible(false);
-        carrera_desasignar_juez.setVisible(false);
-        usuario_insertar_usuario.setVisible(false);
-    }                                                                       
-
+                                                                   
+  
     private void menu_anadir_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
         carrera_crear_carrera.setVisible(false);
@@ -4587,7 +4488,6 @@ public class Inicio extends javax.swing.JFrame {
     }                                                      
 
     private void menu_insertar_tiempoActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        // TODO add your handling code here:
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4610,6 +4510,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombres = carrerasHelper.listarCarrera();
+        
+        carrera_insertar_tiempo_comb_carrera_nombre.removeAllItems();
+        for (Carrera car: nombres) {
+        	
+        	carrera_insertar_tiempo_comb_carrera_nombre.addItem("" + car.getNombreCarrera());
+        } 
     }                                                    
 
     private void menu_insertar_juez_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                           
@@ -4817,14 +4725,13 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel carrera_eliminar_carrera;
     private javax.swing.JPanel carrera_insertar_juez;
     private javax.swing.JPanel carrera_insertar_tiempo;
-    private javax.swing.JButton carrera_insertar_tiempo_but_buscar;
     private javax.swing.JButton carrera_insertar_tiempo_but_insertar_tiempo;
     private javax.swing.JButton carrera_insertar_tiempo_but_salir;
     private javax.swing.JComboBox<String> carrera_insertar_tiempo_comb_carrera_nombre;
     private javax.swing.JLabel carrera_insertar_tiempo_lab_carrera;
     private javax.swing.JLabel carrera_insertar_tiempo_lab_dni_corredor;
     private javax.swing.JLabel carrera_insertar_tiempo_lab_tiempo;
-    private javax.swing.JLabel carrera_insertar_tiempo_lab_titulo;
+    private JTextField carrera_insertar_tiempo_textf_id_carrera;
     private javax.swing.JTextField carrera_insertar_tiempo_textf_dni_corredor;
     private javax.swing.JTextField carrera_insertar_tiempo_textf_tiempo;
     private javax.swing.JPanel carrera_listar_carrera;
