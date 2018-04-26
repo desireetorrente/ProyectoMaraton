@@ -1,16 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="persistencia.CarrerasHelper" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="Modelo.Carrera" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html lang="es">
 <head>
 <title>Zona Usuario</title> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link href="csssignin.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="ZonaUsuario.css">
+        <link href="ZonaUsuario.css" rel="stylesheet">
  </head>       
 <body>
 	<div id="contenedor">
@@ -35,7 +27,7 @@
 			</div>
 			
 			<div id="listaCarrera">				
-				<form action="SVWeb.java" method="post">
+				<form action="" method="post">
 					<p>ID Carrera: </p>
 					<input type="text" name="idcarrera"></input>
 					<p>Nombre de la Carrera:</p>
@@ -49,10 +41,7 @@
 					<p>Juez:</p>
 					<input type="text" name="juez"></input>
 				</form>
-				<%--
-				Carrera carrera = new Carrera();
-				CarrerasHelper listarcarrera = new CarrerasHelper();
-				--%>
+				
 			</div>
 			
 			<div id="listaCorredor">
@@ -101,127 +90,87 @@
 			</form>
 		</div>	
 	</div>
-
-
-<%--   Intento con JDBC
-
-		CarrerasHelper listaA=new CarrerasHelper();
-
-     String idcarrera = request.getParameter("idcarrera");
-		String nombreCarrera =request.getParameter("nombreCarrera");
-		String distanciaCarrera = request.getParameter("distanciaCarrera");
-		String altitudCarrera = request.getParameter("altitudCarrera");
-		
-		Class.forName("com.mysql.jdbc.Driver");
-			
-
-		try{
-		Connection miConexion=java.sql.DriverManager.getConnection("jdbc:mysql://192.168.203.4:3306/bbdd_g2","admin_g2","a4384"); 
-		
-		Statement miStatement=miConexion.createStatement();
-		
-	    String Sql="SELECT ALL FROM CARRERA";
-				
-		miStatement.executeUpdate(Sql);
-		
-		out.println("idcarrera");
-				
-		 }catch(Exception e){
-			
-			out.println("Ha habido un error");
-			
-		}
-		
-			//(idcarrera_carrera, nombre_carrera, distancia_carrera, altitud-carrera";
-
-		--%>
-
+</div>
 <script>
-function ocultaInsert(x) {
-	if(document.getElementById("insert").style.visibility == "visible"){
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}else{
-		document.getElementById("insert").style.visibility = "visible";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}	
-}
-
-function ocultaListaCarrera(x) {
-	if(document.getElementById("listaCarrera").style.visibility == "visible"){
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}else{
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "visible";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}	
-}
-
-function ocultaListaCorredor(x) {
-	if(document.getElementById("listaCorredor").style.visibility == "visible"){
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}else{
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "visible";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}	
-}
-
-function ocultaEditar(x) {
-	if(document.getElementById("editar").style.visibility == "visible"){
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}else{
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "visible";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}	
-}
-
-function ocultaEliminar(x) {
-	if(document.getElementById("eliminar").style.visibility == "visible"){
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}else{
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "visible";
-	}	
-}
+ function ocultaInsert(x) {
+ 	if(document.getElementById("insert").style.visibility == "visible"){
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}else{
+ 		document.getElementById("insert").style.visibility = "visible";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}	
+ }
+ 
+ function ocultaListaCarrera(x) {
+ 	if(document.getElementById("listaCarrera").style.visibility == "visible"){
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}else{
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "visible";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}	
+ }
+ 
+ function ocultaListaCorredor(x) {
+ 	if(document.getElementById("listaCorredor").style.visibility == "visible"){
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}else{
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "visible";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}	
+ }
+ 
+ function ocultaEditar(x) {
+ 	if(document.getElementById("editar").style.visibility == "visible"){
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}else{
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "visible";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}	
+ }
+ 
+ function ocultaEliminar(x) {
+ 	if(document.getElementById("eliminar").style.visibility == "visible"){
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "hidden";
+ 	}else{
+ 		document.getElementById("insert").style.visibility = "hidden";
+ 		document.getElementById("listaCarrera").style.visibility = "hidden";
+ 		document.getElementById("listaCorredor").style.visibility = "hidden";
+ 		document.getElementById("editar").style.visibility = "hidden";
+ 		document.getElementById("eliminar").style.visibility = "visible";
+ 	}	
+ }
 </script>
-
-
-
-
-
-
 </body>
 </html>

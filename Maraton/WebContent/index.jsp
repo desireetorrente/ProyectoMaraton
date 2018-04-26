@@ -12,6 +12,13 @@
 </head>
 
 <body>
+<div id="cabeza">
+<center>
+<img src="https://www.accountancyage.com/wp-content/uploads/sites/3/2016/03/marathon-122.png"  width="500" height="220" />
+</center>
+
+
+</div>
 	<div id="cuadro">
 		<form action="Signin.jsp" method="post">
 			<button type="submit" name="boton" id="boton" value="Enviar">Registrarse</button>
