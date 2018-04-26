@@ -141,7 +141,7 @@ public class JuecesHelper {
 		List<Jueces> jueces = new ArrayList<>();
 		
 		try {
-			Query query = session.createQuery("SELECT p FROM Participantes p");
+			Query query = session.createQuery("SELECT j FROM Jueces j");
 			jueces = query.list();
 			tx.commit();
 			session.close();

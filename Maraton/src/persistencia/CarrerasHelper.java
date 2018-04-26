@@ -107,8 +107,7 @@ public class CarrerasHelper {
 		org.hibernate.Transaction tx = session.beginTransaction();
 		//int dni = juez.getDniJueces();
 		try { 
-			Query q = session.createQuery("from carrera as car where car.idcarrera_carrera = "
-					+ idCarrera);
+			Query q = session.createQuery("from Carrera as car where car.idcarreraCarrera = " + idCarrera);
 			Carrera car = new Carrera();
 			car = session.load(Carrera.class, idCarrera); //CArgamoms objeto bbdd
 			car.setJueces(juez);			

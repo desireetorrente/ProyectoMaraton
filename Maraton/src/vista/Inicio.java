@@ -7,7 +7,9 @@ package vista;
 
 import javax.swing.JFrame;
 import Modelo.Carrera;
+import Modelo.Jueces;
 import persistencia.CarrerasHelper;
+import persistencia.JuecesHelper;
 import persistencia.ParticipantesHelper;
 
 import javax.swing.JTextField;
@@ -31,9 +33,12 @@ public class Inicio extends javax.swing.JFrame {
 	Carrera carrera = new Carrera();
 	CarrerasHelper carrerasHelper = new CarrerasHelper();
 	ParticipantesHelper participantesHelper = new ParticipantesHelper();
+	Jueces jueces = new Jueces();
+	JuecesHelper juecesHelper = new JuecesHelper();
 	
 	List <Carrera> nombres;
 	List<Carrera>nombresListar = new LinkedList<Carrera>();
+	List <Jueces> nombres_jueces;
 	
 	int posicion_listar;
 	
@@ -447,11 +452,23 @@ public class Inicio extends javax.swing.JFrame {
         car_insertar_juez_combo_carrera = new javax.swing.JComboBox<>();
         car_insertar_juez_lab_carrera = new javax.swing.JLabel();
         car_insertar_juez_but_anadir = new javax.swing.JButton();
+        car_insertar_juez_but_anadir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		//elim_carr_textf_introducir_id_eliminar.setText(Integer.toString(nombres.get(elim_carr_comb_eliminar_carrera.getSelectedIndex()).getIdcarreraCarrera()));
+                //carrera = carrerasHelper.Buscar(Integer.parseInt(elim_carr_textf_introducir_id_eliminar.getText()));
+                
+                car_insertar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(car_insertar_juez_comb_buscar_nombre_juez.getSelectedIndex()).getDniJueces()));
+        		car_insertar_juez_textf_id_carrera.setText(Integer.toString(nombres.get(car_insertar_juez_combo_carrera.getSelectedIndex()).getIdcarreraCarrera()));
+                carrerasHelper.insertar_juez(juecesHelper.Buscar(Integer.parseInt(car_insertar_juez_textf_dni_juez.getText())), Integer.parseInt(car_insertar_juez_textf_id_carrera.getText()));
+        		
+        	}
+        });
         car_insertar_juez_but_salir = new javax.swing.JButton();
         car_insertar_juez_lab_buscar_nombre_juez = new javax.swing.JLabel();
         car_insertar_juez_comb_buscar_nombre_juez = new javax.swing.JComboBox<>();
         car_insertar_juez_lab_buscar_apellidos_juez = new javax.swing.JLabel();
-        car_insertar_juez_textf_buscar_apellidos_juez = new javax.swing.JTextField();
+        car_insertar_juez_textf_id_carrera = new javax.swing.JTextField();
         car_insertar_juez_lab_titulo = new javax.swing.JLabel();
         carrera_desasignar_juez = new javax.swing.JPanel();
         carr_desasignar_juez_lab_carrera = new javax.swing.JLabel();
@@ -2720,7 +2737,7 @@ public class Inicio extends javax.swing.JFrame {
 
         car_insertar_juez_lab_buscar_apellidos_juez.setText("Apellidos Juez");
 
-        car_insertar_juez_textf_buscar_apellidos_juez.setEnabled(false);
+        car_insertar_juez_textf_id_carrera.setEnabled(false);
 
         car_insertar_juez_lab_titulo.setText("INSERTAR JUEZ EN CARRERA");
 
@@ -2749,7 +2766,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(car_insertar_juez_lab_buscar_apellidos_juez)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(car_insertar_juez_textf_buscar_apellidos_juez, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(car_insertar_juez_textf_id_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(carrera_insertar_juezLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(car_insertar_juez_lab_titulo)))
@@ -2766,7 +2783,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(car_insertar_juez_lab_buscar_nombre_juez)
                     .addComponent(car_insertar_juez_comb_buscar_nombre_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(car_insertar_juez_lab_buscar_apellidos_juez)
-                    .addComponent(car_insertar_juez_textf_buscar_apellidos_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(car_insertar_juez_textf_id_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(carrera_insertar_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(car_insertar_juez_combo_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4544,6 +4561,25 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(true);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombres = carrerasHelper.listarCarrera();
+        
+        car_insertar_juez_combo_carrera.removeAllItems();
+        for (Carrera car: nombres) {
+        	
+        	car_insertar_juez_combo_carrera.addItem("" + car.getNombreCarrera());
+        }  
+        
+        nombres_jueces = juecesHelper.imprimirJueces();
+        
+        car_insertar_juez_comb_buscar_nombre_juez.removeAllItems();
+        
+        for (Jueces jue: nombres_jueces) {
+        	
+        	car_insertar_juez_comb_buscar_nombre_juez.addItem("" + jue.getNombreJueces());
+        }  
+        
+        
     }                                                          
 
     private void menu_desasignar_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                     
@@ -4713,7 +4749,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel car_insertar_juez_lab_buscar_nombre_juez;
     private javax.swing.JLabel car_insertar_juez_lab_carrera;
     private javax.swing.JLabel car_insertar_juez_lab_titulo;
-    private javax.swing.JTextField car_insertar_juez_textf_buscar_apellidos_juez;
+    private javax.swing.JTextField car_insertar_juez_textf_id_carrera;
     private javax.swing.JTextField car_insertar_juez_textf_dni_juez;
     private javax.swing.JButton carr_desasignar_juez_but_eliminar;
     private javax.swing.JButton carr_desasignar_juez_but_salir;
