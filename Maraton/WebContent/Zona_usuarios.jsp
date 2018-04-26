@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+    
+<%@ page import="Modelo.Carrera"%>
+<%@ page import="persistencia.CarrerasHelper"%>
+<%@ page import="java.util.*"%>
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -26,7 +34,21 @@
 				</form>
 			</div>
 			
-			<div id="listaCarrera">				
+			<div id="listaCarrera">	
+			
+			<%
+			
+			
+			Carrera carrera = new Carrera();
+			CarrerasHelper carreraslistar = new CarrerasHelper();
+			
+			//List <Carrera> nombres;
+			List<Carrera>nombresListar = new LinkedList<Carrera>();
+			nombresListar=carreraslistar.listarCarrera();
+			
+			int posicion_listar;
+		
+			%>			
 				<form action="" method="post">
 					<p>ID Carrera: </p>
 					<input type="text" name="idcarrera"></input>
