@@ -126,6 +126,11 @@ public class Inicio extends javax.swing.JFrame {
         elim_carr_textf_introducir_id_eliminar = new javax.swing.JTextField();
         panel_eliminar_carrera = new javax.swing.JPanel();
         elim_carr_but_eliminar = new javax.swing.JButton();
+        elim_carr_but_eliminar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		carrerasHelper.delete(Integer.parseInt(elim_carr_textf_introducir_id_eliminar.getText()));
+        	}
+        });
         elim_carr_but_salir = new javax.swing.JButton();
         elim_carr_lab_altura_carrera = new javax.swing.JLabel();
         elim_carr_textf_altura_carrera = new javax.swing.JTextField();
@@ -135,7 +140,7 @@ public class Inicio extends javax.swing.JFrame {
         elim_carr_textf_carrera_seleccionada = new javax.swing.JTextField();
         elim_carr_but_buscar_carrera = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        elim_carr_comb_eliminar_carrera = new javax.swing.JComboBox<>();
         elim_carr_lab_titulo = new javax.swing.JLabel();
         carrera_listar_carrera = new javax.swing.JPanel();
         listar_carr_lab_nombre_carrera = new javax.swing.JLabel();
@@ -790,7 +795,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre Carrera");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        elim_carr_comb_eliminar_carrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         elim_carr_lab_titulo.setText("ELIMINAR CARRERA");
 
@@ -806,7 +811,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(carrera_eliminar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(elim_carr_comb_eliminar_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(elim_carr_but_buscar_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(elim_carr_textf_introducir_id_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(carrera_eliminar_carreraLayout.createSequentialGroup()
@@ -824,7 +829,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(carrera_eliminar_carreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(elim_carr_comb_eliminar_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(elim_carr_but_buscar_carrera)
                 .addGap(18, 18, 18)
@@ -3895,8 +3900,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                  
 
     private void menu_modificar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
-    	
+      	
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3920,20 +3924,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
-        
-        
-       
-        /*List <Carrera>nombres= carrerasHelper.listarCarrera();*/
-        
+
         nombres = carrerasHelper.listarCarrera();
                
         modificar_carr_comb_buscar_nombre_carrera.removeAllItems();
         for (Carrera car: nombres) {
         	
         	modificar_carr_comb_buscar_nombre_carrera.addItem("" + car.getNombreCarrera());
-        }
-        
-        
+        }       
         
     }   
 
@@ -3962,6 +3960,15 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombres = carrerasHelper.listarCarrera();
+        
+        elim_carr_comb_eliminar_carrera.removeAllItems();
+        
+        for (Carrera car: nombres) {
+        	
+        	elim_carr_comb_eliminar_carrera.addItem("" + car.getNombreCarrera());
+        }
     }                                                     
 
     private void menu_listar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                    
@@ -4379,14 +4386,20 @@ public class Inicio extends javax.swing.JFrame {
     }                                                        
 
     private void crear_carr_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        // TODO add your handling code here:
+   
         carrera_crear_carrera.setVisible(false);
         inicio.setVisible(true); 
     }                                                    
 
     private void elim_carr_but_buscar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-        // TODO add your handling code here:
+    
         panel_eliminar_carrera.setVisible(true);
+        
+        elim_carr_textf_introducir_id_eliminar.setText(Integer.toString(nombres.get(elim_carr_comb_eliminar_carrera.getSelectedIndex()).getIdcarreraCarrera()));
+        carrera = carrerasHelper.Buscar(Integer.parseInt(elim_carr_textf_introducir_id_eliminar.getText()));
+        elim_carr_textf_carrera_seleccionada.setText(carrera.getNombreCarrera());
+        elim_carr_textf_altura_carrera.setText(carrera.getAltitudCarrera());
+        elim_carr_textf_distancia_carrera.setText(carrera.getDistanciaCarrera());
         
     }                                                            
 
@@ -4851,7 +4864,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel general;
     private javax.swing.JPanel inicio;
     private javax.swing.JLabel inicio_lab_titulo;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> elim_carr_comb_eliminar_carrera;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel11;
