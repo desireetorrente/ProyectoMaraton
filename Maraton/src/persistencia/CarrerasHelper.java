@@ -40,10 +40,10 @@ public class CarrerasHelper {
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
-		Transaction tx = session.beginTransaction();
+		org.hibernate.Transaction tx = session.beginTransaction();
 		
 		try {
-			Query q = session.createQuery("from Carrera as car where car.idcarrera_carrera = " + idCarrera);
+			Query q = session.createQuery("from Carrera as car where car.idcarreraCarrera = " + idCarrera);
 			car = (Carrera) q.uniqueResult();
 			session.delete(car);
 			tx.commit();
