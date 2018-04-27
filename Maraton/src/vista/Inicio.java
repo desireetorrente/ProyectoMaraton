@@ -38,6 +38,7 @@ public class Inicio extends javax.swing.JFrame {
 	Jueces jueces = new Jueces();
 	JuecesHelper juecesHelper = new JuecesHelper();
 	UsuariosHelper usuarioHelper = new UsuariosHelper();
+	Usuarios usuario = new Usuarios();
 	
 	List<Usuarios>nombresUsuarios;
 	List <Carrera> nombres;
@@ -3909,6 +3910,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
+        
+        
     }                                                  
 
     private void menu_modificar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                       
@@ -4046,12 +4049,15 @@ public class Inicio extends javax.swing.JFrame {
         inicio.setVisible(false);
         panel_modificar_usuario.setVisible(false);
         
-        nombresUsuarios = 
+        nombresUsuarios = usuarioHelper.listarUsuarios();
         
-        modificar_carr_comb_buscar_nombre_carrera.removeAllItems();
-        for (Carrera car: nombres) {
+        modificar_usuario_comb_buscar_usaurio_nombre.removeAllItems();
+        
+        for (Usuarios usu: nombresUsuarios) {
         	
-        	modificar_carr_comb_buscar_nombre_carrera.addItem("" + car.getNombreCarrera());
+        	modificar_usuario_comb_buscar_usaurio_nombre.addItem("" + usu.getNombreUsuarios());
+        	modificar_usuario_textf_buscar_apellidos.setText(nombresUsuarios.get(modificar_usuario_comb_buscar_usaurio_nombre.getSelectedIndex()).getApellidosUsuarios());
+        
         } 
     }                                                      
 
@@ -4400,9 +4406,17 @@ public class Inicio extends javax.swing.JFrame {
     }                                                     
 
     private void modificar_usu_but_buscar_usuario_idActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
-        // TODO add your handling code here:
+        
         
         panel_modificar_usuario.setVisible(true);
+        
+        modificar_usu_textf_buscar_usuario_id.setText(Integer.toString(nombresUsuarios.get(modificar_usuario_comb_buscar_usaurio_nombre.getSelectedIndex()).getDniUsuarios()));
+        usuario = usuarioHelper.search(Integer.parseInt(modificar_usu_textf_buscar_usuario_id.getText()));
+        modificar_usu_textf_nombre_usuario.setText(usuario.getNombreUsuarios());
+        modificar_usu_textf_apellidos_usuario.setText(usuario.getApellidosUsuarios());
+        modificar_usu_textf_.setText(usuario.getNombreUsuarios());
+        
+        
     }                                                                   
 
     private void modificar_usu_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                        
@@ -4618,7 +4632,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                    
 
     private void menu_insertar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:    
+            
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4641,10 +4655,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(true);
+        
+        
+        
     }                                                     
 
     private void carrera_insertar_tiempo_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
-        // TODO add your handling code here:
+        
         carrera_insertar_tiempo.setVisible(false);
         inicio.setVisible(true);
     }                                                                 
@@ -4663,13 +4680,13 @@ public class Inicio extends javax.swing.JFrame {
     }                                                              
 
     private void usuario_insertar_usuario_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
-        // TODO add your handling code here:
+        
         usuario_insertar_usuario.setVisible(false);
         inicio.setVisible(true);
     }                                                                  
 
     private void crear_carr_but_guardarActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
+        
     	carrera.setNombreCarrera(crear_carr_textf_nombre_carrera.getText());
 		carrera.setDistanciaCarrera(carr_crear_carrera_textf_distancia_carrera.getText());
 		carrera.setAltitudCarrera(crear_carr_textf_altura_carrera.getText());
