@@ -8,6 +8,7 @@ package vista;
 import javax.swing.JFrame;
 import Modelo.Carrera;
 import Modelo.Jueces;
+import Modelo.Participantes;
 import Modelo.Usuarios;
 import persistencia.CarrerasHelper;
 import persistencia.JuecesHelper;
@@ -39,6 +40,7 @@ public class Inicio extends javax.swing.JFrame {
 	JuecesHelper juecesHelper = new JuecesHelper();
 	UsuariosHelper usuarioHelper = new UsuariosHelper();
 	Usuarios usuario = new Usuarios();
+	Participantes participantes = new Participantes();
 	
 	List<Usuarios>nombresUsuarios;
 	List <Carrera> nombres;
@@ -261,6 +263,13 @@ public class Inicio extends javax.swing.JFrame {
         eliminar_usu_textf_cp_usuario = new javax.swing.JTextField();
         eliminar_usu_textf_telefono_usuario = new javax.swing.JTextField();
         eliminar_usu_but_eliminar = new javax.swing.JButton();
+        eliminar_usu_but_eliminar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println(eliminar_usu_textf_buscar_usuario_id.getText());
+        		
+        		usuarioHelper.delete(Integer.parseInt(eliminar_usu_textf_buscar_usuario_id.getText()));
+        	}
+        });
         eliminar_usu_but_salir = new javax.swing.JButton();
         eliminar_usu_lab_buscar_nombre_usu = new javax.swing.JLabel();
         eliminar_usu_comb_buscar_nombre_usu = new javax.swing.JComboBox<>();
@@ -4067,7 +4076,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                      
 
     private void menu_eliminar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4091,6 +4100,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombresUsuarios = usuarioHelper.listarUsuarios();
+        
+        eliminar_usu_comb_buscar_nombre_usu.removeAllItems();
+        
+        for (Usuarios usu: nombresUsuarios) {
+        	eliminar_usu_comb_buscar_nombre_usu.addItem("" + usu.getNombreUsuarios());
+        }
     }                                                     
 
     private void menu_listar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                    
@@ -4435,8 +4452,17 @@ public class Inicio extends javax.swing.JFrame {
     }                                                       
 
     private void eliminar_usu_but_buscar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-        // TODO add your handling code here:
+        
         panel_eliminar_usuario.setVisible(true);
+        
+        eliminar_usu_textf_buscar_usuario_id.setText(Integer.toString(nombresUsuarios.get(eliminar_usu_comb_buscar_nombre_usu.getSelectedIndex()).getDniUsuarios()));
+        usuario = usuarioHelper.search(Integer.parseInt(eliminar_usu_textf_buscar_usuario_id.getText()));
+        eliminar_usu_textf_nombre_usuario.setText(usuario.getNombreUsuarios());
+        eliminar_usu_textf_apellidos_usuario.setText(usuario.getApellidosUsuarios());
+        eliminar_usu_textf_email_usuario.setText(usuario.getEmailUsuarios());
+        eliminar_usu_textf_edad_usuario.setText(Integer.toString(usuario.getEdadUsuarios()));
+        eliminar_usu_textf_cp_usuario.setText(usuario.getCpUsuarios());
+        eliminar_usu_textf_telefono_usuario.setText(usuario.getTelefonoUsuarios());
     }                                                               
 
     private void eliminar_usu_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                       
