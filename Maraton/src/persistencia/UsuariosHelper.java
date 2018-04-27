@@ -1,11 +1,15 @@
 package persistencia;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+
+import Modelo.Carrera;
 import Modelo.Usuarios;
 
 /**
@@ -49,6 +53,25 @@ public class UsuariosHelper {
 			return 1;
 		}
 
+	}
+	
+	/**
+	 * Método para listar los usuarios que hay inscritos en la BBDD
+	 * @return Lista de usuarios.
+	 */
+	public List <Usuarios> listarUsuarios(){
+		
+		List<Usuarios>usuarios = null;
+		
+		cfg.configure("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("FROM Usuarios");
+		
+		usuarios = (List<Usuarios>) query.list();
+		
+        return usuarios;
 	}
 
 	/**
