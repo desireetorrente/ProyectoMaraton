@@ -1,8 +1,8 @@
 *{
 	margin: 0px;
 	padding: 0px
-	
 }
+
 body{
 	background-color: #A9F5F2;
 }
@@ -34,9 +34,9 @@ form{
 }
 
 #botones{
-	width:60em;
+	width:70em;
 	display:inline-block;
-	margin-left: 15em;
+	margin-left: 10em;
 	position: fixed;
 	z-index:1;
 }
@@ -59,6 +59,33 @@ form{
 	visibility:hidden;
 	position: absolute;
 	top:1em;
+}
+
+.campos{
+	float:left;
+}
+
+.space{
+	float:left;
+	top:2em;
+	width: 10em;
+	height:3em;
+
+}
+
+#botonCarrera{
+	float: center;
+	margin-top:auto;
+	position:relative;
+	
+}
+
+#busca{
+	width:10em;
+	border-radius:6px;
+	background:blue;
+	color:white;
+	font-size: 15px;
 }
 
 #listaCorredor{
