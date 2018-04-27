@@ -40,12 +40,13 @@ public class Inicio extends javax.swing.JFrame {
 	JuecesHelper juecesHelper = new JuecesHelper();
 	UsuariosHelper usuarioHelper = new UsuariosHelper();
 	Usuarios usuario = new Usuarios();
-	Participantes participantes = new Participantes();
+	Participantes participante = new Participantes();
 	
 	List<Usuarios>nombresUsuarios;
 	List <Carrera> nombres;
 	List<Carrera>nombresListar = new LinkedList<Carrera>();
 	List <Jueces> nombres_jueces;
+	List<Participantes>nombresParticipantes;
 	
 	int posicion_listar;
 	
@@ -274,7 +275,7 @@ public class Inicio extends javax.swing.JFrame {
         eliminar_usu_lab_buscar_nombre_usu = new javax.swing.JLabel();
         eliminar_usu_comb_buscar_nombre_usu = new javax.swing.JComboBox<>();
         eliminar_usu_lab_buscar_apellido_usu = new javax.swing.JLabel();
-        eliminar_usuario_textf_buscar_apellido_usu = new javax.swing.JTextField();
+        eliminar_usuario_textf_id_carrera = new javax.swing.JTextField();
         eliminar_usuario_lab_titulo = new javax.swing.JLabel();
         usuario_listar_usuario = new javax.swing.JPanel();
         listar_usu_lab_nombre_usuario = new javax.swing.JLabel();
@@ -1325,7 +1326,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(eliminar_usu_lab_buscar_apellido_usu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eliminar_usuario_textf_buscar_apellido_usu, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(eliminar_usuario_textf_id_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(usuario_eliminar_usuarioLayout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(eliminar_usu_but_buscar_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1350,7 +1351,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(eliminar_usu_lab_buscar_nombre_usu)
                     .addComponent(eliminar_usu_comb_buscar_nombre_usu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminar_usu_lab_buscar_apellido_usu)
-                    .addComponent(eliminar_usuario_textf_buscar_apellido_usu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eliminar_usuario_textf_id_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(eliminar_usu_but_buscar_usuario)
                 .addGap(18, 18, 18)
@@ -4108,6 +4109,7 @@ public class Inicio extends javax.swing.JFrame {
         for (Usuarios usu: nombresUsuarios) {
         	eliminar_usu_comb_buscar_nombre_usu.addItem("" + usu.getNombreUsuarios());
         }
+        
     }                                                     
 
     private void menu_listar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                    
@@ -4456,6 +4458,7 @@ public class Inicio extends javax.swing.JFrame {
         panel_eliminar_usuario.setVisible(true);
         
         eliminar_usu_textf_buscar_usuario_id.setText(Integer.toString(nombresUsuarios.get(eliminar_usu_comb_buscar_nombre_usu.getSelectedIndex()).getDniUsuarios()));
+        //eliminar_usuario_textf_id_carrera.setText(Integer.toString(nombresParticipantes.get(eliminar_usu_comb_buscar_nombre_usu.getSelectedIndex()).getCarrera().getIdcarreraCarrera()));
         usuario = usuarioHelper.search(Integer.parseInt(eliminar_usu_textf_buscar_usuario_id.getText()));
         eliminar_usu_textf_nombre_usuario.setText(usuario.getNombreUsuarios());
         eliminar_usu_textf_apellidos_usuario.setText(usuario.getApellidosUsuarios());
@@ -4921,7 +4924,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField eliminar_usu_textf_nombre_usuario;
     private javax.swing.JTextField eliminar_usu_textf_telefono_usuario;
     private javax.swing.JLabel eliminar_usuario_lab_titulo;
-    private javax.swing.JTextField eliminar_usuario_textf_buscar_apellido_usu;
+    private javax.swing.JTextField eliminar_usuario_textf_id_carrera;
     private javax.swing.JPanel general;
     private javax.swing.JPanel inicio;
     private javax.swing.JLabel inicio_lab_titulo;
