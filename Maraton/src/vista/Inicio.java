@@ -228,9 +228,14 @@ public class Inicio extends javax.swing.JFrame {
         modificar_usu_textf_edad_usuario = new javax.swing.JTextField();
         modificar_usu_textf_cp_usuario = new javax.swing.JTextField();
         modificar_usu_textf_telefono_usuario = new javax.swing.JTextField();
-        modificar_usu_textf_contrasena_1_usuario = new javax.swing.JPasswordField();
-        modificar_usu_textf_contrasena_2_usuario = new javax.swing.JPasswordField();
+        modificar_usu_textf_contrasena_1_usuario = new JTextField();
+        modificar_usu_textf_contrasena_2_usuario = new JTextField();
         modificar_usu_but_modificar = new javax.swing.JButton();
+        modificar_usu_but_modificar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		usuarioHelper.change(Integer.parseInt(modificar_usu_textf_buscar_usuario_id.getText()), modificar_usu_textf_nombre_usuario.getText(), modificar_usu_textf_apellidos_usuario.getText(), modificar_usu_textf_email_usuario.getText(), modificar_usu_textf_contrasena_1_usuario.getText(), Integer.parseInt(modificar_usu_textf_edad_usuario.getText()), modificar_usu_textf_cp_usuario.getText(), modificar_usu_textf_telefono_usuario.getText());
+        	}
+        });
         modificar_usu_but_salir = new javax.swing.JButton();
         modificar_usu_textf_buscar_usuario_id = new javax.swing.JTextField();
         modificar_usu_but_buscar_usuario_id = new javax.swing.JButton();
@@ -4414,8 +4419,12 @@ public class Inicio extends javax.swing.JFrame {
         usuario = usuarioHelper.search(Integer.parseInt(modificar_usu_textf_buscar_usuario_id.getText()));
         modificar_usu_textf_nombre_usuario.setText(usuario.getNombreUsuarios());
         modificar_usu_textf_apellidos_usuario.setText(usuario.getApellidosUsuarios());
-        modificar_usu_textf_.setText(usuario.getNombreUsuarios());
-        
+        modificar_usu_textf_email_usuario.setText(usuario.getEmailUsuarios());
+        modificar_usu_textf_contrasena_1_usuario.setText(usuario.getPasswordUsuarios());
+        modificar_usu_textf_contrasena_2_usuario.setText(usuario.getPasswordUsuarios());
+        modificar_usu_textf_edad_usuario.setText(Integer.toString(usuario.getEdadUsuarios()));
+        modificar_usu_textf_cp_usuario.setText(usuario.getCpUsuarios());
+        modificar_usu_textf_telefono_usuario.setText(usuario.getTelefonoUsuarios());
         
     }                                                                   
 
@@ -5050,8 +5059,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel modificar_usu_lab_telefono_usuario;
     private javax.swing.JTextField modificar_usu_textf_apellidos_usuario;
     private javax.swing.JTextField modificar_usu_textf_buscar_usuario_id;
-    private javax.swing.JPasswordField modificar_usu_textf_contrasena_1_usuario;
-    private javax.swing.JPasswordField modificar_usu_textf_contrasena_2_usuario;
+    private JTextField modificar_usu_textf_contrasena_1_usuario;
+    private JTextField modificar_usu_textf_contrasena_2_usuario;
     private javax.swing.JTextField modificar_usu_textf_cp_usuario;
     private javax.swing.JTextField modificar_usu_textf_dni_usuario;
     private javax.swing.JTextField modificar_usu_textf_edad_usuario;
