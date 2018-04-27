@@ -59,7 +59,7 @@
 			</div>
 			
 			<div id="listaCorredor">
-				<form action="ListarCorredoresServlet" method="post">
+				<form action="" method="post">
 					<div class="campos">
 						<p>Id carrera:</p>
 						<input type="text" name="carrera"></input>
