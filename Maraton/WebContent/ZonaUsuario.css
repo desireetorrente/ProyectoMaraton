@@ -3,15 +3,6 @@
 	padding: 0px
 }
 
-body{
-	background-color: #A9F5F2;
-}
-
-button{
-	margin-left: 0.5em;
-	padding: 1% 2%;
-}
-
 form{
 	text-align: center;	
 	display: block;
@@ -31,6 +22,7 @@ form{
 	background:blue;
 	color:white;
 	font-size: 15px;
+	text-align:center;
 }
 
 #botones{
@@ -94,6 +86,12 @@ form{
 	top:1em;
 }
 
+#logEditar{
+	visibility:hidden;
+	position: absolute;
+	top:1em;
+}
+
 #editar{
 	visibility:hidden;
 	position: absolute;
@@ -108,4 +106,4 @@ form{
 
 #peliminar{
 	text-align: center;
-}
+}}
