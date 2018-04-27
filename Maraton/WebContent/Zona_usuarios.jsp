@@ -20,12 +20,12 @@
 			<button class="boton" onclick="ocultaListaCorredor()"> listar corredor</button>
 			<button class="boton" onclick="ocultaLogEditar()"> editar</button>
 			<button class="boton" onclick="ocultaEliminar()"> eliminar</button>
-			<button class="boton" onclick=""> Log Out</button>
+			<button class="boton" onclick="LogoutServlet"> Log Out</button>
 		</div>
 	
 	<div id="formularios">
 		<div id="insert">
-				<form action="" method="post">
+				<form action="InscribirUsuarioCarreraServlet" method="post">
 					<p>DNI: </p>
 					<input type="text" name="dni"></input>
 					<p>Carrera:</p>
@@ -36,7 +36,7 @@
 			</div>
 			
 			<div id="listaCarrera">				
-				<form action="" method="post">
+				<form action="svlistarcarreras" method="post">
 					<div class="campos">
 						<p>ID Carrera: </p>
 						<input type="text" name="idcarrera"></input>
@@ -110,7 +110,7 @@
 
 		<div id="eliminar">
 			<p id="peliminar">Inserta tu DNI: </p>
-			<form action="" method="post">
+			<form action="EliminarUsuarioSV" method="post">
 				<p>DNI Usuario: </p>
 				<input type="text" name="dniUser"></input>
 				<p>Contraseña:</p>
