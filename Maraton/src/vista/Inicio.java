@@ -2974,10 +2974,6 @@ public class Inicio extends javax.swing.JFrame {
 
         usuario_insertar_usaurio_lab_telefono.setText("Teléfono");
 
-        usuario_insertar_usaurio_passf_1.setText("jPasswordField1");
-
-        usuario_insertar_usaurio_passf_2.setText("jPasswordField2");
-
         usuario_insertar_usuario_but_insertar.setText("INSERTAR");
 
         usuario_insertar_usuario_but_salir.setText("SALIR");
