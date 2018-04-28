@@ -2,6 +2,7 @@ package persistencia;
 
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -76,14 +77,26 @@ public class AdministradoresHelper {
 		}
 	}
 	
-	public List listar() {
+	public List <Administradores>listar() {
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
-        session.beginTransaction();
-        List result = session.createQuery("from Administradores").list();
-        session.getTransaction().commit();
-        return result;
+		org.hibernate.Transaction tx = session.beginTransaction();
+        List<Administradores>administradores=new ArrayList<>();
+        
+        try {
+        	Query q =session.createQuery("from Administradores");
+        	administradores = q.list();
+        	tx.commit();
+        	session.close();
+        	
+        }catch(HibernateException e) {
+        	e.printStackTrace();
+			tx.rollback();
+			session.close();
+        	
+        }
+        return administradores;
     }
 	
 	public Administradores Buscar(int dniAdministradores) {

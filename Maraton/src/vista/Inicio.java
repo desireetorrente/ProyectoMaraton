@@ -6,10 +6,13 @@
 package vista;
 
 import javax.swing.JFrame;
+
+import Modelo.Administradores;
 import Modelo.Carrera;
 import Modelo.Jueces;
 import Modelo.Participantes;
 import Modelo.Usuarios;
+import persistencia.AdministradoresHelper;
 import persistencia.CarrerasHelper;
 import persistencia.JuecesHelper;
 import persistencia.ParticipantesHelper;
@@ -40,11 +43,13 @@ public class Inicio extends javax.swing.JFrame {
 	JuecesHelper juecesHelper = new JuecesHelper();
 	UsuariosHelper usuarioHelper = new UsuariosHelper();
 	Usuarios usuario = new Usuarios();
-	
+	Administradores administrador = new Administradores();
+	AdministradoresHelper administradoresHelper = new AdministradoresHelper();
 	List<Usuarios>nombresUsuarios;
 	List <Carrera> nombres;
 	List<Carrera>nombresListar = new LinkedList<Carrera>();
 	List <Jueces> nombres_jueces;
+	List<Administradores>nombresAdmin;
 	
 	int posicion_listar;
 	
@@ -520,9 +525,18 @@ public class Inicio extends javax.swing.JFrame {
         crear_admin_lab_nombre_admin = new javax.swing.JLabel();
         crear_admin_textf_nombre_admin = new javax.swing.JTextField();
         crear_admin_lab_password_admin = new javax.swing.JLabel();
-        crear_admin_passwf_password_1_admin = new javax.swing.JPasswordField();
-        crear_admin_passwf_password_2_admin = new javax.swing.JPasswordField();
+        crear_admin_passwf_password_1_admin = new JTextField();
+        crear_admin_passwf_password_2_admin = new JTextField();
         crear_admin_but_crear_admin = new javax.swing.JButton();
+        crear_admin_but_crear_admin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		administrador.setDniAdministradores(Integer.parseInt(crear_admin_textf_dni_admin.getText()));
+        		administrador.setNombreAdministradores(crear_admin_textf_nombre_admin.getText());
+        		administrador.setPasswordAdministradores(crear_admin_passwf_password_1_admin.getText());
+        		administradoresHelper.insertar(administrador);
+        		
+        	}
+        });
         crear_admin_but_salir = new javax.swing.JButton();
         crear_admin__lab_titulo = new javax.swing.JLabel();
         administrador_modificar_administrador = new javax.swing.JPanel();
@@ -531,8 +545,8 @@ public class Inicio extends javax.swing.JFrame {
         modificar_admin_lab_dni_admin = new javax.swing.JLabel();
         modificar_admin_lab_nombre_admin = new javax.swing.JLabel();
         modificar_admin_lab_password_admin = new javax.swing.JLabel();
-        modificar_admin_passwf_password_1_admin = new javax.swing.JPasswordField();
-        modificar_admin_passwf_password_2_admin = new javax.swing.JPasswordField();
+        modificar_admin_passwf_password_1_admin = new JTextField();
+        modificar_admin_passwf_password_2_admin = new JTextField();
         modificar_admin_textf_dni_admin = new javax.swing.JTextField();
         modificar_admin_textf_nombre_admin = new javax.swing.JTextField();
         modificar_admin_but_modificar_admin = new javax.swing.JButton();
@@ -2385,10 +2399,6 @@ public class Inicio extends javax.swing.JFrame {
         crear_admin_lab_password_admin.setText("Contraseña administrador");
         crear_admin_lab_password_admin.setFocusable(false);
 
-        crear_admin_passwf_password_1_admin.setText("jPasswordField1");
-
-        crear_admin_passwf_password_2_admin.setText("jPasswordField2");
-
         crear_admin_but_crear_admin.setText("Crear");
 
         crear_admin_but_salir.setText("Salir");
@@ -2472,10 +2482,6 @@ public class Inicio extends javax.swing.JFrame {
 
         modificar_admin_lab_password_admin.setText("Contraseña administrador");
         modificar_admin_lab_password_admin.setFocusable(false);
-
-        modificar_admin_passwf_password_1_admin.setText("jPasswordField1");
-
-        modificar_admin_passwf_password_2_admin.setText("jPasswordField2");
 
         modificar_admin_but_modificar_admin.setText("Modificar");
 
@@ -4415,7 +4421,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                  
 
     private void menu_crear_administradorActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4441,7 +4447,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                        
 
     private void menu_modificar_administradorActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4465,6 +4471,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombresAdmin = administradoresHelper.listar();
+        
+        modificar_admin_comb_buscar_nombre_admin.removeAllItems();
+        for (Administradores admin: nombresAdmin) {
+        	
+        	modificar_admin_comb_buscar_nombre_admin.addItem("" + admin.getNombreAdministradores());
+        }
     }                                                            
 
     private void menu_eliminar_administradorActionPerformed(java.awt.event.ActionEvent evt) {                                                            
@@ -5027,8 +5041,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel crear_admin_lab_dni_admin;
     private javax.swing.JLabel crear_admin_lab_nombre_admin;
     private javax.swing.JLabel crear_admin_lab_password_admin;
-    private javax.swing.JPasswordField crear_admin_passwf_password_1_admin;
-    private javax.swing.JPasswordField crear_admin_passwf_password_2_admin;
+    private JTextField crear_admin_passwf_password_1_admin;
+    private JTextField crear_admin_passwf_password_2_admin;
     private javax.swing.JTextField crear_admin_textf_dni_admin;
     private javax.swing.JTextField crear_admin_textf_nombre_admin;
     private javax.swing.JButton crear_carr_but_guardar;
@@ -5224,8 +5238,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel modificar_admin_lab_nombre_admin;
     private javax.swing.JLabel modificar_admin_lab_password_admin;
     private javax.swing.JLabel modificar_admin_lab_titulo;
-    private javax.swing.JPasswordField modificar_admin_passwf_password_1_admin;
-    private javax.swing.JPasswordField modificar_admin_passwf_password_2_admin;
+    private JTextField modificar_admin_passwf_password_1_admin;
+    private JTextField modificar_admin_passwf_password_2_admin;
     private javax.swing.JTextField modificar_admin_textf_dni_admin;
     private javax.swing.JTextField modificar_admin_textf_dni_buscar;
     private javax.swing.JTextField modificar_admin_textf_nombre_admin;
