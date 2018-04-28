@@ -43,11 +43,11 @@ public class ListarCorredoresServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String idcarrera = request.getParameter("carrera");
+		String idcarrera = request.getParameter("idcarrera");
 		List<Participantes> corredores= ph.corredoresEnCarrera(Integer.parseInt(idcarrera));
 		PrintWriter out = response.getWriter();
 		for(int i = 0; i< corredores.size(); i++) {
-			out.println("<font color = red> corredores.get(i).getUsuarios().getNombreUsuarios()</font>");
+			out.println(corredores.get(i).getUsuarios().getNombreUsuarios());
 		}
 	}
 
