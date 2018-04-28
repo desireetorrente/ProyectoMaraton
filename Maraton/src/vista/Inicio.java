@@ -545,11 +545,18 @@ public class Inicio extends javax.swing.JFrame {
         carr_desasignar_juez_textf_dni_juez = new javax.swing.JTextField();
         carr_desasignar_juez_comb_carrera = new javax.swing.JComboBox<>();
         carr_desasignar_juez_but_eliminar = new javax.swing.JButton();
+        carr_desasignar_juez_but_eliminar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		car_desasignar_juez_textf_buscar_id_carrera.setText(Integer.toString(nombres.get(carr_desasignar_juez_comb_carrera.getSelectedIndex()).getIdcarreraCarrera()));
+                carrerasHelper.desasignar_juez(Integer.parseInt(car_desasignar_juez_textf_buscar_id_carrera.getText()));
+        		
+        	}
+        });
         carr_desasignar_juez_but_salir = new javax.swing.JButton();
         car_desasignar_juez_lab_buscar_nombre_juez = new javax.swing.JLabel();
         car_desasignar_juez_comb_buscar_nombre_juez = new javax.swing.JComboBox<>();
         car_desasignar_juez_lab_buscar_apellidos_juez = new javax.swing.JLabel();
-        car_desasignar_juez_textf_buscar_apellidos_juez = new javax.swing.JTextField();
+        car_desasignar_juez_textf_buscar_id_carrera = new javax.swing.JTextField();
         car_desasignar_juez_lab_titulo = new javax.swing.JLabel();
         usuario_insertar_usuario = new javax.swing.JPanel();
         usuario_insertar_usaurio_lab_dni = new javax.swing.JLabel();
@@ -2899,7 +2906,7 @@ public class Inicio extends javax.swing.JFrame {
 
         car_desasignar_juez_lab_buscar_apellidos_juez.setText("Apellidos Juez");
 
-        car_desasignar_juez_textf_buscar_apellidos_juez.setEnabled(false);
+        car_desasignar_juez_textf_buscar_id_carrera.setEnabled(false);
 
         car_desasignar_juez_lab_titulo.setText("DESASIGNAR JUEZ DE CARRERA");
 
@@ -2924,7 +2931,7 @@ public class Inicio extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(car_desasignar_juez_lab_buscar_apellidos_juez)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(car_desasignar_juez_textf_buscar_apellidos_juez, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(car_desasignar_juez_textf_buscar_id_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carrera_desasignar_juezLayout.createSequentialGroup()
                                     .addComponent(carr_desasignar_juez_but_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(65, 65, 65)
@@ -2946,7 +2953,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(car_desasignar_juez_lab_buscar_nombre_juez)
                     .addComponent(car_desasignar_juez_comb_buscar_nombre_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(car_desasignar_juez_lab_buscar_apellidos_juez)
-                    .addComponent(car_desasignar_juez_textf_buscar_apellidos_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(car_desasignar_juez_textf_buscar_id_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(carrera_desasignar_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(carr_desasignar_juez_lab_carrera)
@@ -4668,8 +4675,8 @@ public class Inicio extends javax.swing.JFrame {
     }                                                    
 
     private void menu_insertar_juez_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        // TODO add your handling code here:
-        carrera_crear_carrera.setVisible(false);
+
+    	carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
         carrera_modificar_carrera.setVisible(false);
@@ -4713,7 +4720,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                          
 
     private void menu_desasignar_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4736,6 +4743,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(true);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombres = carrerasHelper.listarCarrera();
+        
+        carr_desasignar_juez_comb_carrera.removeAllItems();
+        for (Carrera car: nombres) {
+        	
+        	carr_desasignar_juez_comb_carrera.addItem("" + car.getNombreCarrera());
+        }
     }                                                    
 
     private void menu_insertar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
@@ -4869,7 +4884,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel car_desasignar_juez_lab_buscar_apellidos_juez;
     private javax.swing.JLabel car_desasignar_juez_lab_buscar_nombre_juez;
     private javax.swing.JLabel car_desasignar_juez_lab_titulo;
-    private javax.swing.JTextField car_desasignar_juez_textf_buscar_apellidos_juez;
+    private javax.swing.JTextField car_desasignar_juez_textf_buscar_id_carrera;
     private javax.swing.JButton car_insertar_juez_but_anadir;
     private javax.swing.JButton car_insertar_juez_but_salir;
     private javax.swing.JComboBox<String> car_insertar_juez_comb_buscar_nombre_juez;
