@@ -283,9 +283,64 @@ public class Inicio extends javax.swing.JFrame {
         listar_usu_lab_edad_usuario = new javax.swing.JLabel();
         listar_usu_lab_telefono_usuario = new javax.swing.JLabel();
         listar_usu_but_primer_usuario = new javax.swing.JButton();
+        listar_usu_but_primer_usuario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+                listar_usu_textf_nombre_usuario.setText(nombresUsuarios.get(0).getNombreUsuarios());
+                listar_usu_textf_apellidos_usuario.setText(nombresUsuarios.get(0).getApellidosUsuarios());
+                listar_usu_textf_email_usuario.setText(nombresUsuarios.get(0).getEmailUsuarios());
+                listar_usu_textf_edad_usuario.setText(Integer.toString(nombresUsuarios.get(0).getEdadUsuarios()));
+                listar_usu_textf_cp_usuario.setText(nombresUsuarios.get(0).getCpUsuarios());
+                listar_usu_textf_telefono_usuario.setText(nombresUsuarios.get(0).getTelefonoUsuarios());
+                posicion_listar = 0;
+        	}
+        });
         listar_usu_but_anterior_usuario = new javax.swing.JButton();
+        listar_usu_but_anterior_usuario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar>0) {
+        		posicion_listar--;
+        		listar_usu_textf_nombre_usuario.setText(nombresUsuarios.get(posicion_listar).getNombreUsuarios());
+        		listar_usu_textf_apellidos_usuario.setText(nombresUsuarios.get(posicion_listar).getApellidosUsuarios());
+        		listar_usu_textf_email_usuario.setText(nombresUsuarios.get(posicion_listar).getEmailUsuarios());
+        		listar_usu_textf_edad_usuario.setText(Integer.toString(nombresUsuarios.get(posicion_listar).getEdadUsuarios()));
+        		listar_usu_textf_cp_usuario.setText(nombresUsuarios.get(posicion_listar).getCpUsuarios());
+        		listar_usu_textf_telefono_usuario.setText(nombresUsuarios.get(posicion_listar).getTelefonoUsuarios());
+        		}else {
+        			posicion_listar=0;
+        		}
+        	}
+        });
         listar_usu_but_siguiente_usuario = new javax.swing.JButton();
+        listar_usu_but_siguiente_usuario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar< nombresUsuarios.size()-1) {
+            		posicion_listar++;
+            		listar_usu_textf_nombre_usuario.setText(nombresUsuarios.get(posicion_listar).getNombreUsuarios());
+            		listar_usu_textf_apellidos_usuario.setText(nombresUsuarios.get(posicion_listar).getApellidosUsuarios());
+            		listar_usu_textf_email_usuario.setText(nombresUsuarios.get(posicion_listar).getEmailUsuarios());
+            		listar_usu_textf_edad_usuario.setText(Integer.toString(nombresUsuarios.get(posicion_listar).getEdadUsuarios()));
+            		listar_usu_textf_cp_usuario.setText(nombresUsuarios.get(posicion_listar).getCpUsuarios());
+            		listar_usu_textf_telefono_usuario.setText(nombresUsuarios.get(posicion_listar).getTelefonoUsuarios());
+                    
+            		}else {
+            			posicion_listar=nombresUsuarios.size()-1;
+            		}
+        	}
+        });
         listar_usu_but_ultimo_usuario = new javax.swing.JButton();
+        listar_usu_but_ultimo_usuario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		listar_usu_textf_nombre_usuario.setText(nombresUsuarios.get(nombresUsuarios.size()-1).getNombreUsuarios());
+        		listar_usu_textf_apellidos_usuario.setText(nombresUsuarios.get(nombresUsuarios.size()-1).getApellidosUsuarios());
+        		listar_usu_textf_email_usuario.setText(nombresUsuarios.get(nombresUsuarios.size()-1).getEmailUsuarios());
+        		listar_usu_textf_edad_usuario.setText(Integer.toString(nombresUsuarios.get(nombresUsuarios.size()-1).getEdadUsuarios()));
+        		listar_usu_textf_cp_usuario.setText(nombresUsuarios.get(nombresUsuarios.size()-1).getCpUsuarios());
+        		listar_usu_textf_telefono_usuario.setText(nombresUsuarios.get(nombresUsuarios.size()-1).getTelefonoUsuarios());
+
+                posicion_listar = nombresUsuarios.size()-1;
+        	}
+        });
         listar_usu_but_salir = new javax.swing.JButton();
         listar_usu_textf_nombre_usuario = new javax.swing.JTextField();
         listar_usu_textf_apellidos_usuario = new javax.swing.JTextField();
@@ -4111,7 +4166,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                     
 
     private void menu_listar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4134,6 +4189,15 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombresUsuarios= usuarioHelper.listarUsuarios();
+        listar_usu_textf_nombre_usuario.setText(nombresUsuarios.get(0).getNombreUsuarios());
+        listar_usu_textf_apellidos_usuario.setText(nombresUsuarios.get(0).getApellidosUsuarios());
+        listar_usu_textf_email_usuario.setText(nombresUsuarios.get(0).getEmailUsuarios());
+        listar_usu_textf_edad_usuario.setText(Integer.toString(nombresUsuarios.get(0).getEdadUsuarios()));
+        listar_usu_textf_cp_usuario.setText(nombresUsuarios.get(0).getCpUsuarios());
+        listar_usu_textf_telefono_usuario.setText(nombresUsuarios.get(0).getTelefonoUsuarios());
+        posicion_listar = 0;
     }                                                   
                                                                    
   
