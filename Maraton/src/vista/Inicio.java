@@ -564,12 +564,27 @@ public class Inicio extends javax.swing.JFrame {
         usuario_insertar_usaurio_textf_nombre = new javax.swing.JTextField();
         usuario_insertar_usaurio_textf_apellidos = new javax.swing.JTextField();
         usuario_insertar_usaurio_textf_email = new javax.swing.JTextField();
-        usuario_insertar_usaurio_passf_1 = new javax.swing.JPasswordField();
-        usuario_insertar_usaurio_passf_2 = new javax.swing.JPasswordField();
+        usuario_insertar_usaurio_passf_1 = new JTextField();
+        usuario_insertar_usaurio_passf_2 = new JTextField();
         usuario_insertar_usaurio_textf_edad = new javax.swing.JTextField();
         usuario_insertar_usaurio_textf_cp = new javax.swing.JTextField();
         usuario_insertar_usaurio_textf_telefono = new javax.swing.JTextField();
         usuario_insertar_usuario_but_insertar = new javax.swing.JButton();
+        usuario_insertar_usuario_but_insertar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+       		
+        		usuario.setDniUsuarios(Integer.parseInt(usuario_insertar_usaurio_textf_dni.getText()));
+        		usuario.setNombreUsuarios(usuario_insertar_usaurio_textf_nombre.getText());
+        		usuario.setApellidosUsuarios(usuario_insertar_usaurio_textf_apellidos.getText());
+        		usuario.setEmailUsuarios(usuario_insertar_usaurio_textf_email.getText());
+        		usuario.setPasswordUsuarios(usuario_insertar_usaurio_passf_1.getText());
+        		usuario.setEdadUsuarios(Integer.parseInt(usuario_insertar_usaurio_textf_edad.getText()));
+        		usuario.setCpUsuarios(usuario_insertar_usaurio_textf_cp.getText());
+        		usuario.setTelefonoUsuarios(usuario_insertar_usaurio_textf_telefono.getText());
+        		usuarioHelper.insertar(usuario);
+        	
+        	}
+        });
         usuario_insertar_usuario_but_salir = new javax.swing.JButton();
         usuario_insertar_lab_titulo = new javax.swing.JLabel();
         inicio = new javax.swing.JPanel();
@@ -3978,8 +3993,6 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
-        
-        
     }                                                  
 
     private void menu_modificar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                       
@@ -4753,9 +4766,7 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(true);
-        
-        
-        
+   
     }                                                     
 
     private void carrera_insertar_tiempo_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
@@ -4791,9 +4802,7 @@ public class Inicio extends javax.swing.JFrame {
 		carrerasHelper.insertar(carrera);
          
     }                                                      
-
-    
-    
+   
     
     /**
      * @param args the command line arguments
@@ -5181,8 +5190,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel usuario_insertar_usaurio_lab_nombre;
     private javax.swing.JLabel usuario_insertar_usaurio_lab_password;
     private javax.swing.JLabel usuario_insertar_usaurio_lab_telefono;
-    private javax.swing.JPasswordField usuario_insertar_usaurio_passf_1;
-    private javax.swing.JPasswordField usuario_insertar_usaurio_passf_2;
+    private JTextField usuario_insertar_usaurio_passf_1;
+    private JTextField usuario_insertar_usaurio_passf_2;
     private javax.swing.JTextField usuario_insertar_usaurio_textf_apellidos;
     private javax.swing.JTextField usuario_insertar_usaurio_textf_cp;
     private javax.swing.JTextField usuario_insertar_usaurio_textf_dni;
