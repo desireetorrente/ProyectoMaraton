@@ -20,6 +20,7 @@ public class UsuariosHelper {
 
 	// Atributos
 	private Configuration cfg;
+	private ParticipantesHelper participantesHelper = new ParticipantesHelper();
 
 	public UsuariosHelper() {
 		this.cfg = new Configuration();
@@ -98,6 +99,17 @@ public class UsuariosHelper {
 			session.close();
 		}
 
+	}
+	
+	public void totalDelete(int dniUsuario) {
+		if(participantesHelper.buscar(dniUsuario) != null) {
+			for(int i = 0; i<participantesHelper.buscar(dniUsuario).size();i++) {
+				participantesHelper.delete(dniUsuario, participantesHelper.buscar(dniUsuario).get(i).getId().getIdcarreraCarrera());
+			}
+			delete(dniUsuario);
+		}else {
+			delete(dniUsuario);
+		}
 	}
 
 	/**

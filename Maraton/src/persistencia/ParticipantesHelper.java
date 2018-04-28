@@ -213,7 +213,7 @@ public class ParticipantesHelper {
 		//prueba.insertar(54034125, 11);
 		//prueba.insertar(54034125, 11);
 		//prueba.insertar(54034125, 11);
-		prueba.insertarTiempo(777, 11, 200);
+		//prueba.insertarTiempo(777, 11, 200);
 		
 
 
