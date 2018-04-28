@@ -392,6 +392,17 @@ public class Inicio extends javax.swing.JFrame {
         crear_jueces_textf_apellidos_juez = new javax.swing.JTextField();
         crear_jueces_textf_telefono_juez = new javax.swing.JTextField();
         crear_jueces_but_guardar = new javax.swing.JButton();
+        crear_jueces_but_guardar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		jueces.setDniJueces(Integer.parseInt(crear_jueces_textf_dni_juez.getText()));
+        		jueces.setNombreJueces(crear_jueces_textf_nombre_juez.getText());
+        		jueces.setApellidosJueces(crear_jueces_textf_apellidos_juez.getText());
+        		jueces.setTelefonoJueces(crear_jueces_textf_telefono_juez.getText());
+        		juecesHelper.insertar(jueces);
+
+        	}
+        });
         crear_jueces_but_salir = new javax.swing.JButton();
         crear_jueces_combo_id_carrera = new javax.swing.JComboBox<>();
         crear_jueces_lab_titulo = new javax.swing.JLabel();
@@ -404,6 +415,11 @@ public class Inicio extends javax.swing.JFrame {
         modificar_juez_lab_telefono_juez = new javax.swing.JLabel();
         modificar_juez_lab_carrera_juzga = new javax.swing.JLabel();
         modificar_juez_but_modificar = new javax.swing.JButton();
+        modificar_juez_but_modificar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		juecesHelper.change(Integer.parseInt(modificar_juez_textf_dni_para_modificar.getText()), modificar_juez_textf_nombre_juez.getText() , modificar_juez_textf_apellidos_juez.getText(), modificar_juez_textf_telefono_juez.getText());
+        	}
+        });
         modificar_juez_but_salir = new javax.swing.JButton();
         modificar_juez_textf_nombre_juez = new javax.swing.JTextField();
         modificar_juez_textf_apellidos_juez = new javax.swing.JTextField();
@@ -425,6 +441,11 @@ public class Inicio extends javax.swing.JFrame {
         eliminar_juez_textf_apellidos_juez_eliminar = new javax.swing.JTextField();
         eliminar_juez_textf_telefono_juez_eliminar = new javax.swing.JTextField();
         eliminar_juez_but_eliminar_juez = new javax.swing.JButton();
+        eliminar_juez_but_eliminar_juez.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		juecesHelper.delete(Integer.parseInt(eliminar_juez_textf_dni_juez_eliminar.getText()));
+        	}
+        });
         eliminar_juez_but_salir_eliminar_juez = new javax.swing.JButton();
         eliminar_jueces_lab_buscar_nombre_juez = new javax.swing.JLabel();
         eliminar_jueces_comb_buscar_nombre_juez = new javax.swing.JComboBox<>();
@@ -4218,7 +4239,7 @@ public class Inicio extends javax.swing.JFrame {
                                                                    
   
     private void menu_anadir_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+       
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4244,7 +4265,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                
 
     private void menu_modificar_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4268,10 +4289,18 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombres_jueces = juecesHelper.imprimirJueces();
+        
+        modificar_juez_comb_buscar_nombre.removeAllItems();
+        for (Jueces juez: nombres_jueces) {
+        	
+        	modificar_juez_comb_buscar_nombre.addItem("" + juez.getNombreJueces());
+        }
     }                                                   
 
     private void menu_eliminar_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
+       
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4295,6 +4324,15 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombres_jueces = juecesHelper.imprimirJueces();
+        
+        eliminar_jueces_comb_buscar_nombre_juez.removeAllItems();
+        
+        for (Jueces juez: nombres_jueces) {
+        	
+        	eliminar_jueces_comb_buscar_nombre_juez.addItem("" + juez.getNombreJueces());
+        }
     }                                                  
 
     private void menu_listar_juecesActionPerformed(java.awt.event.ActionEvent evt) {                                                   
@@ -4458,7 +4496,7 @@ public class Inicio extends javax.swing.JFrame {
     //BOTONES
     
     private void modificar_carr_but_buscarActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
+        
   	
     	panel_modificar_carrera.setVisible(true);
         
@@ -4580,8 +4618,15 @@ public class Inicio extends javax.swing.JFrame {
     }                                                      
 
     private void modificar_juez_but_buscarActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
+        
         panel_modificar_juez.setVisible(true);
+        
+        modificar_juez_textf_dni_para_modificar.setText(Integer.toString(nombres_jueces.get(modificar_juez_comb_buscar_nombre.getSelectedIndex()).getDniJueces()));
+        jueces = juecesHelper.Buscar(Integer.parseInt(modificar_juez_textf_dni_para_modificar.getText()));
+        modificar_juez_textf_nombre_juez.setText(jueces.getNombreJueces());
+        modificar_juez_textf_apellidos_juez.setText(jueces.getApellidosJueces());
+        modificar_juez_textf_telefono_juez.setText(jueces.getTelefonoJueces());
+        
     }                                                         
 
     private void modificar_juez_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                         
@@ -4591,8 +4636,15 @@ public class Inicio extends javax.swing.JFrame {
     }                                                        
 
     private void eliminar_juez_but_buscar_dni_juez_eliminarActionPerformed(java.awt.event.ActionEvent evt) {                                                                           
-        // TODO add your handling code here:
+        
         panel_eliminar_juez.setVisible(true);
+        
+        eliminar_juez_textf_dni_juez_eliminar.setText(Integer.toString(nombres_jueces.get(eliminar_jueces_comb_buscar_nombre_juez.getSelectedIndex()).getDniJueces()));
+        jueces = juecesHelper.Buscar(Integer.parseInt(eliminar_juez_textf_dni_juez_eliminar.getText()));
+        eliminar_juez_textf_nombre_juez_eliminar.setText(jueces.getNombreJueces());
+        eliminar_juez_textf_apellidos_juez_eliminar.setText(jueces.getApellidosJueces());
+        eliminar_juez_textf_telefono_juez_eliminar.setText(jueces.getTelefonoJueces());
+ 
     }                                                                          
 
     private void eliminar_juez_but_salir_eliminar_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                                      
