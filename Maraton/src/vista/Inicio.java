@@ -463,9 +463,55 @@ public class Inicio extends javax.swing.JFrame {
         listar_juez_textf_apellidos_juez = new javax.swing.JTextField();
         listar_juez_textf_telefono_juez = new javax.swing.JTextField();
         listar_juez_but_primero = new javax.swing.JButton();
+        listar_juez_but_primero.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		listar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(0).getDniJueces()));
+                listar_juez_textf_nombre_juez.setText(nombres_jueces.get(0).getNombreJueces());
+                listar_juez_textf_apellidos_juez.setText(nombres_jueces.get(0).getApellidosJueces());
+                listar_juez_textf_telefono_juez.setText(nombres_jueces.get(0).getTelefonoJueces());
+                posicion_listar = 0;
+        	}
+        });
         listar_juez_but_anterior = new javax.swing.JButton();
+        listar_juez_but_anterior.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar>0) {
+            		posicion_listar--;
+            		listar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(posicion_listar).getDniJueces()));
+                    listar_juez_textf_nombre_juez.setText(nombres_jueces.get(posicion_listar).getNombreJueces());
+                    listar_juez_textf_apellidos_juez.setText(nombres_jueces.get(posicion_listar).getApellidosJueces());
+                    listar_juez_textf_telefono_juez.setText(nombres_jueces.get(posicion_listar).getTelefonoJueces());
+            		}else {
+            			posicion_listar=0;
+            		}
+        	}
+        });
         listar_juez_but_siguiente = new javax.swing.JButton();
+        listar_juez_but_siguiente.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar< nombres_jueces.size()-1) {
+            		posicion_listar++;
+            		listar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(posicion_listar).getDniJueces()));
+                    listar_juez_textf_nombre_juez.setText(nombres_jueces.get(posicion_listar).getNombreJueces());
+                    listar_juez_textf_apellidos_juez.setText(nombres_jueces.get(posicion_listar).getApellidosJueces());
+                    listar_juez_textf_telefono_juez.setText(nombres_jueces.get(posicion_listar).getTelefonoJueces());
+                    
+            		}else {
+            			posicion_listar=nombres_jueces.size()-1;
+            		}
+        	}
+        });
         listar_juez_but_ultimo = new javax.swing.JButton();
+        listar_juez_but_ultimo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		listar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(nombres_jueces.size()-1).getDniJueces()));
+                listar_juez_textf_nombre_juez.setText(nombres_jueces.get(nombres_jueces.size()-1).getNombreJueces());
+                listar_juez_textf_apellidos_juez.setText(nombres_jueces.get(nombres_jueces.size()-1).getApellidosJueces());
+                listar_juez_textf_telefono_juez.setText(nombres_jueces.get(nombres_jueces.size()-1).getTelefonoJueces());
+        		
+                posicion_listar = nombres_jueces.size()-1;
+        	}
+        });
         listar_juez_but_salir = new javax.swing.JButton();
         listar_jueces_lab_titulo = new javax.swing.JLabel();
         administrador_crear_administrador = new javax.swing.JPanel();
@@ -4336,7 +4382,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                  
 
     private void menu_listar_juecesActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4359,6 +4405,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        nombres_jueces= juecesHelper.imprimirJueces();
+        listar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(0).getDniJueces()));
+        listar_juez_textf_nombre_juez.setText(nombres_jueces.get(0).getNombreJueces());
+        listar_juez_textf_apellidos_juez.setText(nombres_jueces.get(0).getApellidosJueces());
+        listar_juez_textf_telefono_juez.setText(nombres_jueces.get(0).getTelefonoJueces());
+        posicion_listar = 0;
     }                                                  
 
     private void menu_crear_administradorActionPerformed(java.awt.event.ActionEvent evt) {                                                         
