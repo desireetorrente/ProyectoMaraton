@@ -40,13 +40,11 @@ public class Inicio extends javax.swing.JFrame {
 	JuecesHelper juecesHelper = new JuecesHelper();
 	UsuariosHelper usuarioHelper = new UsuariosHelper();
 	Usuarios usuario = new Usuarios();
-	Participantes participante = new Participantes();
 	
 	List<Usuarios>nombresUsuarios;
 	List <Carrera> nombres;
 	List<Carrera>nombresListar = new LinkedList<Carrera>();
 	List <Jueces> nombres_jueces;
-	List<Participantes>nombresParticipantes;
 	
 	int posicion_listar;
 	
@@ -268,7 +266,7 @@ public class Inicio extends javax.swing.JFrame {
         	public void actionPerformed(ActionEvent e) {
         		System.out.println(eliminar_usu_textf_buscar_usuario_id.getText());
         		
-        		usuarioHelper.delete(Integer.parseInt(eliminar_usu_textf_buscar_usuario_id.getText()));
+        		usuarioHelper.totalDelete(Integer.parseInt(eliminar_usu_textf_buscar_usuario_id.getText()));
         	}
         });
         eliminar_usu_but_salir = new javax.swing.JButton();
@@ -4381,8 +4379,7 @@ public class Inicio extends javax.swing.JFrame {
     
     private void modificar_carr_but_buscarActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         // TODO add your handling code here:
-        //System.out.println(nombres.get(1).getNombreCarrera());
-    	
+  	
     	panel_modificar_carrera.setVisible(true);
         
         modificar_carr_textf_buscar_id.setText(Integer.toString(nombres.get(modificar_carr_comb_buscar_nombre_carrera.getSelectedIndex()).getIdcarreraCarrera()));
@@ -4458,7 +4455,6 @@ public class Inicio extends javax.swing.JFrame {
         panel_eliminar_usuario.setVisible(true);
         
         eliminar_usu_textf_buscar_usuario_id.setText(Integer.toString(nombresUsuarios.get(eliminar_usu_comb_buscar_nombre_usu.getSelectedIndex()).getDniUsuarios()));
-        //eliminar_usuario_textf_id_carrera.setText(Integer.toString(nombresParticipantes.get(eliminar_usu_comb_buscar_nombre_usu.getSelectedIndex()).getCarrera().getIdcarreraCarrera()));
         usuario = usuarioHelper.search(Integer.parseInt(eliminar_usu_textf_buscar_usuario_id.getText()));
         eliminar_usu_textf_nombre_usuario.setText(usuario.getNombreUsuarios());
         eliminar_usu_textf_apellidos_usuario.setText(usuario.getApellidosUsuarios());
