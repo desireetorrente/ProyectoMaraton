@@ -42,10 +42,13 @@ public class ListarCorredoresServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String idcarrera = request.getParameter("idcarrera");
-		List<Participantes> corredores= ph.corredoresEnCarrera(Integer.parseInt(idcarrera));
 		PrintWriter out = response.getWriter();
+		String idcarrera = request.getParameter("idcarrera");
+		if(idcarrera == "") {
+			out.println("Campo no introducido");
+		}
+		List<Participantes> corredores= ph.corredoresEnCarrera(Integer.parseInt(idcarrera));
+		
 		for(int i = 0; i< corredores.size(); i++) {
 			out.println(corredores.get(i).getUsuarios().getNombreUsuarios());
 		}
