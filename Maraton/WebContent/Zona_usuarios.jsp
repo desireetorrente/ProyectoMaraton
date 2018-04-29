@@ -100,9 +100,9 @@
 			<p id="peliminar">Inserta tu DNI: </p>
 			<form action="EliminarUsuarioSV" method="post">
 				<p>DNI Usuario: </p>
-				<input type="text" name="dniUser"></input>
+				<input type="text" name="dni"></input>
 				<p>Contraseña:</p>
-				<input type="password" name="pwdUser"></input>
+				<input type="password" name="password"></input>
 				<br>
 				<input type="submit" value="Borrar">
 			</form>
