@@ -48,6 +48,8 @@ public class ElimiarUserServlet extends HttpServlet {
 		if(Validate.checkUser(Integer.parseInt(dni), password)) {
 			helperUser.totalDelete(Integer.parseInt(dni));
 			//Mensaje de delete correcto
+		}else {
+			//Password incorrecta, no existe usuario... etc
 		}
 		
 	}

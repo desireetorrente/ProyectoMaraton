@@ -2,9 +2,10 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="persistencia.CarrerasHelper" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="Modelo.Carrera" %>
-
+<%@ page import="Modelo.Participantes" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <title>Zona Usuario</title> 
@@ -59,6 +60,19 @@
 					<div id="botonCarrera">
 						<input type="submit" id="busca" value="Buscar">
 					</div>
+					<table>
+						
+                <tbody>
+               <%
+					ArrayList<Participantes> partis = (ArrayList<Participantes>) request.getAttribute("corre");
+					
+               for(int i = 0; i < partis.size(); i++){
+            	   out.println(partis.get(i).getId().getDniUsuarios());
+               }
+					%>
+                </tbody>           
+          
+					</table>
 				</form>
 			</div>
 				
@@ -98,7 +112,7 @@
 
 		<div id="eliminar">
 			<p id="peliminar">Inserta tu DNI: </p>
-			<form action="EliminarUsuarioSV" method="post">
+			<form action="EliminarUserServlet" method="post">
 				<p>DNI Usuario: </p>
 				<input type="text" name="dni"></input>
 				<p>Contraseña:</p>
