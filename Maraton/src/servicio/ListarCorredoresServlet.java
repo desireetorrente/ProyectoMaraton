@@ -58,8 +58,10 @@ public class ListarCorredoresServlet extends HttpServlet {
 		}else {
 			List<Participantes> corredores = ph.corredoresEnCarrera(Integer.parseInt(idcarrera));
 			out.println("Corredor: ");
+			out.println();
 			for(int i = 0; i< corredores.size(); i++) {
 				out.println(corredores.get(i).getUsuarios().getNombreUsuarios());
+				out.println("<br>");
 			}
 
 		}

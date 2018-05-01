@@ -23,26 +23,24 @@
 	
 	<div id="formularios">
 		<div id="insert">
-				<form action="InscribirUsuarioCarreraServlet" method="post">
-					<p>DNI: </p>
-					<input type="text" name="dni"></input>
-					<p>Carrera:</p>
-					<input type="text" name="dni"></input>
-					<br>
-					<input type="submit" value="Enviar">
-				</form>
+				<form action="InscribirUsuario" method="post">
+				<p>DNI Usuario: </p>
+				<input type="text" name="dni"></input>
+				<p>ID Carrera:</p>
+				<input type="text" name="idcarrera"></input>
+				<br>
+				<br>
+				<button id="busca" onclick="">Inscribirse</button>
+			</form>
 			</div>
 			
 			<div id="listaCarrera">				
-				<form action="svlistarcarreras" method="post">
-					<div class="campos">
-						<p>ID Carrera: </p>
-						<input type="text" name="carrera"></input>
-					</div>
-					<div class="space">
-					</div>
+				<form action="ListarCarreras" method="post">
 					<div id="botonCarrera">
-						<button id="busca" onclick=""> Buscar</button>
+					<br>
+					<br>
+					<br>
+						<button id="busca" onclick="">Mostrar carreras</button>
 					</div>
 					
 				</form>
@@ -55,6 +53,7 @@
 					</div>
 					<br /> <input type="text" name="idcarrera" class="entrada"> <br />
 					<div id="botonCarrera">
+					<br>
 						<input type="submit" id="busca" value="Buscar">
 					</div>
 				</form>
@@ -95,14 +94,14 @@
 		</div>
 
 		<div id="eliminar">
-			<p id="peliminar">Inserta tu DNI: </p>
-			<form action="ElimiarUserServlet" method="post">
+			<form action="EliminarUserServlet" method="post">
 				<p>DNI Usuario: </p>
 				<input type="text" name="dni"></input>
 				<p>Contraseña:</p>
 				<input type="password" name="password"></input>
 				<br>
-				<input type="submit" value="Borrar">
+				<br>
+				<button id="busca" onclick="">Eliminar</button>
 			</form>
 		</div>	
 	</div>
