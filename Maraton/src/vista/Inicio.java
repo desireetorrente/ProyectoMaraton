@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JPanel;
+import java.awt.Button;
 
 /**
  *
@@ -443,8 +444,11 @@ public class Inicio extends javax.swing.JFrame {
         eliminar_juez_lab_apellidos_juez_eliminar = new javax.swing.JLabel();
         eliminar_juez_lab_telefono_juez_eliminar = new javax.swing.JLabel();
         eliminar_juez_textf_nombre_juez_eliminar = new javax.swing.JTextField();
+        eliminar_juez_textf_nombre_juez_eliminar.setEnabled(false);
         eliminar_juez_textf_apellidos_juez_eliminar = new javax.swing.JTextField();
+        eliminar_juez_textf_apellidos_juez_eliminar.setEnabled(false);
         eliminar_juez_textf_telefono_juez_eliminar = new javax.swing.JTextField();
+        eliminar_juez_textf_telefono_juez_eliminar.setEnabled(false);
         eliminar_juez_but_eliminar_juez = new javax.swing.JButton();
         eliminar_juez_but_eliminar_juez.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -545,25 +549,56 @@ public class Inicio extends javax.swing.JFrame {
         modificar_admin_lab_dni_admin = new javax.swing.JLabel();
         modificar_admin_lab_nombre_admin = new javax.swing.JLabel();
         modificar_admin_lab_password_admin = new javax.swing.JLabel();
-        modificar_admin_passwf_password_1_admin = new JTextField();
-        modificar_admin_passwf_password_2_admin = new JTextField();
+        modificar_admin_textf_password_1_admin = new JTextField();
+        modificar_admin_textf_password_2_admin = new JTextField();
         modificar_admin_textf_dni_admin = new javax.swing.JTextField();
         modificar_admin_textf_nombre_admin = new javax.swing.JTextField();
         modificar_admin_but_modificar_admin = new javax.swing.JButton();
+        modificar_admin_but_modificar_admin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        				
+        		administradoresHelper.modificar(Integer.parseInt(modificar_admin_textf_dni_buscar.getText()), modificar_admin_textf_nombre_admin.getText(), modificar_admin_textf_password_1_admin.getText());
+        		       		
+        	}
+        });
         modificar_admin_but_salir = new javax.swing.JButton();
-        modificar_admin_but_buscar = new javax.swing.JButton();
+        modificar_admin_but_buscar_invisible = new javax.swing.JButton();
         modificar_admin_lab_buscar_nombre_admin = new javax.swing.JLabel();
         modificar_admin_comb_buscar_nombre_admin = new javax.swing.JComboBox<>();
-        modificar_admin_lab_titulo = new javax.swing.JLabel();
+        modificar_admin_but_buscar = new Button();
+        modificar_admin_but_buscar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		panel_modificar_administrador.setVisible(true);
+        		modificar_admin_but_buscar_invisible.setVisible(false);
+        	
+                
+                modificar_admin_textf_dni_buscar.setText(Integer.toString(nombresAdmin.get(modificar_admin_comb_buscar_nombre_admin.getSelectedIndex()).getDniAdministradores()));
+                administrador = administradoresHelper.Buscar(Integer.parseInt(modificar_admin_textf_dni_buscar.getText()));
+                modificar_admin_textf_dni_admin.setText(Integer.toString(administrador.getDniAdministradores()));
+                modificar_admin_textf_nombre_admin.setText(administrador.getNombreAdministradores());
+                modificar_admin_textf_password_1_admin.setText(administrador.getPasswordAdministradores());         
+        		
+        	}
+        });
+        modificar_admin_but_buscar.setLabel("Buscar");
         administrador_eliminar_administrador = new javax.swing.JPanel();
         eliminar_admin_textf_buscar_dni_eliminar = new javax.swing.JTextField();
         eliminar_admin_but_buscar_para_eliminar = new javax.swing.JButton();
         panel_eliminar_administrador = new javax.swing.JPanel();
         eliminar_admin_lab_dni_administrador = new javax.swing.JLabel();
         eliminar_admin_textf_dni_administrador = new javax.swing.JTextField();
+        eliminar_admin_textf_dni_administrador.setEnabled(false);
         eliminar_admin_lab_nombre_administrador = new javax.swing.JLabel();
         eliminar_admin_textf_nombre_administrador = new javax.swing.JTextField();
+        eliminar_admin_textf_nombre_administrador.setEnabled(false);
         eliminar_admin_but_eliminar_administrador = new javax.swing.JButton();
+        eliminar_admin_but_eliminar_administrador.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		administradoresHelper.delete(Integer.parseInt(eliminar_admin_textf_buscar_dni_eliminar.getText()));
+        		
+        	}
+        });
         eliminar_admin_but_salir = new javax.swing.JButton();
         eliminar_admin_lab_buscar_nombre_admin = new javax.swing.JLabel();
         eliminar_admin_comb_buscar_nombre_admin = new javax.swing.JComboBox<>();
@@ -575,9 +610,51 @@ public class Inicio extends javax.swing.JFrame {
         listar_admin_textf_dni_administrador = new javax.swing.JTextField();
         listar_admin_textf_nombre_administrador = new javax.swing.JTextField();
         listar_admin_but_primero = new javax.swing.JButton();
+        listar_admin_but_primero.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		                
+                listar_admin_textf_dni_administrador.setText(Integer.toString(nombresAdmin.get(0).getDniAdministradores()));
+                listar_admin_textf_nombre_administrador.setText(nombresAdmin.get(0).getNombreAdministradores());
+                posicion_listar = 0;
+        		
+        	}
+        });
         listar_admin_but_anterior = new javax.swing.JButton();
+        listar_admin_but_anterior.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar>0) {
+            		posicion_listar--;
+                    listar_admin_textf_dni_administrador.setText(Integer.toString(nombresAdmin.get(posicion_listar).getDniAdministradores()));
+                    listar_admin_textf_nombre_administrador.setText(nombresAdmin.get(posicion_listar).getNombreAdministradores());
+            		}else {
+            			posicion_listar=0;
+            		}
+        	}
+        });
         listar_admin_but_siguiente = new javax.swing.JButton();
+        listar_admin_but_siguiente.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(posicion_listar< nombresAdmin.size()-1) {
+            		posicion_listar++;
+                    listar_admin_textf_dni_administrador.setText(Integer.toString(nombresAdmin.get(posicion_listar).getDniAdministradores()));
+                    listar_admin_textf_nombre_administrador.setText(nombresAdmin.get(posicion_listar).getNombreAdministradores());
+                    
+            		}else {
+            			posicion_listar=nombresAdmin.size()-1;
+            		} 		
+        	}
+        });
         listar_admin_but_ultimo = new javax.swing.JButton();
+        listar_admin_but_ultimo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+                listar_admin_textf_dni_administrador.setText(Integer.toString(nombresAdmin.get(nombresAdmin.size()-1).getDniAdministradores()));
+                listar_admin_textf_nombre_administrador.setText(nombresAdmin.get(nombresAdmin.size()-1).getNombreAdministradores());
+                
+                posicion_listar = nombresAdmin.size()-1;       	
+        		
+        	}
+        });
         listar_admin_but_salir = new javax.swing.JButton();
         listar_admin_lab_titulo = new javax.swing.JLabel();
         carrera_insertar_tiempo = new javax.swing.JPanel();
@@ -1906,67 +1983,67 @@ public class Inicio extends javax.swing.JFrame {
         crear_jueces_lab_titulo.setText("CREAR JUEZ");
 
         javax.swing.GroupLayout jueces_crear_juezLayout = new javax.swing.GroupLayout(jueces_crear_juez);
-        jueces_crear_juez.setLayout(jueces_crear_juezLayout);
         jueces_crear_juezLayout.setHorizontalGroup(
-            jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jueces_crear_juezLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jueces_crear_juezLayout.createSequentialGroup()
-                        .addComponent(crear_jueces_but_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(crear_jueces_but_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jueces_crear_juezLayout.createSequentialGroup()
-                        .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crear_jueces_lab_id_carrera)
-                            .addComponent(crear_jueces_lab_dni_juez, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(crear_jueces_lab_nombre_juez, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(crear_jueces_lab_apellidos_juez, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(crear_jueces_telefono_juez, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(crear_jueces_textf_apellidos_juez, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crear_jueces_textf_nombre_juez, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crear_jueces_textf_dni_juez, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crear_jueces_textf_telefono_juez)
-                            .addComponent(crear_jueces_combo_id_carrera, javax.swing.GroupLayout.Alignment.LEADING, 0, 285, Short.MAX_VALUE))
-                        .addGap(0, 74, Short.MAX_VALUE))))
-            .addGroup(jueces_crear_juezLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(crear_jueces_lab_titulo)
-                .addGap(0, 0, Short.MAX_VALUE))
+        	jueces_crear_juezLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jueces_crear_juezLayout.createSequentialGroup()
+        			.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jueces_crear_juezLayout.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(jueces_crear_juezLayout.createSequentialGroup()
+        							.addComponent(crear_jueces_but_guardar, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+        							.addGap(28)
+        							.addComponent(crear_jueces_but_salir, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(jueces_crear_juezLayout.createSequentialGroup()
+        							.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.LEADING)
+        								.addComponent(crear_jueces_lab_id_carrera)
+        								.addComponent(crear_jueces_lab_dni_juez, Alignment.TRAILING)
+        								.addComponent(crear_jueces_lab_nombre_juez, Alignment.TRAILING)
+        								.addComponent(crear_jueces_lab_apellidos_juez, Alignment.TRAILING)
+        								.addComponent(crear_jueces_telefono_juez, Alignment.TRAILING))
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.LEADING)
+        								.addComponent(crear_jueces_textf_telefono_juez, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+        								.addComponent(crear_jueces_textf_apellidos_juez, 238, 238, 238)
+        								.addComponent(crear_jueces_textf_nombre_juez, 238, 238, 238)
+        								.addComponent(crear_jueces_combo_id_carrera, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(crear_jueces_textf_dni_juez, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))))
+        				.addGroup(jueces_crear_juezLayout.createSequentialGroup()
+        					.addGap(178)
+        					.addComponent(crear_jueces_lab_titulo)))
+        			.addGap(287))
         );
         jueces_crear_juezLayout.setVerticalGroup(
-            jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jueces_crear_juezLayout.createSequentialGroup()
-                .addComponent(crear_jueces_lab_titulo)
-                .addGap(16, 16, 16)
-                .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_jueces_lab_dni_juez)
-                    .addComponent(crear_jueces_textf_dni_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_jueces_lab_nombre_juez)
-                    .addComponent(crear_jueces_textf_nombre_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_jueces_lab_apellidos_juez)
-                    .addComponent(crear_jueces_textf_apellidos_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_jueces_telefono_juez)
-                    .addComponent(crear_jueces_textf_telefono_juez, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_jueces_lab_id_carrera)
-                    .addComponent(crear_jueces_combo_id_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jueces_crear_juezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_jueces_but_guardar)
-                    .addComponent(crear_jueces_but_salir))
-                .addContainerGap(125, Short.MAX_VALUE))
+        	jueces_crear_juezLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jueces_crear_juezLayout.createSequentialGroup()
+        			.addComponent(crear_jueces_lab_titulo)
+        			.addGap(16)
+        			.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_jueces_lab_dni_juez)
+        				.addComponent(crear_jueces_textf_dni_juez, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_jueces_lab_nombre_juez)
+        				.addComponent(crear_jueces_textf_nombre_juez, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_jueces_lab_apellidos_juez)
+        				.addComponent(crear_jueces_textf_apellidos_juez, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_jueces_telefono_juez)
+        				.addComponent(crear_jueces_textf_telefono_juez, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_jueces_lab_id_carrera)
+        				.addComponent(crear_jueces_combo_id_carrera, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jueces_crear_juezLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_jueces_but_guardar)
+        				.addComponent(crear_jueces_but_salir))
+        			.addContainerGap(248, Short.MAX_VALUE))
         );
+        jueces_crear_juez.setLayout(jueces_crear_juezLayout);
 
         jueces_modificar_juez.setFocusable(false);
 
@@ -2411,64 +2488,64 @@ public class Inicio extends javax.swing.JFrame {
         crear_admin__lab_titulo.setText("CREAR ADMINISTRADOR");
 
         javax.swing.GroupLayout administrador_crear_administradorLayout = new javax.swing.GroupLayout(administrador_crear_administrador);
-        administrador_crear_administrador.setLayout(administrador_crear_administradorLayout);
         administrador_crear_administradorLayout.setHorizontalGroup(
-            administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(administrador_crear_administradorLayout.createSequentialGroup()
-                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(administrador_crear_administradorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, administrador_crear_administradorLayout.createSequentialGroup()
-                                .addComponent(crear_admin_lab_password_admin)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(crear_admin_passwf_password_2_admin, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(crear_admin_passwf_password_1_admin)))
-                            .addGroup(administrador_crear_administradorLayout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(crear_admin_but_crear_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(crear_admin_but_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(administrador_crear_administradorLayout.createSequentialGroup()
-                                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(administrador_crear_administradorLayout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
-                                        .addComponent(crear_admin_lab_dni_admin))
-                                    .addComponent(crear_admin_lab_nombre_admin, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(crear_admin_textf_nombre_admin, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(crear_admin_textf_dni_admin)))))
-                    .addGroup(administrador_crear_administradorLayout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(crear_admin__lab_titulo)))
-                .addContainerGap(76, Short.MAX_VALUE))
+        	administrador_crear_administradorLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        			.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.TRAILING, false)
+        						.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        							.addGap(38)
+        							.addComponent(crear_admin_but_crear_admin, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(crear_admin_but_salir, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        							.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.LEADING)
+        								.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        									.addGap(38)
+        									.addComponent(crear_admin_lab_dni_admin))
+        								.addComponent(crear_admin_lab_nombre_admin, Alignment.TRAILING))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.LEADING, false)
+        								.addComponent(crear_admin_textf_nombre_admin, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+        								.addComponent(crear_admin_textf_dni_admin)))
+        						.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        							.addComponent(crear_admin_lab_password_admin)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.TRAILING)
+        								.addComponent(crear_admin_passwf_password_2_admin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(crear_admin_passwf_password_1_admin, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)))))
+        				.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        					.addGap(176)
+        					.addComponent(crear_admin__lab_titulo)))
+        			.addContainerGap(253, Short.MAX_VALUE))
         );
         administrador_crear_administradorLayout.setVerticalGroup(
-            administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(administrador_crear_administradorLayout.createSequentialGroup()
-                .addComponent(crear_admin__lab_titulo)
-                .addGap(12, 12, 12)
-                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_admin_lab_dni_admin)
-                    .addComponent(crear_admin_textf_dni_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_admin_lab_nombre_admin)
-                    .addComponent(crear_admin_textf_nombre_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_admin_lab_password_admin)
-                    .addComponent(crear_admin_passwf_password_1_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(crear_admin_passwf_password_2_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(administrador_crear_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_admin_but_crear_admin)
-                    .addComponent(crear_admin_but_salir))
-                .addContainerGap(182, Short.MAX_VALUE))
+        	administrador_crear_administradorLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(administrador_crear_administradorLayout.createSequentialGroup()
+        			.addComponent(crear_admin__lab_titulo)
+        			.addGap(12)
+        			.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_admin_lab_dni_admin)
+        				.addComponent(crear_admin_textf_dni_admin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_admin_lab_nombre_admin)
+        				.addComponent(crear_admin_textf_nombre_admin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_admin_lab_password_admin)
+        				.addComponent(crear_admin_passwf_password_1_admin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(crear_admin_passwf_password_2_admin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(29)
+        			.addGroup(administrador_crear_administradorLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(crear_admin_but_crear_admin)
+        				.addComponent(crear_admin_but_salir))
+        			.addContainerGap(312, Short.MAX_VALUE))
         );
+        administrador_crear_administrador.setLayout(administrador_crear_administradorLayout);
 
         administrador_modificar_administrador.setFocusable(false);
 
@@ -2492,8 +2569,8 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        modificar_admin_but_buscar.setText("Buscar");
-        modificar_admin_but_buscar.addActionListener(new java.awt.event.ActionListener() {
+        modificar_admin_but_buscar_invisible.setText("Buscar");
+        modificar_admin_but_buscar_invisible.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	
             	
@@ -2526,19 +2603,19 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(modificar_admin_lab_password_admin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificar_admin_passwf_password_2_admin, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                            .addComponent(modificar_admin_passwf_password_1_admin))))
+                            .addComponent(modificar_admin_textf_password_2_admin, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                            .addComponent(modificar_admin_textf_password_1_admin))))
                 .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(panel_modificar_administradorLayout.createSequentialGroup()
                 .addGap(170, 170, 170)
-                .addComponent(modificar_admin_but_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modificar_admin_but_buscar_invisible, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_modificar_administradorLayout.setVerticalGroup(
             panel_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_modificar_administradorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(modificar_admin_but_buscar)
+                .addComponent(modificar_admin_but_buscar_invisible)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificar_admin_lab_dni_admin)
@@ -2550,9 +2627,9 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panel_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificar_admin_lab_password_admin)
-                    .addComponent(modificar_admin_passwf_password_1_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modificar_admin_textf_password_1_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(modificar_admin_passwf_password_2_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modificar_admin_textf_password_2_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panel_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificar_admin_but_modificar_admin)
@@ -2564,40 +2641,38 @@ public class Inicio extends javax.swing.JFrame {
 
         modificar_admin_comb_buscar_nombre_admin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        modificar_admin_lab_titulo.setText("MODIFICAR ADMINISTRADOR");
-
         javax.swing.GroupLayout administrador_modificar_administradorLayout = new javax.swing.GroupLayout(administrador_modificar_administrador);
-        administrador_modificar_administrador.setLayout(administrador_modificar_administradorLayout);
         administrador_modificar_administradorLayout.setHorizontalGroup(
-            administrador_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_modificar_administrador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(administrador_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
-                        .addComponent(modificar_admin_lab_buscar_nombre_admin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(modificar_admin_comb_buscar_nombre_admin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addGroup(administrador_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificar_admin_lab_titulo)
-                            .addComponent(modificar_admin_textf_dni_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	administrador_modificar_administradorLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(panel_modificar_administrador, GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+        		.addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(administrador_modificar_administradorLayout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
+        					.addComponent(modificar_admin_lab_buscar_nombre_admin)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(modificar_admin_comb_buscar_nombre_admin, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        				.addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
+        					.addGap(159)
+        					.addGroup(administrador_modificar_administradorLayout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(modificar_admin_but_buscar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(modificar_admin_textf_dni_buscar, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))))
+        			.addContainerGap(328, Short.MAX_VALUE))
         );
         administrador_modificar_administradorLayout.setVerticalGroup(
-            administrador_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
-                .addComponent(modificar_admin_lab_titulo)
-                .addGap(5, 5, 5)
-                .addComponent(modificar_admin_textf_dni_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(administrador_modificar_administradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modificar_admin_lab_buscar_nombre_admin)
-                    .addComponent(modificar_admin_comb_buscar_nombre_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panel_modificar_administrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        	administrador_modificar_administradorLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(administrador_modificar_administradorLayout.createSequentialGroup()
+        			.addComponent(modificar_admin_but_buscar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(37)
+        			.addComponent(modificar_admin_textf_dni_buscar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(administrador_modificar_administradorLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(modificar_admin_lab_buscar_nombre_admin)
+        				.addComponent(modificar_admin_comb_buscar_nombre_admin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+        			.addComponent(panel_modificar_administrador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
+        administrador_modificar_administrador.setLayout(administrador_modificar_administradorLayout);
 
         administrador_eliminar_administrador.setFocusable(false);
 
@@ -3593,11 +3668,11 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void modificar_juez_lab_carrera_juzgaComponentMoved(java.awt.event.ComponentEvent evt) {                                                                
-        // TODO add your handling code here:
+        
     }                                                               
 
     private void menu_inicioMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3620,10 +3695,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+       
+        
+        
     }                                        
 
     private void menu_crear_carreraMouseClicked(java.awt.event.MouseEvent evt) {                                                
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(true);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3646,10 +3724,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                               
 
     private void menu_modificar_carreraMouseClicked(java.awt.event.MouseEvent evt) {                                                    
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3673,12 +3753,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
-               
-        
+       
+        modificar_carr_textf_buscar_id.setVisible(false);
+             
     }                                                   
 
     private void menu_eliminar_carreraMouseClicked(java.awt.event.MouseEvent evt) {                                                   
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(true);
         carrera_listar_carrera.setVisible(false);
@@ -3701,10 +3782,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+       
+        elim_carr_textf_introducir_id_eliminar.setVisible(false);
+        
     }                                                  
 
     private void menu_listar_carreraMouseClicked(java.awt.event.MouseEvent evt) {                                                 
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(true);
@@ -3727,10 +3812,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                                
 
     private void menu_modificar_usuarioMouseClicked(java.awt.event.MouseEvent evt) {                                                    
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3753,10 +3840,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        modificar_usu_textf_buscar_usuario_id.setVisible(false);
+        
     }                                                   
 
     private void menu_eliminar_usuarioMouseClicked(java.awt.event.MouseEvent evt) {                                                   
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3779,10 +3870,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        eliminar_usu_textf_buscar_usuario_id.setVisible(false);
     }                                                  
 
     private void menu_listar_usuarioMouseClicked(java.awt.event.MouseEvent evt) {                                                 
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3805,10 +3899,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                                
 
     private void menu_blacklist_submenu_meter_usuarioMouseClicked(java.awt.event.MouseEvent evt) {                                                                  
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3831,10 +3927,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                                                                                                               
 
     private void menu_anadir_juezMouseClicked(java.awt.event.MouseEvent evt) {                                              
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3857,10 +3955,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                             
 
     private void menu_modificar_juezMouseClicked(java.awt.event.MouseEvent evt) {                                                 
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3883,10 +3983,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        modificar_juez_textf_dni_para_modificar.setVisible(false);
+        
     }                                                
 
     private void menu_eliminar_juezMouseClicked(java.awt.event.MouseEvent evt) {                                                
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3909,10 +4013,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        eliminar_juez_textf_dni_juez_eliminar.setVisible(false);
+        
     }                                               
 
     private void menu_listar_juecesMouseClicked(java.awt.event.MouseEvent evt) {                                                
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3935,10 +4043,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                               
 
     private void menu_crear_administradorMouseClicked(java.awt.event.MouseEvent evt) {                                                      
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3961,10 +4071,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                                     
 
     private void menu_modificar_administradorMouseClicked(java.awt.event.MouseEvent evt) {                                                          
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -3987,10 +4099,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        modificar_admin_textf_dni_buscar.setVisible(false);
+        
     }                                                         
 
     private void menu_eliminar_administradorMouseClicked(java.awt.event.MouseEvent evt) {                                                         
-        // TODO add your handling code here:
+       
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4013,10 +4128,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        eliminar_admin_textf_buscar_dni_eliminar.setVisible(false);
+        
     }                                                        
 
     private void menu_listar_administradoresMouseClicked(java.awt.event.MouseEvent evt) {                                                         
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4039,6 +4158,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                                        
 
     
@@ -4069,6 +4190,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
+        
+        
     }                                                  
 
     private void menu_modificar_carreraActionPerformed(java.awt.event.ActionEvent evt) {                                                       
@@ -4096,6 +4219,10 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        modificar_carr_textf_buscar_id.setVisible(false);
+        
 
         nombres = carrerasHelper.listarCarrera();
                
@@ -4132,14 +4259,10 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
-        modificar_admin_textf_dni_buscar.setVisible(false);
-        eliminar_admin_textf_buscar_dni_eliminar.setVisible(false);
-        modificar_carr_textf_buscar_id.setVisible(false);
+        
+        
         elim_carr_textf_introducir_id_eliminar.setVisible(false);
-        modificar_juez_textf_dni_para_modificar.setVisible(false);
-        eliminar_juez_textf_dni_juez_eliminar.setVisible(false);
-        modificar_usu_textf_buscar_usuario_id.setVisible(false);
-        eliminar_usu_textf_buscar_usuario_id.setVisible(false);
+        
         
         nombres = carrerasHelper.listarCarrera();
         
@@ -4176,6 +4299,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
+        
+        
         nombresListar= carrerasHelper.listarCarrera();
         listar_carr_textf_listar_carrera.setText(nombresListar.get(0).getNombreCarrera());
         listar_carr_textf_distancia_carrera.setText(nombresListar.get(0).getDistanciaCarrera());
@@ -4205,6 +4330,15 @@ public class Inicio extends javax.swing.JFrame {
         administrador_modificar_administrador.setVisible(false);
         inicio.setVisible(false);
         panel_modificar_usuario.setVisible(false);
+        
+        
+        modificar_usu_textf_buscar_usuario_id.setVisible(false);
+        
+        
+        modificar_usuario_lab_buscar_usuario_apellido.setVisible(false);
+        modificar_usuario_textf_buscar_apellidos.setVisible(false);
+        modificar_usu_lab_dni_usuario.setVisible(false);
+        modificar_usu_textf_dni_usuario.setVisible(false);
         
         nombresUsuarios = usuarioHelper.listarUsuarios();
         
@@ -4244,6 +4378,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
+        
+        eliminar_usu_textf_buscar_usuario_id.setVisible(false);
+          
+        eliminar_usu_lab_buscar_apellido_usu.setVisible(false);
+        eliminar_usuario_textf_id_carrera.setVisible(false);
+        
+        
         nombresUsuarios = usuarioHelper.listarUsuarios();
         
         eliminar_usu_comb_buscar_nombre_usu.removeAllItems();
@@ -4278,6 +4419,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
         
         nombresUsuarios= usuarioHelper.listarUsuarios();
         listar_usu_textf_nombre_usuario.setText(nombresUsuarios.get(0).getNombreUsuarios());
@@ -4314,6 +4457,12 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        
+        crear_jueces_combo_id_carrera.setVisible(false);
+        crear_jueces_lab_id_carrera.setVisible(false);
+        
     }                                                
 
     private void menu_modificar_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                    
@@ -4341,6 +4490,15 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        modificar_juez_textf_dni_para_modificar.setVisible(false);
+        
+        
+        modificar_juez_lab_buscar_apellido.setVisible(false);
+        modificar_juez_textf_buscar_apellido.setVisible(false);
+        modificar_juez_combo_carrera_juzga.setVisible(false);
+        modificar_juez_lab_carrera_juzga.setVisible(false);
         
         nombres_jueces = juecesHelper.imprimirJueces();
         
@@ -4377,6 +4535,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
+        
+        eliminar_juez_textf_dni_juez_eliminar.setVisible(false);
+        
+        
+        eliminar_jueces_lab_buscar_apellido_juez.setVisible(false);
+        eliminar_jueces_textf_buscar_apellidos_juez.setVisible(false);
+        
         nombres_jueces = juecesHelper.imprimirJueces();
         
         eliminar_jueces_comb_buscar_nombre_juez.removeAllItems();
@@ -4412,6 +4577,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
+       
+        
         nombres_jueces= juecesHelper.imprimirJueces();
         listar_juez_textf_dni_juez.setText(Integer.toString(nombres_jueces.get(0).getDniJueces()));
         listar_juez_textf_nombre_juez.setText(nombres_jueces.get(0).getNombreJueces());
@@ -4444,6 +4611,10 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        crear_admin_passwf_password_2_admin.setVisible(false);
+        
+        
     }                                                        
 
     private void menu_modificar_administradorActionPerformed(java.awt.event.ActionEvent evt) {                                                             
@@ -4472,6 +4643,10 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
         
+        modificar_admin_textf_dni_buscar.setVisible(false);
+        modificar_admin_textf_password_2_admin.setVisible(false);
+        
+        
         nombresAdmin = administradoresHelper.listar();
         
         modificar_admin_comb_buscar_nombre_admin.removeAllItems();
@@ -4482,7 +4657,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                            
 
     private void menu_eliminar_administradorActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4506,10 +4681,23 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        eliminar_admin_textf_buscar_dni_eliminar.setVisible(false);
+        
+        
+        nombresAdmin = administradoresHelper.listar();
+        
+        eliminar_admin_comb_buscar_nombre_admin.removeAllItems();
+        for (Administradores admin: nombresAdmin) {
+        	
+        	eliminar_admin_comb_buscar_nombre_admin.addItem("" + admin.getNombreAdministradores());
+        }
+        
     }                                                           
 
     private void menu_listar_administradoresActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4532,10 +4720,18 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        
+        nombresAdmin = administradoresHelper.listar();
+        listar_admin_textf_dni_administrador.setText(Integer.toString(nombresAdmin.get(0).getDniAdministradores()));
+        listar_admin_textf_nombre_administrador.setText(nombresAdmin.get(0).getNombreAdministradores());
+        posicion_listar = 0;
+        
     }                                                           
 
     private void menu_inicioActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        
         carrera_crear_carrera.setVisible(false);
         carrera_eliminar_carrera.setVisible(false);
         carrera_listar_carrera.setVisible(false);
@@ -4558,6 +4754,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
     }                                           
 
     //BOTONES
@@ -4576,7 +4774,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                         
 
     private void modificar_carr_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+        
         carrera_modificar_carrera.setVisible(false);
         inicio.setVisible(true);
     }                                                        
@@ -4600,13 +4798,13 @@ public class Inicio extends javax.swing.JFrame {
     }                                                            
 
     private void elim_carr_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+        
         carrera_eliminar_carrera.setVisible(false);
         inicio.setVisible(true);
     }                                                   
 
     private void listar_carr_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
+        
         carrera_listar_carrera.setVisible(false);
         inicio.setVisible(true);
     }                                                     
@@ -4630,7 +4828,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                                   
 
     private void modificar_usu_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
+        
         usuario_modificar_usuario.setVisible(false);
         inicio.setVisible(true);
     }                                                       
@@ -4650,36 +4848,36 @@ public class Inicio extends javax.swing.JFrame {
     }                                                               
 
     private void eliminar_usu_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
+        
         usuario_eliminar_usuario.setVisible(false);
         inicio.setVisible(true);
     }                                                      
 
     private void listar_usu_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        // TODO add your handling code here:
+        
         usuario_listar_usuario.setVisible(false);
         inicio.setVisible(true);
     }                                                    
 
     private void anadir_blacklist_usu_but_buscar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                                        
-        // TODO add your handling code here:
+        
         panel_blacklist_anadir.setVisible(true);
     }                                                                       
 
     private void anadir_blacklist_usu_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
+        
         usuario_blacklist_anadir_blacklist.setVisible(false);
         inicio.setVisible(true);
     }                                                              
 
     private void listar_blacklist_usu_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
+        
         usuario_blacklistt_listar_blacklist.setVisible(false);
         inicio.setVisible(true);
     }                                                              
 
     private void crear_jueces_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
+        
         jueces_crear_juez.setVisible(false);
         inicio.setVisible(true);
     }                                                      
@@ -4697,7 +4895,7 @@ public class Inicio extends javax.swing.JFrame {
     }                                                         
 
     private void modificar_juez_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+        
         jueces_modificar_juez.setVisible(false);
         inicio.setVisible(true);
     }                                                        
@@ -4715,47 +4913,57 @@ public class Inicio extends javax.swing.JFrame {
     }                                                                          
 
     private void eliminar_juez_but_salir_eliminar_juezActionPerformed(java.awt.event.ActionEvent evt) {                                                                      
-        // TODO add your handling code here:
+        
         jueces_eliminar_juez.setVisible(false);
         inicio.setVisible(true);
     }                                                                     
 
     private void listar_juez_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
+        
         jueces_listar_juez.setVisible(false);
         inicio.setVisible(true);
     }                                                     
 
     private void crear_admin_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
+        
         administrador_crear_administrador.setVisible(false);
         inicio.setVisible(true);
     }                                                     
 
     private void modificar_admin_but_buscarActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        // TODO add your handling code here:
+        
         panel_modificar_administrador.setVisible(true);
     }                                                          
 
     private void modificar_admin_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
+        
         administrador_modificar_administrador.setVisible(false);
         inicio.setVisible(true);
     }                                                         
 
     private void eliminar_admin_but_buscar_para_eliminarActionPerformed(java.awt.event.ActionEvent evt) {                                                                        
-        // TODO add your handling code here:
+       
         panel_eliminar_administrador.setVisible(true);
+                
+        eliminar_admin_textf_buscar_dni_eliminar.setText(Integer.toString(nombresAdmin.get(eliminar_admin_comb_buscar_nombre_admin.getSelectedIndex()).getDniAdministradores()));
+        administrador = administradoresHelper.Buscar(Integer.parseInt(eliminar_admin_textf_buscar_dni_eliminar.getText()));
+        eliminar_admin_textf_dni_administrador.setText(Integer.toString(administrador.getDniAdministradores()));
+        eliminar_admin_textf_nombre_administrador.setText(administrador.getNombreAdministradores());
+        
+        
+        
+        
+        
     }                                                                       
 
     private void eliminar_admin_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+       
         administrador_eliminar_administrador.setVisible(false);
         inicio.setVisible(true);
     }                                                        
 
     private void listar_admin_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
+        
         administrador_listar_administrador.setVisible(false);
         inicio.setVisible(true);
     }                                                      
@@ -4783,6 +4991,10 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        
+        carrera_insertar_tiempo_textf_id_carrera.setVisible(false);
         
         nombres = carrerasHelper.listarCarrera();
         
@@ -4817,6 +5029,13 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(true);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(false);
+        
+        
+        
+        car_insertar_juez_textf_dni_juez.setVisible(false);
+        car_insertar_juez_lab_buscar_apellidos_juez.setVisible(false);
+        car_insertar_juez_textf_id_carrera.setVisible(false);
+       
         
         nombres = carrerasHelper.listarCarrera();
         
@@ -4863,6 +5082,14 @@ public class Inicio extends javax.swing.JFrame {
         carrera_desasignar_juez.setVisible(true);
         usuario_insertar_usuario.setVisible(false);
         
+        
+        
+        carr_desasignar_juez_textf_dni_juez.setVisible(false);
+        car_desasignar_juez_lab_buscar_apellidos_juez.setVisible(false);
+        car_desasignar_juez_textf_buscar_id_carrera.setVisible(false);
+        car_desasignar_juez_lab_buscar_nombre_juez.setVisible(false);
+        car_desasignar_juez_comb_buscar_nombre_juez.setVisible(false);
+        
         nombres = carrerasHelper.listarCarrera();
         
         carr_desasignar_juez_comb_carrera.removeAllItems();
@@ -4896,6 +5123,8 @@ public class Inicio extends javax.swing.JFrame {
         carrera_insertar_juez.setVisible(false);
         carrera_desasignar_juez.setVisible(false);
         usuario_insertar_usuario.setVisible(true);
+        
+        
    
     }                                                     
 
@@ -4906,14 +5135,14 @@ public class Inicio extends javax.swing.JFrame {
     }                                                                 
 
     private void car_insertar_juez_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        // TODO add your handling code here:
+        
         carrera_insertar_juez.setVisible(false);
         inicio.setVisible(true);
         
     }                                                           
 
     private void carr_desasignar_juez_but_salirActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        // TODO add your handling code here:
+        
         carrera_desasignar_juez.setVisible(false);
         inicio.setVisible(true);
     }                                                              
@@ -5229,7 +5458,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_modificar_juez;
     private javax.swing.JMenuItem menu_modificar_usuario;
     private javax.swing.JMenu menu_usuario;
-    private javax.swing.JButton modificar_admin_but_buscar;
+    private javax.swing.JButton modificar_admin_but_buscar_invisible;
     private javax.swing.JButton modificar_admin_but_modificar_admin;
     private javax.swing.JButton modificar_admin_but_salir;
     private javax.swing.JComboBox<String> modificar_admin_comb_buscar_nombre_admin;
@@ -5237,9 +5466,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel modificar_admin_lab_dni_admin;
     private javax.swing.JLabel modificar_admin_lab_nombre_admin;
     private javax.swing.JLabel modificar_admin_lab_password_admin;
-    private javax.swing.JLabel modificar_admin_lab_titulo;
-    private JTextField modificar_admin_passwf_password_1_admin;
-    private JTextField modificar_admin_passwf_password_2_admin;
+    private Button modificar_admin_but_buscar;
+    private JTextField modificar_admin_textf_password_1_admin;
+    private JTextField modificar_admin_textf_password_2_admin;
     private javax.swing.JTextField modificar_admin_textf_dni_admin;
     private javax.swing.JTextField modificar_admin_textf_dni_buscar;
     private javax.swing.JTextField modificar_admin_textf_nombre_admin;
