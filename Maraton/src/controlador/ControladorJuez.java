@@ -29,7 +29,7 @@ public class ControladorJuez {
 	
 	/**
 	 * Elimina un juez
-	 * @param juezEliminar Juez que se quiere eliminar
+	 * @param dniJuez Identificador (DNI) del juez que se quiere eliminar
 	 * @return Booleano que indica si se ha realizado correctamente la operacion
 	 */
 	public boolean eliminarJuez(int dniJuez) {
@@ -42,6 +42,14 @@ public class ControladorJuez {
 		}
 	}
 	
+	/**
+	 * Modifica los atributos de un juez
+	 * @param dni DNI del juez que se quiere modificar
+	 * @param nombre Nuevo nombre que se quiere dar al juez
+	 * @param apellidos Nuevos apellidos del juez
+	 * @param telefono Nuevo teléfono del juez
+	 * @return Booleano indicando si la operacion se ha realizado correctamente
+	 */
 	public boolean cambiar(int dni, String nombre, String apellidos, String telefono) {
 		try {
 			helper.change(dni, nombre, apellidos, telefono);
