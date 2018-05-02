@@ -13,15 +13,27 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- * 
+ * Servlet que implementa la clase LoginServlet
+ * Es el controlador que se encarga de gestionar las peticiones
+ * de acceso a la página web mediante contraseña
+ * Hereda de HttpServlet
+ * @author admin
+ * @version 02/05/2018
  */
-
-
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-
+	/**
+	 * Método para las peticiones Post generadas en el cliente
+	 * Se encarga de recibir los parametros insertados por el cliente
+	 * DNI y Contraseña, comprueba el contenido contra la BBDD, en el 
+	 * caso en que la comprobación sea correcta, manda la respuesta y al programa
+	 * de nuevo y envia al cliente a la zona_usuarios que es la página cuando 
+	 * cliente esa registrado, en el caso contrario marcara en rojo los parametros
+	 * introducidos y mostrara el menesaje de que los parametros son incorrectos
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import Modelo.Carrera;
 import persistencia.CarrerasHelper;
 
+/**
+ * @author admin
+ */
 public class ServicioCarreras {
 	
 	Carrera carrera = new Carrera();
