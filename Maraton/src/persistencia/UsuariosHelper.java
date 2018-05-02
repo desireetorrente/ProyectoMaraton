@@ -106,7 +106,7 @@ public class UsuariosHelper {
 	}
 	
 	/**
-	 * MEtodo que elimina a un usuario que sea participante
+	 * MEtodo que elimina a un usuario que sea participante.
 	 * @param dniUsuario. dni del usuario.
 	 */
 	
