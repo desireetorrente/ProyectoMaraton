@@ -41,7 +41,7 @@ public class ControladorUsuario {
 	
 	/**
 	 * Elimina un usuario
-	 * @param usuarioEliminar Objeto tipo usuario que se quiere eliminar
+	 * @param dni Identificador (DNI) del usuario que se quiere eliminar
 	 * @return Booleano indicando si se ha realizado correctamente la operacion de borrado
 	 */
 	public boolean eliminarUsuario(int dni) {
@@ -55,9 +55,15 @@ public class ControladorUsuario {
 	}
 	
 	/**
-	 * Cambia el nombre del usuario
-	 * @param usuario Objeto tipo usuario al cual se quere cambiar el nombre
+	 * Cambia el nombre, apellidos, mail, password, edad, teléfono y código postal del usuario
+	 * @param dni Identificador (DNI) del usuario que se quiere modificar
 	 * @param nombreNuevo Nuevo nombre del usuario
+	 * @param apellidos Nuevos apellidos del usuario
+	 * @param mail Nueva dirección de correo electrónico del usuario
+	 * @param password Nueva constraseña del usuario
+	 * @param edad Nuevo año de nacimiento
+	 * @param telefono Nuevo teléfono del usuario
+	 * @param cp Nuevo código postal del usuario
 	 * @return Booleano indicando si se ha reliado correctamente el cambio
 	 */
 	public boolean cambiar(int dni, String nombreNuevo, String apellidos, String mail, String password, int edad, 
@@ -71,6 +77,11 @@ public class ControladorUsuario {
 		}
 	}
 	
+	/**
+	 * Busca un usuario concreto entre la lista de usuarios que hay en la BBDD
+	 * @param dni DNI del usuario que se quiere buscar
+	 * @return Retorna el objeto usuario buscado
+	 */
 	public Usuarios buscar(int dni) {
 		return helper.search(dni);
 	}
