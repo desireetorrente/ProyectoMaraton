@@ -5,7 +5,7 @@ import persistencia.UsuariosHelper;
 
 public class Validate {
 
-	private static UsuariosHelper usuario = new UsuariosHelper(); //static?
+	private static UsuariosHelper usuario = new UsuariosHelper(); 
 	
 	public static boolean checkUser(int dni, String pass) {
 		

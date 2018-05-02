@@ -23,7 +23,6 @@ public class InscribirUsuario extends HttpServlet {
      */
     public InscribirUsuario() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

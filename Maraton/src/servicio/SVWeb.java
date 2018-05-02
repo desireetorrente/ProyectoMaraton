@@ -38,8 +38,6 @@ public class SVWeb extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO : comprobar el campo acción de las vistas que se llama igual.
-		//TODO: comprobar el nombre del servlet en los JSP.
 		String idcarrera = request.getParameter("idcarrera");
 		String nombreCarrera =request.getParameter("nombreCarrera");
 		String distanciaCarrera = request.getParameter("distanciaCarrera");
@@ -58,7 +56,6 @@ public class SVWeb extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO: comprobar que los nombres de los campos del getParameter es el mismo que en el formulario del JSP
 		int dni = Integer.parseInt(request.getParameter("dni"));
 		String nombre = request.getParameter("nombre");
 		String apellidos = request.getParameter("apellidos");
@@ -77,14 +74,11 @@ public class SVWeb extends HttpServlet {
 		 		controladorUsuario.crearUsuario(dni, nombre, apellidos, mail, password, edad, telefono, cp);
 		 		break;
 		 	case "Modificar":
-		 		//TODO: método modificar, ver ORM o no...
 		 		break;
 		 	case "Eliminar":
 		 		controladorUsuario.eliminarUsuario(dni);
 		 		break;
 		 	case "ElegirCarrera":
-		 		//TODO: crear el método para inscribirse a una carrera
-		 		//controladorUsuario.elegirCarrera();
 		} 
 	
 		}
