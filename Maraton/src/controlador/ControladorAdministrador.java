@@ -18,7 +18,6 @@ public class ControladorAdministrador {
 	 * @param dni. El dni se utilizará como identificador único de cada administrador.
 	 * @param nombre. Nombre de usuario
 	 * @param password. Contraseña del administrador para poder acceder a la aplicación.
-	 * @param timeStamp. TimeSTamp que mostrará el momento en el que se ha creado el Administrador.
 	 * @return Booleano indicando si ese administrador se ha podido añadir o no porque ya se encuentra en la colecion.
 	 */
 	public boolean crearAdministrador(int dni, String nombre, String password) {
@@ -34,10 +33,11 @@ public class ControladorAdministrador {
 	}
 	
 	/**
-	 * Cambio de nombre de usuario para un administrador.
+	 * Cambio de nombre de usuario para un administrador y/o contraseña
 	 * @param dni DNI del administrador que se quiere cambiar el nombre.
 	 * @param nuevoNombre Nuevo nombre de usuario.
-	 * @see Clase Controlador.buscar().
+	 * @param password Nueva contraseña del administrador.
+	 * @return Booleano indicando si se ha podido modificar o no.
 	 */
 	public boolean cambiar(int dni, String nuevoNombre, String password){
 		try{
@@ -53,7 +53,6 @@ public class ControladorAdministrador {
 	 * Eliminar un administrador. 
 	 * @param dni DNI del administrador que se quiere eliminar.
 	 * @return Booleano indicando si se ha podido realizar la operacion.
-	 * @see Clase Controlador.buscar().
 	 */
 	public boolean eliminarAdministrador(int dni) {
 		try {
@@ -67,8 +66,12 @@ public class ControladorAdministrador {
 		
 	}
 	
+	/**
+	 * Imprime la lista de administradores registrados en la BBDD
+	 * El Helper retorna una lista de Administradores.
+	 */
 	public void imprimirAdministradores() {
-		//Retorna una lista con los administradores registrados en la base de datos
+		
 		try {
 			helper.listar();
 		}catch(Exception e) {
