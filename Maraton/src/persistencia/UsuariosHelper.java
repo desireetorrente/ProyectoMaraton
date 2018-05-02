@@ -105,6 +105,11 @@ public class UsuariosHelper {
 
 	}
 	
+	/**
+	 * MEtodo que elimina a un usuario que sea participante
+	 * @param dniUsuario. dni del usuario.
+	 */
+	
 	public void totalDelete(int dniUsuario) {
 		if(participantesHelper.buscar(dniUsuario) != null) {
 			for(int i = 0; i<participantesHelper.buscar(dniUsuario).size();i++) {
