@@ -46,26 +46,6 @@ public class SVWeb extends HttpServlet {
 		String altitudCarrera = request.getParameter("altitudCarrera");
 	
 		//condicional que según lo que hemos recogido en acción hace una cosa u otra.
-		String siguientevista = "Zona_usuarios.jsp";
-		//TODO: sustituir el nombre de siguietne vista por el nombre del JSP del formulario de David.
-		if (accion != null) {
-			switch (accion) {
-			case "Nuevo":
-				break;
-			case "verListadoCorredores":
-				// TODO: cambiar el nombre de listadoCorredores al que tenga David para
-				// mostrarlo.
-				siguientevista = "listadoCorredores.jsp";
-				// llamamos al método de listar corredores de controladorusuario/carrera
-				// TODO: implementar el método listarCorredores en el controlador de usuario.
-				//List<Usuarios>corredores = controladorUsuario.listarCorredores();
-				// con esto dejamos la información para que la recoja la vista
-				// TODO: poner el nombre del array en el valor del setAttribute
-				//request.setAttribute("listadoCorredores", corredores);
-				break;
-			}
-		}
-		request.getRequestDispatcher(siguientevista).forward(request, response);
 	}
 
 	/**Método para las peticiones post que llegan desde el cliente

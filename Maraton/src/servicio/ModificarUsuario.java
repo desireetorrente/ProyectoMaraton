@@ -1,6 +1,8 @@
 package servicio;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,19 +41,22 @@ public class ModificarUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		doGet(request, response);
-		String dniString = request.getParameter("dniUser");
-		int dni = Integer.parseInt(dniString);
+		
+		String dni= request.getParameter("dniUser");
 		String nombre = request.getParameter("nombreUser");
 		String apellidos = request.getParameter("apellidosUser");
 		String email = request.getParameter("emailUser");
 		String pwd = request.getParameter("pwdUser");
-		String edadString = request.getParameter("edadUser");
-		int edad = Integer.parseInt(edadString);
+		String edad = request.getParameter("edadUser");
 		String cp = request.getParameter("cpUser");
 		String telf = request.getParameter("telefonoUser");
+		PrintWriter out= response.getWriter();
 		
-		cu.cambiar(dni, nombre, apellidos, email, pwd, edad, cp, telf);
+		if(cu.cambiar(Integer.parseInt(dni), nombre, apellidos, email, pwd, Integer.parseInt(edad), cp, telf)) {
+			out.println("<font color=green>Usuario modificado correctamente</font>");
+		}else {
+			out.println("<font color=red>No se pudo modificar el usuario</font>");
+		}
 	}
 
 }

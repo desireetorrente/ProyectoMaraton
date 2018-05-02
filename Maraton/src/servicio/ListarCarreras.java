@@ -46,9 +46,13 @@ public class ListarCarreras extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		List<Carrera> carreras = ch.listarCarrera();
-		
+		out.println("Carreras: ");
+		out.println("<br>");
+		out.println("---------");
+		out.println("<br>");
 		for(int i = 0; i < carreras.size(); i++) {
-			out.println(carreras.get(i).getNombreCarrera());
+			out.println("ID: " + carreras.get(i).getIdcarreraCarrera() + ";   Nombre: " + carreras.get(i).getNombreCarrera() +
+					";   Distancia: " + carreras.get(i).getDistanciaCarrera() + "Km");
 			out.println("<br>");
 		}
 

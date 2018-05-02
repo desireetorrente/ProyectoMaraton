@@ -134,7 +134,7 @@ public class UsuariosHelper {
 		try {
 			Query q = session.createQuery("from Usuarios as user where user.dniUsuarios = " + dniUsuarios);
 			Usuarios user = new Usuarios();
-			user = session.load(Usuarios.class, dniUsuarios); // Cargamoms objeto bbdd
+			user = session.load(Usuarios.class, dniUsuarios); 
 			user.setNombreUsuarios(nombreUsuarios);
 			user.setApellidosUsuarios(apellidosUsuarios);
 			user.setEmailUsuarios(emailUsuarios);

@@ -16,7 +16,7 @@
 			<button class="boton" onclick="ocultaInsert()" onclick="rellenaForm()">Inscripcion</button>
 			<button class="boton" onclick="ocultaListaCarrera()"> listar carrera</button>
 			<button class="boton" onclick="ocultaListaCorredor()"> listar corredor</button>
-			<button class="boton" onclick="ocultaLogEditar()"> editar</button>
+			<button class="boton" onclick="ocultaEditar()"> editar</button>
 			<button class="boton" onclick="ocultaEliminar()"> eliminar</button>
 			<button class="boton" onclick="logout()"> Log Out</button>
 		</div>
@@ -60,18 +60,7 @@
 			</div>
 				
 			<div id="logEditar">		
-				<form action="" method="post">
-					<p>DNI Usuario: </p>
-					<input type="text" name="dniUser"></input>
-					<p>Contraseña:</p>
-					<input type="password" name="pwdUser"></input>
-					<br>
-					<input class="boton" onclick="ocultaEditar()" value="Enviar">
-				</form>	
-			</div>		
-		
-		<div id="editar">
-			<form action="ModificarUsuario" method="post">
+				<form action="ModificarUsuario" method="post">
 				<p>DNI Usuario: </p>
 				<input type="text" name="dniUser"></input>
 				<p>Nombre:</p>
@@ -79,7 +68,7 @@
 				<p>Apellidos:</p>
 				<input type="text" name="apellidosUser"></input>
 				<p>Email:</p>
-				<input type="text" name="emailUser"></input>
+				<input type="email" name="emailUser"></input>
 				<p>Contraseña:</p>
 				<input type="password" name="pwdUser"></input>
 				<p>Edad:</p>
@@ -89,9 +78,11 @@
 				<p>Telefono:</p>
 				<input type="text" name="telefonoUser"></input>
 				<br>
-				<input type="submit" value="Enviar">
+				<br>
+				<input type="submit" id="busca" value="Salvar nuevos campos">
 			</form>
-		</div>
+			</div>		
+		
 
 		<div id="eliminar">
 			<form action="EliminarUserServlet" method="post">
@@ -147,14 +138,12 @@ function ocultaInsert(x) {
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}else{
 		document.getElementById("insert").style.visibility = "visible";
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}	
 }
@@ -165,14 +154,12 @@ function ocultaListaCarrera(x) {
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}else{
 		document.getElementById("insert").style.visibility = "hidden";
 		document.getElementById("listaCarrera").style.visibility = "visible";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}	
 }
@@ -183,50 +170,29 @@ function ocultaListaCorredor(x) {
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}else{
 		document.getElementById("insert").style.visibility = "hidden";
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "visible";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}	
 }
 
-function ocultaLogEditar(x) {
+
+function ocultaEditar(x) {
 	if(document.getElementById("logEditar").style.visibility == "visible"){
 		document.getElementById("insert").style.visibility = "hidden";
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}else{
 		document.getElementById("insert").style.visibility = "hidden";
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "visible";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}	
-}
-
-function ocultaEditar(x) {
-	if(document.getElementById("editar").style.visibility == "visible"){
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
-		document.getElementById("eliminar").style.visibility = "hidden";
-	}else{
-		document.getElementById("insert").style.visibility = "hidden";
-		document.getElementById("listaCarrera").style.visibility = "hidden";
-		document.getElementById("listaCorredor").style.visibility = "hidden";
-		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "visible";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}	
 }
@@ -237,14 +203,12 @@ function ocultaEliminar(x) {
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "hidden";
 	}else{
 		document.getElementById("insert").style.visibility = "hidden";
 		document.getElementById("listaCarrera").style.visibility = "hidden";
 		document.getElementById("listaCorredor").style.visibility = "hidden";
 		document.getElementById("logEditar").style.visibility = "hidden";
-		document.getElementById("editar").style.visibility = "hidden";
 		document.getElementById("eliminar").style.visibility = "visible";
 	}	
 
