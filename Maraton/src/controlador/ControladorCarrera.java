@@ -43,9 +43,11 @@ public class ControladorCarrera {
 	}
 	
 	/**
-	 * Cambia nombre de una carrera
-	 * @param carreraCambiarNombre Objeto carrera a modificar
+	 * Cambia nombre, distacia y altitud de una carrera
+	 * @param idCarrera Identificador de la carrera que se quiere modificar
 	 * @param nuevoNombre Nuevo nombre para la carrera
+	 * @param nuevaDistancia Nueva distancia que se da a la carrera
+	 * @param nuevaAltitud Nueva altitud que se da a la carrera
 	 * @return Booleano indicando si se ha podido realizar la operacion
 	 */
 	public boolean cambiar(int idCarrera, String nuevoNombre, String nuevaDistancia, String nuevaAltitud) {
@@ -60,9 +62,9 @@ public class ControladorCarrera {
 	
 	/**
 	 * Adjudica un juez a una carrera
-	 * @param juezInsertar Juez que se quiere introducir en la carrera
-	 * @param carrera Carrera a la cual se quiere introducir el juez
-	 * @return Booleano que indica si se ha realizado bien la operacion de inserccion 
+	 * @param juez Objeto Juez que se quiere introducir en la carrera
+	 * @param idcarrera identificador de la carrera a la cual se quiere introducir el juez
+	 * @return Booleano que indica si se ha realizado bien la operacion
 	 */
 	public boolean asignarJuez(Jueces juez, int idCarrera) {
 		try{
@@ -76,8 +78,7 @@ public class ControladorCarrera {
 	
 	/**
 	 * Desvincula un juez de la carrera
-	 * @param juezDesvincular Objeto tipo juez que se quiere desvincular
-	 * @param carrera Carrera a la cual queremos desvincular el juez
+	 * @param idCarrera identificador de la carrera a la cual queremos desvincular el juez
 	 * @return Booleano indicando si la operacion se ha realizado correctamente
 	 */
 	public boolean desasignarJuez(int idCarrera) {
@@ -91,10 +92,10 @@ public class ControladorCarrera {
 	}
 	
 	/**
-	 * Añade corredor a la carrera
-	 * @param corredorVincular Corredor que se va a añadir
-	 * @param carrera Carrrera a la cual se va a añadir
-	 * @return Booleano a la cual
+	 * Añade usuario (corredor) a la carrera
+	 * @param  dniUsuario identificador (DNI) del corredor que se va a añadir a la carrera
+	 * @param idcarrera identificador de la carrera a la cual se va a añadir el corredor
+	 * @return Booleano indicando si la operacion se ha realizado correctamente
 	 */
 	public boolean asignarCorredor(int dniUsuario, int idCarrera) {
 		try{
@@ -106,6 +107,12 @@ public class ControladorCarrera {
 		}
 	}
 	
+	/**
+	 * Elimina un usuario (corredor) de una carrera
+	 * @param dniUsuario DNI del corredor que se quiere desasignar
+	 * @param idCarrera identificador de la carrera de la que se quiere eliminar al corredor
+	 * @return Booleano indicando si la operacion se ha realizado correctamente
+	 */
 	public boolean desasignarCorredor(int dniUsuario, int idCarrera) {
 		try{
 			helperParticipante.delete(dniUsuario, idCarrera);
@@ -116,6 +123,13 @@ public class ControladorCarrera {
 		}
 	}
 	
+	/**
+	 * Introduce el tiempo que un usuario (corredor) ha hecho en la carrera
+	 * @param dniUsuario DNI del corredor que ha hecho el tiempo
+	 * @param idCarrera identificador de la carrera en la que ha corrido el corredor anterior
+	 * @param tiempo timpo realizado por el corredor
+	 * @return Booleano indicando si la operacion se ha realizado correctamente
+	 */
 	public boolean introducirTiempo(int dniUsuario, int idCarrera, int tiempo) {
 		try {
 			helperParticipante.insertarTiempo(dniUsuario, idCarrera, tiempo);  
