@@ -12,14 +12,24 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import Modelo.Administradores;
 
+/**
+ * Clase que contiene las conexiones de administradores a la bbdd
+ */
+
 public class AdministradoresHelper {
 	
 	private Configuration cfg;
-	
+	/**
+	 * constructor por defecto
+	 * @param cfg. inicia el objeto configuracion
+	 */
 	public AdministradoresHelper() {
 		this.cfg = new Configuration();
 	}
-	
+	/**
+	 * Inserta un administrador en la bbdd.
+	 * @param admin. Objeto administrador que se quiere insertar
+	 */
 	public void insertar(Administradores admin) {
 		
 		cfg.configure("hibernate.cfg.xml");
@@ -31,6 +41,11 @@ public class AdministradoresHelper {
 		tx.commit(); 
 		session.close();
 	}
+	
+	/**
+	 * metodo para borrar un administrador de la bbdd
+	 * @param dniAdministradores. dni del administrador que se quiere borrar
+	 */
 	
 	public void delete(int dniAdministradores) {
 		
@@ -52,6 +67,13 @@ public class AdministradoresHelper {
 			session.close();
 		} 
 	}
+	
+	/**
+	 * metodo para modificar un administrador
+	 * @param dniAdministradores. dni del administrador
+	 * @param name. nuevo nombre del administrador
+	 * @param pwd. nueva contraseña del administrador
+	 */
 	
 	public void modificar(int dniAdministradores, String name, String pwd) {
 		
@@ -77,6 +99,11 @@ public class AdministradoresHelper {
 		}
 	}
 	
+	/**
+	 * metodo que lista los administradores.
+	 * @return una lista con los administradores.
+	 */
+	
 	public List <Administradores>listar() {
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
@@ -98,6 +125,12 @@ public class AdministradoresHelper {
         }
         return administradores;
     }
+	
+	/**
+	 * metodo que busca un administrador
+	 * @param dniAdministradores dni del administrador a buscar
+	 * @return el administrador encontrado.
+	 */
 	
 	public Administradores Buscar(int dniAdministradores) {
 
