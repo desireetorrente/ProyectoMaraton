@@ -22,7 +22,6 @@ public class CarrerasHelper {
 	
 	/**
 	 * constructor por defecto
-	 * @param cfg. inicia el objeto configuracion
 	 */
 	
 	public CarrerasHelper() {
