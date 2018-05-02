@@ -59,6 +59,5 @@ public class ElimiarUserServlet extends HttpServlet {
 		}else {
 			out.println("<font color=red>No se pudo eliminar el usuario</font>");
 		}
-		
 	}
 }
