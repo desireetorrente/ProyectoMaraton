@@ -21,7 +21,11 @@ public class UsuariosHelper {
 	// Atributos
 	private Configuration cfg;
 	private ParticipantesHelper participantesHelper = new ParticipantesHelper();
-
+	
+	/**
+	 * Constructor de la clase
+	 */
+	
 	public UsuariosHelper() {
 		this.cfg = new Configuration();
 
