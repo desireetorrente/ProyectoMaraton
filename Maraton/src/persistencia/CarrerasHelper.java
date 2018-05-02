@@ -12,16 +12,29 @@ import org.hibernate.cfg.Configuration;
 import Modelo.Carrera;
 import Modelo.Jueces;
 
+/**
+ * Clase que contiene las conexiones de carreras a la bbdd
+ */
+
 public class CarrerasHelper {
 
 	private Configuration cfg;
+	
+	/**
+	 * constructor por defecto
+	 * @param cfg. inicia el objeto configuracion
+	 */
 	
 	public CarrerasHelper() {
 		this.cfg = new Configuration();
 	}
 	
+	/**
+	 * Metodo para insertar una carrera a la bbdd
+	 * @param car. Carrera a insertar
+	 */
+	
 	public void insertar(Carrera car) {
-		
 		
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
@@ -32,6 +45,12 @@ public class CarrerasHelper {
 		tx.commit();
 		session.close();
 	}
+	
+	
+	/**
+	 * Metodo que elimina una carrera
+	 * @param idCarrera. ID de la carrera a eliminar
+	 */
 	
 	public void delete(int idCarrera) {
 		
@@ -52,11 +71,17 @@ public class CarrerasHelper {
 			e.printStackTrace();
 			tx.rollback();
 			session.close();
-		}
-		
-		
+		}	
 	}	
-
+	
+	/**
+	 * Metodo para modificar una carrera
+	 * @param idCarrera. id de la carrera
+	 * @param nombreCarrera. Nuevo nombre de la carrera
+	 * @param distanciaCarrera. nueva distancia de la carrera
+	 * @param altitudCarrera. nueva altitu de la carrera
+	 */
+	
 	public void cambiar(int idCarrera, String nombreCarrera, String distanciaCarrera, String altitudCarrera) {
 
 		cfg.configure("hibernate.cfg.xml");
@@ -82,6 +107,11 @@ public class CarrerasHelper {
 		}
 		
 	}
+	
+	/**
+	 * metodo que lista las carreras.
+	 * @return una lista con las carreras.
+	 */
 		
 	public List<Carrera> listarCarrera() {
 		
@@ -98,6 +128,12 @@ public class CarrerasHelper {
         return carreras;
         
     }
+	
+	/**
+	 * Metodo que inserta un juez a una carrera
+	 * @param juez. juez a insertar
+	 * @param idCarrera. ID de la carrera a la que se le asigna el juez
+	 */
 	
 	public void insertar_juez(Jueces juez, int idCarrera) {
 		
@@ -123,6 +159,11 @@ public class CarrerasHelper {
 		
 	}
 	
+	/**
+	 * Metodo que quita un juez de una carrera
+	 * @param idCarrera. Id de la carrera a la que se le va a desasignar un juez
+	 */
+	
 	public void desasignar_juez(int idCarrera) {
 		
 		cfg.configure("hibernate.cfg.xml");
@@ -145,6 +186,12 @@ public class CarrerasHelper {
 		}
 		
 	}
+	
+	/**
+	 * Metodo para buscar una carrera
+	 * @param idcarreraCarrera. ID de la carrera a buscar
+	 * @return la carrera encontrada
+	 */
 	
 	public Carrera Buscar(int idcarreraCarrera) {
 
@@ -169,22 +216,6 @@ public class CarrerasHelper {
 			System.out.println("La carrera no existe no existe");
 		}
 		return car;
-	}
-	
-	public static void main(String[] args) {
-		CarrerasHelper prueba = new CarrerasHelper();
-		//prueba.insertar(555, 1);
-		//prueba.insertar(555, 11);
-		//prueba.delete(555, 11);
-		//prueba.delete(555, 1);
-		//prueba.insertarTiempo(555, 1, 1234);
-		//prueba.insertarTiempov2(555, 1, 0);
-		
-		System.out.println("Usuario 555 inscrito en: ");
-		
-			System.out.println(prueba.listarCarrera().get(0).getNombreCarrera());
-			
-		
 	}
 	
 }
