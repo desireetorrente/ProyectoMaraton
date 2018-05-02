@@ -3,21 +3,22 @@ package servicio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import Modelo.Participantes;
 import persistencia.CarrerasHelper;
 import persistencia.ParticipantesHelper;
 
 /**
- * Servlet implementation class ListarCorredoresServlet
+ * Servlet que implementa la clase ListarCorredoresServlet
+ * Esta clase es el controlador que gestiona las peticiones
+ * de listar los corredores que hay inscritos en una carrera
+ * Esta clase hereda de HttpServlet
+ * @author admin
+ * @version 02/05/2018
  */
 @WebServlet("/ListarCorredoresServlet")
 public class ListarCorredoresServlet extends HttpServlet {
@@ -26,6 +27,7 @@ public class ListarCorredoresServlet extends HttpServlet {
 	CarrerasHelper ch = new CarrerasHelper();
 	
     /**
+     * Constructor por defecto
      * @see HttpServlet#HttpServlet()
      */
     public ListarCorredoresServlet() {
@@ -33,6 +35,8 @@ public class ListarCorredoresServlet extends HttpServlet {
     }
 
 	/**
+	 * Método que gestiona las peticiones Get que se generan en el cliente
+	 * En este caso no se gestionan peticiones de este tipo
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,6 +45,12 @@ public class ListarCorredoresServlet extends HttpServlet {
 	}
 
 	/**
+	 * Método paras las petiones Post que se generan en el cliente
+	 * En este cxaso se recibe la petición de listar los corredores que hay 
+	 * inscritos en una determinada carrera
+	 * Primeramente, se comprueba que exista la carrera seleccionada
+	 * Si es así, se listan los corredores o se informa al usuario de que todavía no 
+	 * hay inscritos en esa carrera
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
