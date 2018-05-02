@@ -146,7 +146,7 @@ public class ParticipantesId implements java.io.Serializable {
 	}
 
 	/**
-	 * Método que comprueba si el participante ya está registrado
+	 * Método generado por Hibernate
 	 */
 	public boolean equals(Object other) {
 		if ((this == other))
@@ -169,7 +169,7 @@ public class ParticipantesId implements java.io.Serializable {
 	}
 
 	/**
-	 * Método para?????
+	 * Método generado por Hibernate
 	 */
 	public int hashCode() {
 		int result = 17;
