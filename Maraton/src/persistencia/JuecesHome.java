@@ -11,7 +11,7 @@ import Modelo.Jueces;
 
 /**
  * Home object for domain model class Jueces.
- * @see persistencia.Jueces
+ * @see Modelo.Jueces
  * @author Hibernate Tools
  */
 @Stateless

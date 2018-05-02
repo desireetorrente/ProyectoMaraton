@@ -11,7 +11,7 @@ import Modelo.Carrera;
 
 /**
  * Home object for domain model class Carrera.
- * @see persistencia.Carrera
+ * @see Modelo.Carrera
  * @author Hibernate Tools
  */
 @Stateless

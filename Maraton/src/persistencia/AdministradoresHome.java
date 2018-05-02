@@ -11,7 +11,7 @@ import Modelo.Administradores;
 
 /**
  * Home object for domain model class Administradores.
- * @see persistencia.Administradores
+ * @see Modelo.Administradores
  * @author Hibernate Tools
  */
 @Stateless

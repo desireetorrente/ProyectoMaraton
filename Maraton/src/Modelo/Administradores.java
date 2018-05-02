@@ -83,7 +83,7 @@ public class Administradores implements java.io.Serializable {
 	/**
 	 * Método de selección/lectura de la contraseña del administrador
 	 * Esta clase tiene selecionado que la contraseña no puede ser null
-	 * @return. Te retorna la contraseña del administrador
+	 * @return Retorna la contraseña del administrador
 	 */
 	@Column(name = "password_administradores", nullable = false, length = 45)
 	public String getPasswordAdministradores() {

@@ -92,7 +92,7 @@ public class Jueces implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura del nombre del juez
-	 * @return. Nombre del juez
+	 * @return Nombre del juez
 	 */
 	@Column(name = "nombre_jueces", nullable = false, length = 45)
 	public String getNombreJueces() {
@@ -109,7 +109,7 @@ public class Jueces implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura de los apellidos del juez
-	 * @return. Apellidos del juez
+	 * @return Apellidos del juez
 	 */
 	@Column(name = "apellidos_jueces", nullable = false, length = 70)
 	public String getApellidosJueces() {
@@ -126,7 +126,7 @@ public class Jueces implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura del teléfono del juez
-	 * @return. Teléfono del juez
+	 * @return Teléfono del juez
 	 */
 	@Column(name = "telefono_jueces", nullable = false, length = 15)
 	public String getTelefonoJueces() {
@@ -143,7 +143,7 @@ public class Jueces implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura del ID de la carrera del juez
-	 * @return. ID de la carrera
+	 * @return ID de la carrera
 	 */
 	@Column(name = "idcarrera_jueces", nullable = false)
 	public int getIdcarreraJueces() {

@@ -11,7 +11,7 @@ import Modelo.Usuarios;
 
 /**
  * Home object for domain model class Usuarios.
- * @see persistencia.Usuarios
+ * @see Modelo.Usuarios
  * @author Hibernate Tools
  */
 @Stateless

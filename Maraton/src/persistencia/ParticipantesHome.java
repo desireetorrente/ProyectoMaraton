@@ -12,7 +12,7 @@ import Modelo.ParticipantesId;
 
 /**
  * Home object for domain model class Participantes.
- * @see persistencia.Participantes
+ * @see Modelo.Participantes
  * @author Hibernate Tools
  */
 @Stateless

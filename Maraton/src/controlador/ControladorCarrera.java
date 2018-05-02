@@ -63,7 +63,7 @@ public class ControladorCarrera {
 	/**
 	 * Adjudica un juez a una carrera
 	 * @param juez Objeto Juez que se quiere introducir en la carrera
-	 * @param idcarrera identificador de la carrera a la cual se quiere introducir el juez
+	 * @param idCarrera identificador de la carrera a la cual se quiere introducir el juez
 	 * @return Booleano que indica si se ha realizado bien la operacion
 	 */
 	public boolean asignarJuez(Jueces juez, int idCarrera) {
@@ -93,8 +93,8 @@ public class ControladorCarrera {
 	
 	/**
 	 * Añade usuario (corredor) a la carrera
-	 * @param  dniUsuario identificador (DNI) del corredor que se va a añadir a la carrera
-	 * @param idcarrera identificador de la carrera a la cual se va a añadir el corredor
+	 * @param dniUsuario identificador (DNI) del corredor que se va a añadir a la carrera
+	 * @param idCarrera identificador de la carrera a la cual se va a añadir el corredor
 	 * @return Booleano indicando si la operacion se ha realizado correctamente
 	 */
 	public boolean asignarCorredor(int dniUsuario, int idCarrera) {
@@ -127,7 +127,7 @@ public class ControladorCarrera {
 	 * Introduce el tiempo que un usuario (corredor) ha hecho en la carrera
 	 * @param dniUsuario DNI del corredor que ha hecho el tiempo
 	 * @param idCarrera identificador de la carrera en la que ha corrido el corredor anterior
-	 * @param tiempo timpo realizado por el corredor
+	 * @param tiempo tiempo realizado por el corredor
 	 * @return Booleano indicando si la operacion se ha realizado correctamente
 	 */
 	public boolean introducirTiempo(int dniUsuario, int idCarrera, int tiempo) {

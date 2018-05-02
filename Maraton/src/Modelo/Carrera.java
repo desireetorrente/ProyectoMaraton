@@ -130,7 +130,7 @@ public class Carrera implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura del nombre de la carrera
-	 * @return. Nombre de la carrera
+	 * @return Nombre de la carrera
 	 */
 	@Column(name = "nombre_carrera", nullable = false, length = 45)
 	public String getNombreCarrera() {
@@ -147,7 +147,7 @@ public class Carrera implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura de la distancia de la carrera
-	 * @return. Distancia de la carrera
+	 * @return Distancia de la carrera
 	 */
 	@Column(name = "distancia_carrera", nullable = false, length = 11)
 	public String getDistanciaCarrera() {
@@ -164,7 +164,7 @@ public class Carrera implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura de la altura de la carrera
-	 * @return. Diferencia de altitud de la carrera
+	 * @return Diferencia de altitud de la carrera
 	 */
 	@Column(name = "altitud_carrera", nullable = false, length = 11)
 	public String getAltitudCarrera() {

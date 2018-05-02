@@ -8,8 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-
-import Modelo.Carrera;
 import Modelo.Usuarios;
 
 /**
@@ -164,6 +162,7 @@ public class UsuariosHelper {
 	/**
 	 * Método para buscar usuarios por su dni
 	 * @param dniUsuarios. DNI del usuario
+	 * @return Retorna el objeto usuario buscado
 	 */
 	public Usuarios search(int dniUsuarios) {
 

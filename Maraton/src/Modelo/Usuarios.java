@@ -110,7 +110,7 @@ public class Usuarios implements java.io.Serializable {
 
 	/**
 	 * Método de selección/lectura del nombre del usuario
-	 * @return. Nombre del usuario
+	 * @return Nombre del usuario
 	 */
 	@Column(name = "nombre_usuarios", nullable = false, length = 45)
 	public String getNombreUsuarios() {
