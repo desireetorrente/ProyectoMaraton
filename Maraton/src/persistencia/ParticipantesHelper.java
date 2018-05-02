@@ -20,10 +20,18 @@ public class ParticipantesHelper {
 
 	private Configuration cfg;
 	
-	
+	/**
+	 * constructor por defecto
+	 */
 	public ParticipantesHelper() {
 		this.cfg = new Configuration();
 	}
+	
+	/**
+	 * Inserta un participante en la bbdd
+	 * @param dni. deni del participante
+	 * @param idcarrera. ID de la carrera en la que se va a insertar el participante
+	 */
 	
 	public void insertar(int dni, int idcarrera) {
 
@@ -53,6 +61,12 @@ public class ParticipantesHelper {
 		
 	}
 	
+	/**
+	 * Inserta el tiempo de un participante
+	 * @param participante participante al que se le va a dar el tiempo
+	 * @param tiempo. tiempo a introducir
+	 */
+	
 	public void insertar(Participantes participante, int tiempo) {
 
 		cfg.configure("hibernate.cfg.xml");
@@ -72,6 +86,13 @@ public class ParticipantesHelper {
 		}
 		
 	}
+	
+	/**
+	 * Metodo para borrar un participante
+	 * @param dni del participante
+	 * @param idcarrera Id de la carrera
+	 * @return el participante eliminado
+	 */
 	
 	public Participantes delete(int dni, int idcarrera) {
 
@@ -139,6 +160,12 @@ public class ParticipantesHelper {
 		}
 	}
 	
+	/**
+	 * Busca un participante
+	 * @param dni del participante a buscar
+	 * @return el participante encontrado
+	 */
+	
 	public List<Participantes> buscar(int dni) {
 		
 		cfg.configure("hibernate.cfg.xml");
@@ -158,6 +185,12 @@ public class ParticipantesHelper {
 		return participante;
 	}
 	
+	/**
+	 * Metodo que lista los corredores de una carrera
+	 * @param idcarrera. Id de carrera a listar
+	 * @return lista de los corredores
+	 */
+	
 	public List<Participantes> corredoresEnCarrera(int idcarrera){
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
@@ -176,7 +209,11 @@ public class ParticipantesHelper {
 		return participante;
 	}
 	
-	
+	/**
+	 * Metodo que asigna los dorsales a los participantes
+	 * @param idcarrera. Id de la carrera a asignar los dorsales de los participantes
+	 * @return el dorsal asignado
+	 */
 	public int nextDorsal(int idcarrera) {
 		cfg.configure("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
@@ -196,27 +233,6 @@ public class ParticipantesHelper {
 		}else {
 			return participante.get(participante.size()-1).getId().getDorsalParticipantes()+1;
 		}
-		
-	}
-	
-	
-	
-	public static void main(String[] args) {
-		ParticipantesHelper prueba = new ParticipantesHelper();
-		///prueba.insertar(555, 1);
-		//prueba.insertar(777, 11);
-		//prueba.insertar(1234, 1);
-		///prueba.insertar(1234, 11);
-		//prueba.insertar(54034125, 1);
-		//prueba.insertar(54034125, 11);
-		//prueba.insertar(54034125, 11);
-		//prueba.insertar(54034125, 11);
-		//prueba.insertar(54034125, 11);
-		//prueba.insertar(54034125, 11);
-		//prueba.insertarTiempo(777, 11, 200);
-		
-
-
 		
 	}
 	

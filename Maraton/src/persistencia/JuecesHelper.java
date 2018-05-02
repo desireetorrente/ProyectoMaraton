@@ -108,6 +108,12 @@ public class JuecesHelper {
 		}
 	}
 	
+	/**
+	 * Metodo para buscar un juez
+	 * @param dniJueces. DNI del juez a busar
+	 * @return Juez encontrado.
+	 */
+	
 	public Jueces Buscar(int dniJueces) {
 
 		Jueces juez = null;
@@ -132,6 +138,11 @@ public class JuecesHelper {
 		}
 		return juez;
 	}
+	
+	/**
+	 * Lista los jueces
+	 * @return lista de jueces
+	 */
 	
 	public List<Jueces> imprimirJueces(){
 		cfg.configure("hibernate.cfg.xml");

@@ -21,7 +21,6 @@ public class AdministradoresHelper {
 	private Configuration cfg;
 	/**
 	 * constructor por defecto
-	 * @param cfg. inicia el objeto configuracion
 	 */
 	public AdministradoresHelper() {
 		this.cfg = new Configuration();
