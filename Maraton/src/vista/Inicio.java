@@ -12,6 +12,8 @@ import Modelo.Carrera;
 import Modelo.Jueces;
 import Modelo.Participantes;
 import Modelo.Usuarios;
+import controlador.ControladorAdministrador;
+import controlador.ControladorUsuario;
 import persistencia.AdministradoresHelper;
 import persistencia.CarrerasHelper;
 import persistencia.JuecesHelper;
@@ -23,10 +25,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
+
 import javax.swing.GroupLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
+import java.io.Console;
 import java.awt.event.ItemEvent;
 import javax.swing.JPanel;
 import java.awt.Button;
@@ -5165,14 +5170,16 @@ public class Inicio extends javax.swing.JFrame {
     
     /**
      * @param args the command line arguments
+     * @throws Exception 
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+
+    	try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

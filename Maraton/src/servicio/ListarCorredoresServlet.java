@@ -68,13 +68,14 @@ public class ListarCorredoresServlet extends HttpServlet {
 			if(corredores == null) {
 				out.println("La carrera no tiene ningun corredor");
 			}else {
-				out.println("Corredores " + corredores.size() + " Carrera: " + ch.Buscar(Integer.parseInt(idcarrera)).getNombreCarrera() + " ID:" + idcarrera);
+				out.println("Corredores " + corredores.size() + " Carrera: " + ch.Buscar(Integer.parseInt(idcarrera)).getNombreCarrera() + " [ID:" + idcarrera + "]");
 				out.println("<br>");
-				out.println("------------------------------");
+				out.println("--------------------------------------------------------");
 				out.println("<br>");
 				for(int i = 0; i< corredores.size(); i++) {
-					out.println("Nombre: " + corredores.get(i).getUsuarios().getNombreUsuarios() + 
-							"; Dorsal: " + corredores.get(i).getId().getDorsalParticipantes());
+					out.println("Nombre: " + corredores.get(i).getUsuarios().getNombreUsuarios() + " " + corredores.get(i).getUsuarios().getApellidosUsuarios() +
+							"; Dorsal: " + corredores.get(i).getId().getDorsalParticipantes() + "; Tiempo:" + 
+							corredores.get(i).getId().getTiempoParticipantes() + " segundos");
 					out.println("<br>");
 				}
 			}

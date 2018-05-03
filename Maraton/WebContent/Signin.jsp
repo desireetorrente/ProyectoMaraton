@@ -15,7 +15,7 @@
 			<p id="titulo">Registro de usuario</p>
 			<hr>
 			<br />
-			<br /> <label id="subtitulo">DNI de usuario</label> <br />
+			<br /> <label id="subtitulo">DNI de usuario (sin letra)</label> <br />
 			<br /> <input type="text" name="dni" class="entrada"> <br />
 			<br /> <label id="subtitulo2">Contraseña</label> <br />
 			<br /> <input type="password" name="password" class="entrada" /> <br />

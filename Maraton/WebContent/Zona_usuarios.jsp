@@ -85,7 +85,7 @@
 		
 
 		<div id="eliminar">
-			<form action="EliminarUserServlet" method="post">
+			<form action="ElimiarUserServlet" method="post">
 				<p>DNI Usuario: </p>
 				<input type="text" name="dni"></input>
 				<p>Contraseña:</p>
